@@ -1,6 +1,8 @@
 import React from "react";
 
-const Main = () => {
+const Main = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const {date, genre} = props;
   return (
     <>
     <section className="movie-card">
@@ -35,8 +37,8 @@ const Main = () => {
           <div className="movie-card__desc">
             <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">Drama</span>
-              <span className="movie-card__year">2014</span>
+              <span className="movie-card__genre">{genre}</span>
+              <span className="movie-card__year">{date}</span>
             </p>
 
             <div className="movie-card__buttons">

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Film = ({film}) => (
   <>
@@ -139,6 +140,16 @@ const Main = (props) => {
     </div>
     </>
   );
+};
+
+Film.propTypes = {
+  film: PropTypes.string.isRequired
+};
+
+Main.propTypes = {
+  date: PropTypes.number.isRequired,
+  genre: PropTypes.string.isRequired,
+  filmsList: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Main;

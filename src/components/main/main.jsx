@@ -1,19 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Film = ({film}) => (
-  <>
-    <article className="small-movie-card catalog__movies-card">
-      <div className="small-movie-card__image">
-        <img src="img/aviator.jpg" alt={film} width="280" height="175" />
-      </div>
-      <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{film}</a>
-      </h3>
-    </article>
-  </>
-);
-
 const Main = (props) => {
   const {date, genre, filmsList} = props;
   return (
@@ -111,12 +98,18 @@ const Main = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          {filmsList.map((film, index) => (
-            <Film
-              key={index + film}
-              film={film}
-            />
-          ))}
+          {filmsList.map((film, index) => {
+            return (
+              <article key={film + index} className="small-movie-card catalog__movies-card">
+                <div className="small-movie-card__image">
+                  <img src="img/aviator.jpg" alt={film} width="280" height="175" />
+                </div>
+                <h3 className="small-movie-card__title">
+                  <a className="small-movie-card__link" href="movie-page.html">{film}</a>
+                </h3>
+              </article>
+            );
+          })}
         </div>
 
         <div className="catalog__more">
@@ -140,10 +133,6 @@ const Main = (props) => {
     </div>
     </>
   );
-};
-
-Film.propTypes = {
-  film: PropTypes.string.isRequired
 };
 
 Main.propTypes = {

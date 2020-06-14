@@ -8,6 +8,7 @@ describe(`FilmTest`, () => {
       .create(
           <Film
             film={`Fantastic Beasts`}
+            onFilmTitleClick={() => {}}
           />
       ).toJSON();
 

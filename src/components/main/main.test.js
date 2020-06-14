@@ -10,6 +10,7 @@ describe(`MainTest`, () => {
             date={1984}
             genre={`comedy`}
             filmsList = {[`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`]}
+            onTitleClick={() => {}}
           />
       ).toJSON();
 

@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
 
+const titleClickHandler = () => {};
+
 const App = (props) => {
   const {releaseDate, filmGenre, films} = props;
   return (
@@ -10,6 +12,7 @@ const App = (props) => {
       date={releaseDate}
       genre={filmGenre}
       filmsList = {films}
+      onTitleClick={titleClickHandler}
     />
   );
 };
@@ -17,7 +20,7 @@ const App = (props) => {
 App.propTypes = {
   releaseDate: PropTypes.number.isRequired,
   filmGenre: PropTypes.string.isRequired,
-  films: PropTypes.arrayOf(PropTypes.string).isRequired,
+  films: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 

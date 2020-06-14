@@ -1,21 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Film = ({film}) => (
-  <>
-    <article className="small-movie-card catalog__movies-card">
-      <div className="small-movie-card__image">
-        <img src="img/aviator.jpg" alt={film} width="280" height="175" />
-      </div>
-      <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{film}</a>
-      </h3>
-    </article>
-  </>
-);
+import Film from "../film/film.jsx";
 
 const Main = (props) => {
-  const {date, genre, filmsList} = props;
+  const {date, genre, filmsList, onTitleClick} = props;
   return (
     <>
     <section className="movie-card">
@@ -115,6 +104,7 @@ const Main = (props) => {
             <Film
               key={index + film}
               film={film}
+              onFilmTitleClick={onTitleClick}
             />
           ))}
         </div>
@@ -142,14 +132,11 @@ const Main = (props) => {
   );
 };
 
-Film.propTypes = {
-  film: PropTypes.string.isRequired
-};
-
 Main.propTypes = {
   date: PropTypes.number.isRequired,
   genre: PropTypes.string.isRequired,
   filmsList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;

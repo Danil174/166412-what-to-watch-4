@@ -20,7 +20,7 @@ const App = (props) => {
 App.propTypes = {
   releaseDate: PropTypes.number.isRequired,
   filmGenre: PropTypes.string.isRequired,
-  films: PropTypes.arrayOf(PropTypes.string).isRequired
+  films: PropTypes.array.isRequired,
 };
 
 

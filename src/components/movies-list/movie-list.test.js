@@ -32,7 +32,6 @@ describe(`MoviesListTest`, () => {
           <MoviesList
             filmsList = {testFilmsList}
             onCardHoverHandler={() => {}}
-            onTitleClick={() => {}}
           />
       ).toJSON();
 

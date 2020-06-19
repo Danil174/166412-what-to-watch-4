@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
-  const {date, genre, filmsList, onTitleClick} = props;
+  const {date, genre, filmsList} = props;
   return (
     <>
     <section className="movie-card">
@@ -101,7 +101,6 @@ const Main = (props) => {
 
         <MoviesList
           filmsList={filmsList}
-          onTitleClick={onTitleClick}
         />
 
         <div className="catalog__more">
@@ -130,11 +129,7 @@ const Main = (props) => {
 Main.propTypes = {
   date: PropTypes.number.isRequired,
   genre: PropTypes.string.isRequired,
-  filmsList: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-  })).isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  filmsList: PropTypes.array.isRequired,
 };
 
 export default Main;

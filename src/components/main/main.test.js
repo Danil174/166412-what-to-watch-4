@@ -33,7 +33,6 @@ describe(`MainTest`, () => {
             date={1984}
             genre={`comedy`}
             filmsList = {testFilmsList}
-            onTitleClick={() => {}}
           />
       ).toJSON();
 

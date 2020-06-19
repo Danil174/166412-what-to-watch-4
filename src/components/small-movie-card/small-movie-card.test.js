@@ -13,7 +13,6 @@ describe(`FilmTest`, () => {
       .create(
           <SmallMovieCard
             film={film}
-            onFilmTitleClick={() => {}}
             onCardHoverHandler={() => {}}
           />
       ).toJSON();

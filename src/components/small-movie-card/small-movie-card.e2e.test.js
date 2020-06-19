@@ -13,23 +13,18 @@ const film = {
 };
 
 it(`Small Movie card hovered`, () => {
-  const onCardTitleClick = jest.fn();
   const onCardHoverHandler = jest.fn();
 
   const card = shallow(
       <SmallMovieCard
         film={film}
-        onFilmTitleClick={onCardTitleClick}
         onCardHoverHandler={onCardHoverHandler}
       />
   );
 
   const currentCar = card.find(`.small-movie-card`);
-  const cardTitle = card.find(`.small-movie-card__title`);
 
   currentCar.props().onMouseOver();
-  cardTitle.props().onClick();
 
   expect(onCardHoverHandler.mock.calls.length).toBe(1);
-  expect(onCardTitleClick.mock.calls.length).toBe(1);
 });

@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilmTest render Film 1`] = `
+exports[`FilmTest render SmallMovieCard 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onMouseOver={[Function]}
 >
   <div
     className="small-movie-card__image"
@@ -10,13 +11,12 @@ exports[`FilmTest render Film 1`] = `
     <img
       alt="Fantastic Beasts"
       height="175"
-      src="img/aviator.jpg"
+      src="img/johnny-english.jpg"
       width="280"
     />
   </div>
   <h3
     className="small-movie-card__title"
-    onClick={[Function]}
   >
     <a
       className="small-movie-card__link"

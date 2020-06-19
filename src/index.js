@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-
-const films = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
+import films from "./mocks/films.js";
 
 const Mock = {
   RELEASE_DATE: 2014,

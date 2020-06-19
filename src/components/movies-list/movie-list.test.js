@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import MoviesList from "./movies-list.jsx";
 
 const testFilmsList = [
   {
@@ -25,14 +25,13 @@ const testFilmsList = [
   },
 ];
 
-describe(`MainTest`, () => {
-  it(`render Main`, () => {
+describe(`MoviesListTest`, () => {
+  it(`render MoviesList`, () => {
     const tree = renderer
       .create(
-          <Main
-            date={1984}
-            genre={`comedy`}
+          <MoviesList
             filmsList = {testFilmsList}
+            onCardHoverHandler={() => {}}
           />
       ).toJSON();
 

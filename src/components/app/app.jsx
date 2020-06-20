@@ -1,7 +1,9 @@
 import React, {PureComponent} from "react";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
+import MoviePage from "../movie-page/movie-page.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -9,7 +11,7 @@ class App extends PureComponent {
 
   }
 
-  render() {
+  _renderApp() {
     const {releaseDate, filmGenre, films} = this.props;
 
     return (
@@ -18,6 +20,22 @@ class App extends PureComponent {
         genre={filmGenre}
         filmsList = {films}
       />
+    );
+  }
+
+  render() {
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp()}
+          </Route>
+          <Route exact path="/movie-page">
+            <MoviePage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

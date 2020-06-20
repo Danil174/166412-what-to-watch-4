@@ -1,23 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import MoviePage from "./movie-page.jsx";
 
-const testFilms = [
-  {
-    title: `Aviator`,
-    src: `img/aviator.jpg`,
-  },
-  {
-    title: `Bohemian Rhapsody`,
-    src: `img/bohemian-rhapsody.jpg`,
-  },
-  {
-    title: `Dardjeeling Limited`,
-    src: `img/dardjeeling-limited.jpg`,
-  },
-];
-
-const testFilm = {
+const fakeFilm = {
   poster: `img/the-grand-budapest-hotel-poster.jpg`,
   cover: `img/bg-the-grand-budapest-hotel.jpg`,
   movieTitle: `The Grand Budapest Hotel`,
@@ -33,15 +18,12 @@ const testFilm = {
   actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
-describe(`AppTest`, () => {
-  it(`render App`, () => {
+describe(`MoviePageTest`, () => {
+  it(`render MoviePage`, () => {
     const tree = renderer
       .create(
-          <App
-            releaseDate={1984}
-            filmGenre={`comedy`}
-            films = {testFilms}
-            film={testFilm}
+          <MoviePage
+            film={fakeFilm}
           />
       ).toJSON();
 

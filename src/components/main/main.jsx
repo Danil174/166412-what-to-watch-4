@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
-  const {date, genre, filmsList} = props;
+  const {date, genre, filmsList, onTitleOrImgClickHandler} = props;
   return (
     <>
     <section className="movie-card">
@@ -101,6 +101,7 @@ const Main = (props) => {
 
         <MoviesList
           filmsList={filmsList}
+          onTitleOrImgClickHandler={onTitleOrImgClickHandler}
         />
 
         <div className="catalog__more">
@@ -127,6 +128,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  onTitleOrImgClickHandler: PropTypes.func.isRequired,
   date: PropTypes.number.isRequired,
   genre: PropTypes.string.isRequired,
   filmsList: PropTypes.array.isRequired,

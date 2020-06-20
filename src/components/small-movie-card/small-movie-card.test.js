@@ -14,6 +14,7 @@ describe(`FilmTest`, () => {
           <SmallMovieCard
             film={film}
             onCardHoverHandler={() => {}}
+            onTitleOrImgClickHandler={() => {}}
           />
       ).toJSON();
 

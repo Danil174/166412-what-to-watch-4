@@ -33,6 +33,7 @@ describe(`MainTest`, () => {
             date={1984}
             genre={`comedy`}
             filmsList = {testFilmsList}
+            onTitleOrImgClickHandler={() => {}}
           />
       ).toJSON();
 

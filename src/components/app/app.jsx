@@ -9,18 +9,41 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.state = {
+      page: `main`,
+    };
+    this.changePage = this.changePage.bind(this);
+  }
+
+  changePage() {
+    this.setState({
+      page: `film`,
+    });
   }
 
   _renderApp() {
-    const {releaseDate, filmGenre, films} = this.props;
+    const {page} = this.state;
+    const {releaseDate, filmGenre, films, film} = this.props;
 
-    return (
-      <Main
-        date={releaseDate}
-        genre={filmGenre}
-        filmsList = {films}
-      />
-    );
+    switch (page) {
+      case `main`:
+        return (
+          <Main
+            date={releaseDate}
+            genre={filmGenre}
+            filmsList = {films}
+            onTitleOrImgClickHandler={this.changePage}
+          />
+        );
+      case `film`:
+        return (
+          <MoviePage
+            film={film}
+          />
+        );
+    }
+
+    return null;
   }
 
   render() {

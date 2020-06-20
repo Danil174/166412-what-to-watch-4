@@ -1,6 +1,25 @@
 import React from "react";
+// import PropTypes from "prop-types";
+
+// import {getTextMovieRating} from "../../utils/common.js";
 
 const MoviePage = () => {
+  // const {film} = props;
+  // const {
+  //   poster,
+  //   cover,
+  //   movieTitle,
+  //   genre,
+  //   releaseDate,
+  //   synopsis,
+  //   movieScore,
+  //   ratingCount,
+  //   director,
+  //   actors,
+  // } = film;
+
+  // const textRating = getTextMovieRating(movieScore);
+
   return (
   <>
     <section className="movie-card movie-card--full">
@@ -157,5 +176,20 @@ const MoviePage = () => {
   </>
   );
 };
+
+// MoviePage.propTypes = {
+//   film: PropTypes.shape({
+//     poster: PropTypes.string.isRequired,
+//     cover: PropTypes.string.isRequired,
+//     movieTitle: PropTypes.string.isRequired,
+//     genre: PropTypes.string.isRequired,
+//     releaseDate: PropTypes.number.isRequired,
+//     synopsis: PropTypes.arrayOf(PropTypes.string).isRequired,
+//     movieScore: PropTypes.number.isRequired,
+//     ratingCount: PropTypes.number.isRequired,
+//     director: PropTypes.string.isRequired,
+//     actors: PropTypes.arrayOf(PropTypes.string).isRequired,
+//   }).isRequired,
+// };
 
 export default MoviePage;

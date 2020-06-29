@@ -4,24 +4,28 @@ import MoviesList from "./movies-list.jsx";
 
 const testFilmsList = [
   {
-    title: `Aviator`,
-    src: `img/aviator.jpg`,
+    id: 11,
+    title: `Orlando`,
+    src: `img/orlando.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
-    title: `Bohemian Rhapsody`,
-    src: `img/bohemian-rhapsody.jpg`,
+    id: 12,
+    title: `Pulp Fiction`,
+    src: `img/pulp-fiction.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
-    title: `Dardjeeling Limited`,
-    src: `img/dardjeeling-limited.jpg`,
+    id: 13,
+    title: `Revenant`,
+    src: `img/revenant.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
-    title: `Fantastic Beasts The Crimes Of Grindelwald`,
-    src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  },
-  {
-    title: `Johnny English`,
-    src: `img/johnny-english.jpg`,
+    id: 14,
+    title: `Seven Years in Tibet`,
+    src: `img/seven-years-in-tibet.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
 ];
 
@@ -31,9 +35,14 @@ describe(`MoviesListTest`, () => {
       .create(
           <MoviesList
             filmsList = {testFilmsList}
-            onCardHoverHandler={() => {}}
+            onCardMouseEnter={() => {}}
+            onCardMouseLeave={() => {}}
             onTitleOrImgClickHandler={() => {}}
-          />
+          />, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

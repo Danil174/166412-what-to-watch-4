@@ -24,7 +24,11 @@ describe(`MoviePageTest`, () => {
       .create(
           <MoviePage
             film={fakeFilm}
-          />
+          />, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

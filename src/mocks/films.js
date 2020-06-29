@@ -1,78 +1,116 @@
 export default [
   {
+    id: 1,
     title: `Aviator`,
     src: `img/aviator.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 2,
     title: `Bohemian Rhapsody`,
     src: `img/bohemian-rhapsody.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 3,
     title: `Dardjeeling Limited`,
     src: `img/dardjeeling-limited.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 4,
     title: `Fantastic Beasts The Crimes Of Grindelwald`,
     src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 5,
     title: `Johnny English`,
     src: `img/johnny-english.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 6,
     title: `Macbeth`,
     src: `img/macbeth.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 7,
     title: `Midnight Special`,
     src: `img/midnight-special.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 8,
     title: `Mindhunter`,
     src: `img/mindhunter.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 9,
     title: `Moonrise Kingdom`,
     src: `img/moonrise-kingdom.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 10,
     title: `No Country For Old Men`,
     src: `img/no-country-for-old-men.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 11,
     title: `Orlando`,
     src: `img/orlando.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 12,
     title: `Pulp Fiction`,
     src: `img/pulp-fiction.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 13,
     title: `Revenant`,
     src: `img/revenant.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 14,
     title: `Seven Years in Tibet`,
     src: `img/seven-years-in-tibet.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 15,
     title: `Shutter Island`,
     src: `img/shutter-island.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 16,
     title: `Snatch`,
     src: `img/snatch.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 17,
     title: `War of the Worlds`,
     src: `img/war-of-the-worlds.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
+    id: 18,
     title: `We Need to Talk about Kevin`,
     src: `img/we-need-to-talk-about-kevin.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
+    id: 19,
     title: `What We Do in the Shadows`,
     src: `img/what-we-do-in-the-shadows.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   }
 ];

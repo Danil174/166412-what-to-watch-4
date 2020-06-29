@@ -8,8 +8,10 @@ Enzyme.configure({
 });
 
 const film = {
-  title: `Midnight Special`,
-  src: `img/moonrise-kingdom.jpg`,
+  id: 77,
+  title: `Test film`,
+  src: `img/midnight-special.jpg`,
+  source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
 const mockEvent = {
@@ -17,13 +19,15 @@ const mockEvent = {
 };
 
 it(`Small Movie card hovered`, () => {
-  const onCardHoverHandler = jest.fn();
+  const onCardMouseEnter = jest.fn();
+  const onCardMouseLeave = jest.fn();
   const onTitleOrImgClickHandler = jest.fn();
 
   const card = shallow(
       <SmallMovieCard
         film={film}
-        onCardHoverHandler={onCardHoverHandler}
+        onCardMouseEnter={onCardMouseEnter}
+        onCardMouseLeave={onCardMouseLeave}
         onTitleOrImgClickHandler={onTitleOrImgClickHandler}
       />
   );
@@ -31,7 +35,10 @@ it(`Small Movie card hovered`, () => {
   const currentCar = card.find(`.small-movie-card`);
 
   currentCar.simulate(`mouseOver`);
-  expect(onCardHoverHandler.mock.calls.length).toBe(1);
+  expect(onCardMouseEnter.mock.calls.length).toBe(1);
+
+  currentCar.simulate(`mouseOut`);
+  expect(onCardMouseLeave.mock.calls.length).toBe(1);
 
   const title = card.find(`.small-movie-card__title`);
   const imgWrapper = card.find(`.small-movie-card__image`);

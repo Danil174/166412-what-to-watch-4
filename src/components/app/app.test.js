@@ -4,17 +4,29 @@ import App from "./app.jsx";
 
 const testFilms = [
   {
-    title: `Aviator`,
-    src: `img/aviator.jpg`,
+    id: 16,
+    title: `Snatch`,
+    src: `img/snatch.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
-    title: `Bohemian Rhapsody`,
-    src: `img/bohemian-rhapsody.jpg`,
+    id: 17,
+    title: `War of the Worlds`,
+    src: `img/war-of-the-worlds.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
-    title: `Dardjeeling Limited`,
-    src: `img/dardjeeling-limited.jpg`,
+    id: 18,
+    title: `We Need to Talk about Kevin`,
+    src: `img/we-need-to-talk-about-kevin.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
+  {
+    id: 19,
+    title: `What We Do in the Shadows`,
+    src: `img/what-we-do-in-the-shadows.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  }
 ];
 
 const testFilm = {

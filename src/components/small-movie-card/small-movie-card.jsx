@@ -35,14 +35,14 @@ class SmallMovieCard extends PureComponent {
           className="small-movie-card__image"
           onClick={onTitleOrImgClickHandler}
         >
-          <Video
+          {/* <Video
             poster={src}
             source={source}
             isMuted={SmallCardVideoSettings.IS_MUTED}
             width={SmallCardVideoSettings.WIDTH}
             height={SmallCardVideoSettings.HEIGHT}
             isPlaying={isPlaying}
-          />
+          /> */}
         </div>
         <h3
           onClick={(evt) => {

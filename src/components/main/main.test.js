@@ -4,25 +4,17 @@ import Main from "./main.jsx";
 
 const testFilmsList = [
   {
-    title: `Aviator`,
-    src: `img/aviator.jpg`,
+    id: 18,
+    title: `We Need to Talk about Kevin`,
+    src: `img/we-need-to-talk-about-kevin.jpg`,
+    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
-    title: `Bohemian Rhapsody`,
-    src: `img/bohemian-rhapsody.jpg`,
-  },
-  {
-    title: `Dardjeeling Limited`,
-    src: `img/dardjeeling-limited.jpg`,
-  },
-  {
-    title: `Fantastic Beasts The Crimes Of Grindelwald`,
-    src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  },
-  {
-    title: `Johnny English`,
-    src: `img/johnny-english.jpg`,
-  },
+    id: 19,
+    title: `What We Do in the Shadows`,
+    src: `img/what-we-do-in-the-shadows.jpg`,
+    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  }
 ];
 
 describe(`MainTest`, () => {

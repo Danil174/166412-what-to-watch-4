@@ -3,19 +3,14 @@
 exports[`FilmTest render SmallMovieCard 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  id={7}
+  onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
   <div
     className="small-movie-card__image"
     onClick={[Function]}
-  >
-    <img
-      alt="Fantastic Beasts"
-      height="175"
-      src="img/johnny-english.jpg"
-      width="280"
-    />
-  </div>
+  />
   <h3
     className="small-movie-card__title"
     onClick={[Function]}
@@ -24,7 +19,7 @@ exports[`FilmTest render SmallMovieCard 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      Fantastic Beasts
+      Midnight Special
     </a>
   </h3>
 </article>

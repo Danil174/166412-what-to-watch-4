@@ -266,7 +266,12 @@ Array [
           <div
             className="small-movie-card__image"
             onClick={[Function]}
-          />
+          >
+            <video
+              height={175}
+              width={280}
+            />
+          </div>
           <h3
             className="small-movie-card__title"
             onClick={[Function]}
@@ -288,7 +293,12 @@ Array [
           <div
             className="small-movie-card__image"
             onClick={[Function]}
-          />
+          >
+            <video
+              height={175}
+              width={280}
+            />
+          </div>
           <h3
             className="small-movie-card__title"
             onClick={[Function]}
@@ -310,7 +320,12 @@ Array [
           <div
             className="small-movie-card__image"
             onClick={[Function]}
-          />
+          >
+            <video
+              height={175}
+              width={280}
+            />
+          </div>
           <h3
             className="small-movie-card__title"
             onClick={[Function]}
@@ -332,7 +347,12 @@ Array [
           <div
             className="small-movie-card__image"
             onClick={[Function]}
-          />
+          >
+            <video
+              height={175}
+              width={280}
+            />
+          </div>
           <h3
             className="small-movie-card__title"
             onClick={[Function]}

@@ -26,7 +26,11 @@ describe(`MainTest`, () => {
             genre={`comedy`}
             filmsList = {testFilmsList}
             onTitleOrImgClickHandler={() => {}}
-          />
+          />, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

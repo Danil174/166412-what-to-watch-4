@@ -54,7 +54,11 @@ describe(`AppTest`, () => {
             filmGenre={`comedy`}
             films = {testFilms}
             film={testFilm}
-          />
+          />, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

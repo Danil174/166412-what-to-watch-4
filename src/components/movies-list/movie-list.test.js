@@ -38,7 +38,11 @@ describe(`MoviesListTest`, () => {
             onCardMouseEnter={() => {}}
             onCardMouseLeave={() => {}}
             onTitleOrImgClickHandler={() => {}}
-          />
+          />, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -11,18 +11,19 @@ class MoviesList extends PureComponent {
       pointedCard: null,
     };
 
-    this.onCardHoverHandler = this.onCardHoverHandler.bind(this);
+    this.onCardMouseEnterHandler = this.onCardMouseEnterHandler.bind(this);
+    this.onCardMouseLeaveHandler = this.onCardMouseLeaveHandler.bind(this);
   }
 
-  onCardHoverHandler(evt) {
-    const element = evt.target.parentElement;
-
-    if (element.tagName !== `ARTICLE` || this.state.pointedCard === element) {
-      return;
-    }
-
+  onCardMouseEnterHandler(id) {
     this.setState({
-      pointedCard: element
+      pointedCard: id
+    });
+  }
+
+  onCardMouseLeaveHandler() {
+    this.setState({
+      pointedCard: null
     });
   }
 
@@ -30,12 +31,13 @@ class MoviesList extends PureComponent {
     const {filmsList, onTitleOrImgClickHandler} = this.props;
     return (
       <div className="catalog__movies-list">
-        {filmsList.map((film, index) => (
+        {filmsList.map((film) => (
           <SmallMovieCard
-            key={index + film.title}
+            key={film.id}
             film={film}
             onTitleOrImgClickHandler={onTitleOrImgClickHandler}
-            onCardHoverHandler={this.onCardHoverHandler}
+            onCardMouseEnter={this.onCardMouseEnterHandler}
+            onCardMouseLeave={this.onCardMouseLeaveHandler}
           />
         ))}
       </div>
@@ -46,8 +48,10 @@ class MoviesList extends PureComponent {
 MoviesList.propTypes = {
   onTitleOrImgClickHandler: PropTypes.func.isRequired,
   filmsList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
   })).isRequired,
 };
 

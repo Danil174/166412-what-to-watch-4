@@ -1,47 +1,72 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {SmallCardVideoSettings} from "../../const.js";
 
-const SmallMovieCard = (props) => {
-  const {film, onCardHoverHandler, onTitleOrImgClickHandler} = props;
-  const {title, src} = film;
+import Video from "../video/video.jsx";
 
-  return (
-  <>
-    <article
-      className="small-movie-card catalog__movies-card"
-      onMouseOver={onCardHoverHandler}
-    >
-      <div
-        className="small-movie-card__image"
-        onClick={onTitleOrImgClickHandler}
-      >
-        <img
-          src={src}
-          alt={title}
-          width="280"
-          height="175"
-        />
-      </div>
-      <h3
-        onClick={(evt) => {
-          evt.preventDefault();
-          onTitleOrImgClickHandler();
+class SmallMovieCard extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isPlaying: false,
+    };
+  }
+
+  render() {
+    const {film, onTitleOrImgClickHandler, onCardMouseEnter, onCardMouseLeave} = this.props;
+    const {id, title, src, source} = film;
+    const {isPlaying} = this.state;
+
+    return (
+      <article
+        id={id}
+        className="small-movie-card catalog__movies-card"
+        onMouseOver={() => {
+          onCardMouseEnter(id);
+          this.setState({isPlaying: true});
         }}
-        className="small-movie-card__title"
+        onMouseOut={() => {
+          onCardMouseLeave();
+          this.setState({isPlaying: false});
+        }}
       >
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
-      </h3>
-    </article>
-  </>
-  );
-};
+        <div
+          className="small-movie-card__image"
+          onClick={onTitleOrImgClickHandler}
+        >
+          <Video
+            poster={src}
+            source={source}
+            isMuted={SmallCardVideoSettings.IS_MUTED}
+            width={SmallCardVideoSettings.WIDTH}
+            height={SmallCardVideoSettings.HEIGHT}
+            isPlaying={isPlaying}
+          />
+        </div>
+        <h3
+          onClick={(evt) => {
+            evt.preventDefault();
+            onTitleOrImgClickHandler();
+          }}
+          className="small-movie-card__title"
+        >
+          <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        </h3>
+      </article>
+    );
+  }
+}
 
 SmallMovieCard.propTypes = {
+  onCardMouseEnter: PropTypes.func.isRequired,
+  onCardMouseLeave: PropTypes.func.isRequired,
   onTitleOrImgClickHandler: PropTypes.func.isRequired,
-  onCardHoverHandler: PropTypes.func.isRequired,
   film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
   }).isRequired,
 };
 

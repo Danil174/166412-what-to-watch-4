@@ -6,8 +6,8 @@ import {getTextMovieRating} from "../../utils/common.js";
 const getDescParagraphs = (array) => {
   return (
     <>
-    {array.map((it, index) => {
-      return <p key={index + it.slice(0, index)}>{it}</p>;
+    {array.map((it) => {
+      return <p key={it}>{it}</p>;
     })}
     </>
   );

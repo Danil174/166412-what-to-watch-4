@@ -5,3 +5,11 @@ export const TextMovieRatings = {
   VERY_GOOD: `Very good`,
   AWESOME: `Awesome`,
 };
+
+export const SmallCardVideoSettings = {
+  WIDTH: 280,
+  HEIGHT: 175,
+  IS_MUTED: true,
+};
+
+export const smallCardVideoStartTimeOut = 1000;

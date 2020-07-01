@@ -2,10 +2,15 @@ import mockFilms from "./mocks/films.js";
 import mainFilm from "./mocks/film.js";
 import {extend} from "./utils/common.js";
 
+const defaultGenre = `All genres`;
+const genres = Array.from(new Set(mockFilms.map((film) => film.genre)));
+genres.unshift(defaultGenre);
+
 const initialState = {
-  activeGenre: `All genres`,
   films: mockFilms,
-  film: mainFilm
+  film: mainFilm,
+  activeGenre: defaultGenre,
+  genres
 };
 
 const ActionType = {
@@ -23,7 +28,7 @@ const ActionCreator = {
     payload: filter,
   }),
 
-  getFilmsByGenre: (films, genre) => {
+  getFilmsByGenre: (genre) => {
     if (genre === `All genres`) {
       return {
         type: ActionType.GET_FILMS_BY_GENRE,
@@ -31,7 +36,7 @@ const ActionCreator = {
       };
     }
 
-    const filteredFilms = getFilmsByGenre(films, genre);
+    const filteredFilms = getFilmsByGenre(initialState.films, genre);
 
     return {
       type: ActionType.GET_FILMS_BY_GENRE,

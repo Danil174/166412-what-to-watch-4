@@ -92,6 +92,7 @@ export default [
   },
   {
     id: 14,
+    genre: `Kids & Family`,
     title: `Seven Years in Tibet`,
     src: `img/seven-years-in-tibet.jpg`,
     source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,

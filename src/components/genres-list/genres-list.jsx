@@ -1,16 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// const activeClass = `catalog__genres-item--active`;
-
-const genreItem = (genre) => {
-  // const activeClass = active ? activeClass : ``;
+const listItem = (genre, isActive) => {
+  const defaultClass = `catalog__genres-item`;
+  const activeClass = isActive ? ` catalog__genres-item--active` : ``;
+  const itemClass = defaultClass + activeClass;
   return (
-    <li className="catalog__genres-item">
+    <li
+      key={genre}
+      className={itemClass}
+    >
       <a
         href="#"
         className="catalog__genres-link"
-        dataGenreType={genre}
+        data-genre={genre}
       >
         {genre}
       </a>
@@ -18,28 +21,41 @@ const genreItem = (genre) => {
   );
 };
 
+const checkGenre = (target, oldGenge) => {
+  if (target.tagName !== `A` || oldGenge === target.dataset.genre) {
+    return oldGenge;
+  }
+
+  const genre = target.dataset.genre;
+
+  return genre;
+};
+
 const GenresList = (props) => {
-  const {genres, onGenreItemClickHandler} = props;
+  const {genres, onGenreItemClick, activeGenre} = props;
+
+  const listItems = genres.map((genre) => {
+    const isActive = activeGenre === genre;
+    return listItem(genre, isActive);
+  });
 
   return (
     <ul
       className="catalog__genres-list"
-      onClick={onGenreItemClickHandler}
-    >
-      {genres.map((genre) => (
-        <genreItem
-          key={genre}
-          genre={genre}
-        />
-      ))}
+      onClick={(evt) => {
+        evt.preventDefault();
+        const ganre = checkGenre(evt.target, activeGenre);
+        onGenreItemClick(ganre);
+      }}>
+      {listItems}
     </ul>
   );
 };
 
 GenresList.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // selectedGenre: PropTypes.string.isRequired,
-  onGenreItemClickHandler: PropTypes.func.isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  onGenreItemClick: PropTypes.func.isRequired,
 };
 
 export default GenresList;

@@ -1,4 +1,4 @@
-import {getTextMovieRating} from "./common.js";
+import {getTextMovieRating, extend} from "./common.js";
 import {TextMovieRatings} from "../const.js";
 
 const testCases = {
@@ -12,5 +12,21 @@ describe(`getTextMovieRating`, () => {
     expect(getTextMovieRating(testCases.BAD)).toBe(TextMovieRatings.BAD);
     expect(getTextMovieRating(testCases.GOOD)).toBe(TextMovieRatings.GOOD);
     expect(getTextMovieRating(testCases.AWESOME)).toBe(TextMovieRatings.AWESOME);
+  });
+});
+
+const testState = {
+  steps: 0,
+  color: `red`
+};
+
+describe(`extendTest`, () => {
+  it(`test extend func`, () => {
+    expect(extend(testState, {
+      color: `blue`,
+    })).toStrictEqual({
+      steps: 0,
+      color: `blue`
+    });
   });
 });

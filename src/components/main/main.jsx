@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
-  const {date, genre, filmsList, onTitleOrImgClickHandler} = props;
+  const {filmsList, onTitleOrImgClickHandler} = props;
   return (
     <>
     <section className="movie-card">
@@ -39,8 +39,8 @@ const Main = (props) => {
           <div className="movie-card__desc">
             <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{genre}</span>
-              <span className="movie-card__year">{date}</span>
+              <span className="movie-card__genre">Drama</span>
+              <span className="movie-card__year">2014</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -129,8 +129,6 @@ const Main = (props) => {
 
 Main.propTypes = {
   onTitleOrImgClickHandler: PropTypes.func.isRequired,
-  date: PropTypes.number.isRequired,
-  genre: PropTypes.string.isRequired,
   filmsList: PropTypes.array.isRequired,
 };
 

@@ -22,8 +22,6 @@ describe(`MainTest`, () => {
     const tree = renderer
       .create(
           <Main
-            date={1984}
-            genre={`comedy`}
             filmsList = {testFilmsList}
             onTitleOrImgClickHandler={() => {}}
           />, {

@@ -1,9 +1,11 @@
 import mockFilms from "./mocks/films.js";
+import mainFilm from "./mocks/film.js";
 import {extend} from "./utils/common.js";
 
 const initialState = {
   activeGenre: `All genres`,
-  films: mockFilms
+  films: mockFilms,
+  film: mainFilm
 };
 
 const ActionType = {

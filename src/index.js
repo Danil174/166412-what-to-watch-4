@@ -1,20 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
 import App from "./components/app/app.jsx";
-import films from "./mocks/films.js";
-import film from "./mocks/film.js";
+import {reducer} from "./reducer.js";
 
-const Mock = {
-  RELEASE_DATE: 2014,
-  GENRE: `Drama`
-};
+const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+);
 
 ReactDOM.render(
-    <App
-      film={film}
-      films={films}
-      releaseDate={Mock.RELEASE_DATE}
-      filmGenre={Mock.GENRE}
-    />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.querySelector(`#root`)
 );

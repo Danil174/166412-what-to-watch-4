@@ -89,12 +89,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              comedy
+              Drama
             </span>
             <span
               className="movie-card__year"
             >
-              1984
+              2014
             </span>
           </p>
           <div

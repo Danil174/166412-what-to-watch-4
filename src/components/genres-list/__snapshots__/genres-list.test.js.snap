@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenresListTest render GenresList 1`] = `
+<ul
+  className="catalog__genres-list"
+  onClick={[Function]}
+>
+  <genreItem
+    genre="Comedies"
+  />
+  <genreItem
+    genre="Crime"
+  />
+  <genreItem
+    genre="Documentary"
+  />
+  <genreItem
+    genre="Dramas"
+  />
+  <genreItem
+    genre="Horror"
+  />
+  <genreItem
+    genre="Kids & Family"
+  />
+  <genreItem
+    genre="Romance"
+  />
+  <genreItem
+    genre="Sci-Fi"
+  />
+  <genreItem
+    genre="Thrillers"
+  />
+</ul>
+`;

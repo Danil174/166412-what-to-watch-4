@@ -1,5 +1,7 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
@@ -23,16 +25,17 @@ class App extends PureComponent {
 
   _renderApp() {
     const {page} = this.state;
-    const {releaseDate, filmGenre, films, film} = this.props;
+    const {films, film, onGenreItemClick, genres, activeGenre} = this.props;
 
     switch (page) {
       case `main`:
         return (
           <Main
-            date={releaseDate}
-            genre={filmGenre}
-            filmsList = {films}
+            filmsList={films}
+            genres={genres}
+            activeGenre={activeGenre}
             onTitleOrImgClickHandler={this.changePage}
+            onGenreItemClick={onGenreItemClick}
           />
         );
       case `film`:
@@ -66,8 +69,9 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  releaseDate: PropTypes.number.isRequired,
-  filmGenre: PropTypes.string.isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onGenreItemClick: PropTypes.func.isRequired,
   films: PropTypes.array.isRequired,
   film: PropTypes.shape({
     poster: PropTypes.string.isRequired,
@@ -83,4 +87,19 @@ App.propTypes = {
   }).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  activeGenre: state.activeGenre,
+  films: state.films,
+  film: state.film,
+  genres: state.genres
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreItemClick(genre) {
+    dispatch(ActionCreator.getFilmsByGenre(genre));
+    dispatch(ActionCreator.changeFilter(genre));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import {App} from "./app.jsx";
+
+const mockStore = configureStore([]);
 
 const testFilms = [
   {
@@ -45,16 +49,27 @@ const testFilm = {
   actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
+const activeGenre = `Drama`;
+
+const genres = [`All genres`, `Drama`, `Documentary`, `Horror`];
+
 describe(`AppTest`, () => {
   it(`render App`, () => {
+    const store = mockStore({
+      mistakes: 0,
+    });
     const tree = renderer
       .create(
-          <App
-            releaseDate={1984}
-            filmGenre={`comedy`}
-            films = {testFilms}
-            film={testFilm}
-          />, {
+          <Provider store={store}>
+            <App
+              films = {testFilms}
+              film={testFilm}
+              genres={genres}
+              activeGenre={activeGenre}
+              onTitleOrImgClickHandler={() => {}}
+              onGenreItemClick={() => {}}
+            />
+          </Provider>, {
             createNodeMock: () => {
               return {};
             }

@@ -89,12 +89,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              comedy
+              Drama
             </span>
             <span
               className="movie-card__year"
             >
-              1984
+              2014
             </span>
           </p>
           <div
@@ -152,22 +152,14 @@ Array [
       </h2>
       <ul
         className="catalog__genres-list"
+        onClick={[Function]}
       >
         <li
           className="catalog__genres-item catalog__genres-item--active"
         >
           <a
             className="catalog__genres-link"
-            href="#"
-          >
-            All genres
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
+            data-genre="Comedies"
             href="#"
           >
             Comedies
@@ -178,6 +170,7 @@ Array [
         >
           <a
             className="catalog__genres-link"
+            data-genre="Crime"
             href="#"
           >
             Crime
@@ -188,69 +181,10 @@ Array [
         >
           <a
             className="catalog__genres-link"
+            data-genre="Documentary"
             href="#"
           >
             Documentary
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Horror
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Kids & Family
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Romance
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Sci-Fi
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Thrillers
           </a>
         </li>
       </ul>

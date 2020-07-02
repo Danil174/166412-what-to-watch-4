@@ -1,5 +1,9 @@
 import {TextMovieRatings} from "../const.js";
 
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
 export const getTextMovieRating = (raiting) => {
   switch (true) {
     case (raiting < 3):

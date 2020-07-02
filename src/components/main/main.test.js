@@ -17,13 +17,17 @@ const testFilmsList = [
   }
 ];
 
+const genres = [`Comedies`, `Crime`, `Documentary`];
+const activeGenre = `Comedies`;
+
 describe(`MainTest`, () => {
   it(`render Main`, () => {
     const tree = renderer
       .create(
           <Main
-            date={1984}
-            genre={`comedy`}
+            onGenreItemClick={() => {}}
+            genres={genres}
+            activeGenre={activeGenre}
             filmsList = {testFilmsList}
             onTitleOrImgClickHandler={() => {}}
           />, {

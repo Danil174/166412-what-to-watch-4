@@ -29,7 +29,7 @@ const ActionCreator = {
   }),
 
   getFilmsByGenre: (genre) => {
-    if (genre === `All genres`) {
+    if (genre === defaultGenre) {
       return {
         type: ActionType.GET_FILMS_BY_GENRE,
         payload: initialState.films,

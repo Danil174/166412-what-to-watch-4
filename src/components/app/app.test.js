@@ -49,6 +49,10 @@ const testFilm = {
   actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
 };
 
+const activeGenre = `Drama`;
+
+const genres = [`All genres`, `Drama`, `Documentary`, `Horror`];
+
 describe(`AppTest`, () => {
   it(`render App`, () => {
     const store = mockStore({
@@ -60,6 +64,10 @@ describe(`AppTest`, () => {
             <App
               films = {testFilms}
               film={testFilm}
+              genres={genres}
+              activeGenre={activeGenre}
+              onTitleOrImgClickHandler={() => {}}
+              onGenreItemClick={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

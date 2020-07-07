@@ -13,7 +13,7 @@ exports[`FilmTest render SmallMovieCard 1`] = `
   >
     <video
       height={175}
-      width={280}
+      width={242}
     />
   </div>
   <h3

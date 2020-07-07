@@ -214,7 +214,7 @@ Array [
           >
             <video
               height={175}
-              width={280}
+              width={242}
             />
           </div>
           <h3
@@ -241,7 +241,7 @@ Array [
           >
             <video
               height={175}
-              width={280}
+              width={242}
             />
           </div>
           <h3
@@ -268,7 +268,7 @@ Array [
           >
             <video
               height={175}
-              width={280}
+              width={242}
             />
           </div>
           <h3
@@ -295,7 +295,7 @@ Array [
           >
             <video
               height={175}
-              width={280}
+              width={242}
             />
           </div>
           <h3

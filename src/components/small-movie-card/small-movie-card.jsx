@@ -2,7 +2,9 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {SmallCardVideoSettings} from "../../const.js";
 
-import Video from "../video/video.jsx";
+import VideoPlayer from "../video/video.jsx";
+import withVideo from "../../hocs/with-video/with-video.js";
+const Video = withVideo(VideoPlayer);
 
 class SmallMovieCard extends PureComponent {
   constructor(props) {

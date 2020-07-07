@@ -7,8 +7,8 @@ export const TextMovieRatings = {
 };
 
 export const SmallCardVideoSettings = {
-  WIDTH: 280,
-  HEIGHT: 175,
+  WIDTH: `100%`,
+  HEIGHT: `100%`,
   IS_MUTED: true,
 };
 

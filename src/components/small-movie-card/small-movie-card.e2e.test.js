@@ -25,9 +25,10 @@ it(`Small Movie card hovered`, () => {
 
   const card = shallow(
       <SmallMovieCard
+        isPlaying={false}
         film={film}
-        onCardMouseEnter={onCardMouseEnter}
-        onCardMouseLeave={onCardMouseLeave}
+        onMouseOver={onCardMouseEnter}
+        onMouseOut={onCardMouseLeave}
         onTitleOrImgClickHandler={onTitleOrImgClickHandler}
       />
   );

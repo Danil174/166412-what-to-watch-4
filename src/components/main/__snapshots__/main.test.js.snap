@@ -202,8 +202,8 @@ Array [
             onClick={[Function]}
           >
             <video
-              height={175}
-              width={242}
+              height="100%"
+              width="100%"
             />
           </div>
           <h3
@@ -229,8 +229,8 @@ Array [
             onClick={[Function]}
           >
             <video
-              height={175}
-              width={242}
+              height="100%"
+              width="100%"
             />
           </div>
           <h3

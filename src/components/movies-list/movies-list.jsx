@@ -2,6 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
+import withActiveCard from "../../hocs/with-active-card/with-active-card.js";
+const SmallMovieCardWrapper = withActiveCard(SmallMovieCard);
 
 class MoviesList extends PureComponent {
   constructor(props) {
@@ -32,9 +34,10 @@ class MoviesList extends PureComponent {
     return (
       <div className="catalog__movies-list">
         {filmsList.map((film) => (
-          <SmallMovieCard
+          <SmallMovieCardWrapper
             key={film.id}
             film={film}
+            id={film.id}
             onTitleOrImgClickHandler={onTitleOrImgClickHandler}
             onCardMouseEnter={this.onCardMouseEnterHandler}
             onCardMouseLeave={this.onCardMouseLeaveHandler}

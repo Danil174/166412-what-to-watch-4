@@ -7,31 +7,16 @@ import withVideo from "../../hocs/with-video/with-video.js";
 const Video = withVideo(VideoPlayer);
 
 class SmallMovieCard extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isPlaying: false,
-    };
-  }
-
   render() {
-    const {film, onTitleOrImgClickHandler, onCardMouseEnter, onCardMouseLeave} = this.props;
+    const {film, onTitleOrImgClickHandler, onMouseOver, onMouseOut, isPlaying} = this.props;
     const {id, title, src, source} = film;
-    const {isPlaying} = this.state;
 
     return (
       <article
         id={id}
         className="small-movie-card catalog__movies-card"
-        onMouseOver={() => {
-          onCardMouseEnter(id);
-          this.setState({isPlaying: true});
-        }}
-        onMouseOut={() => {
-          onCardMouseLeave();
-          this.setState({isPlaying: false});
-        }}
+        onMouseOver={() => onMouseOver()}
+        onMouseOut={() => onMouseOut()}
       >
         <div
           className="small-movie-card__image"
@@ -61,8 +46,9 @@ class SmallMovieCard extends PureComponent {
 }
 
 SmallMovieCard.propTypes = {
-  onCardMouseEnter: PropTypes.func.isRequired,
-  onCardMouseLeave: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  onMouseOver: PropTypes.func.isRequired,
+  onMouseOut: PropTypes.func.isRequired,
   onTitleOrImgClickHandler: PropTypes.func.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,

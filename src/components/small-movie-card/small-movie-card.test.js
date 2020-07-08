@@ -9,14 +9,15 @@ const film = {
   source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
-describe(`FilmTest`, () => {
+describe(`small movie card rendered correct`, () => {
   it(`render SmallMovieCard`, () => {
     const tree = renderer
       .create(
           <SmallMovieCard
+            isPlaying={false}
             film={film}
-            onCardMouseEnter={() => {}}
-            onCardMouseLeave={() => {}}
+            onMouseOver={() => {}}
+            onMouseOut={() => {}}
             onTitleOrImgClickHandler={() => {}}
           />, {
             createNodeMock: () => {

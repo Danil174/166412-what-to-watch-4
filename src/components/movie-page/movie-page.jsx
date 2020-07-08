@@ -18,7 +18,7 @@ const MoviePage = (props) => {
   const {
     poster,
     cover,
-    movieTitle,
+    title,
     genre,
     releaseDate,
     synopsis,
@@ -29,7 +29,7 @@ const MoviePage = (props) => {
   } = film;
 
   const stringRating = (movieScore + ``).split(`.`).join(`,`);
-  const posterAlt = `${movieTitle} poster`;
+  const posterAlt = `${title} poster`;
   const actorsString = actors.join(`, `);
   const textRating = getTextMovieRating(movieScore);
 
@@ -40,7 +40,7 @@ const MoviePage = (props) => {
         <div className="movie-card__bg">
           <img
             src={cover}
-            alt={movieTitle}
+            alt={title}
           />
         </div>
 
@@ -64,7 +64,7 @@ const MoviePage = (props) => {
 
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{movieTitle}</h2>
+            <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
               <span className="movie-card__genre">{genre}</span>
               <span className="movie-card__year">{releaseDate}</span>
@@ -200,7 +200,7 @@ MoviePage.propTypes = {
   film: PropTypes.shape({
     poster: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
-    movieTitle: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
     synopsis: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -208,7 +208,7 @@ MoviePage.propTypes = {
     ratingCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
+  })
 };
 
 export default MoviePage;

@@ -14,6 +14,7 @@ class App extends PureComponent {
     this.state = {
       page: `main`,
     };
+
     this.changePage = this.changePage.bind(this);
   }
 
@@ -25,7 +26,8 @@ class App extends PureComponent {
 
   _renderApp() {
     const {page} = this.state;
-    const {films, film, onGenreItemClick, genres, activeGenre} = this.props;
+    // eslint-disable-next-line react/prop-types
+    const {films, selectedFilm, onGenreItemClick, genres, activeGenre} = this.props;
 
     switch (page) {
       case `main`:
@@ -41,7 +43,7 @@ class App extends PureComponent {
       case `film`:
         return (
           <MoviePage
-            film={film}
+            film={selectedFilm}
           />
         );
     }
@@ -50,7 +52,8 @@ class App extends PureComponent {
   }
 
   render() {
-    const {film} = this.props;
+    // eslint-disable-next-line react/prop-types
+    const {selectedFilm} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -59,7 +62,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-film">
             <MoviePage
-              film = {film}
+              film = {selectedFilm}
             />
           </Route>
         </Switch>
@@ -73,24 +76,12 @@ App.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   films: PropTypes.array.isRequired,
-  film: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
-    movieTitle: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-    synopsis: PropTypes.arrayOf(PropTypes.string).isRequired,
-    movieScore: PropTypes.number.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  selectedFilm: state.selectedFilm,
   activeGenre: state.activeGenre,
   films: state.films,
-  film: state.film,
   genres: state.genres
 });
 

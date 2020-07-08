@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilmTest render SmallMovieCard 1`] = `
+exports[`small movie card rendered correct render SmallMovieCard 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
-  id={7}
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
@@ -12,8 +11,8 @@ exports[`FilmTest render SmallMovieCard 1`] = `
     onClick={[Function]}
   >
     <video
-      height={175}
-      width={280}
+      height="100%"
+      width="100%"
     />
   </div>
   <h3
@@ -24,7 +23,7 @@ exports[`FilmTest render SmallMovieCard 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      Midnight Special
+      War of the Worlds
     </a>
   </h3>
 </article>

@@ -204,7 +204,6 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          id={16}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
         >
@@ -213,8 +212,8 @@ Array [
             onClick={[Function]}
           >
             <video
-              height={175}
-              width={280}
+              height="100%"
+              width="100%"
             />
           </div>
           <h3
@@ -231,7 +230,6 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          id={17}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
         >
@@ -240,8 +238,8 @@ Array [
             onClick={[Function]}
           >
             <video
-              height={175}
-              width={280}
+              height="100%"
+              width="100%"
             />
           </div>
           <h3
@@ -258,7 +256,6 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          id={18}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
         >
@@ -267,8 +264,8 @@ Array [
             onClick={[Function]}
           >
             <video
-              height={175}
-              width={280}
+              height="100%"
+              width="100%"
             />
           </div>
           <h3
@@ -285,7 +282,6 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          id={19}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
         >
@@ -294,8 +290,8 @@ Array [
             onClick={[Function]}
           >
             <video
-              height={175}
-              width={280}
+              height="100%"
+              width="100%"
             />
           </div>
           <h3

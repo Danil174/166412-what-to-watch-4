@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import GenresList from "./genres-list.jsx";
 
@@ -17,7 +17,7 @@ const mockEvent = {
 it(`generes list clicked`, () => {
   const onGenreItemClick = jest.fn();
 
-  const card = shallow(
+  const card = mount(
       <GenresList
         genres={genres}
         activeGenre={activeGenre}
@@ -26,8 +26,9 @@ it(`generes list clicked`, () => {
   );
 
   const firstGenre = card.find(`.catalog__genres-link`).at(0);
+  const lastGenre = card.find(`.catalog__genres-link`).at(genres.length - 1);
 
   firstGenre.simulate(`click`, mockEvent);
-  // expect(onGenreItemClick).toHaveBeenCalledTimes(1);
-  expect(onGenreItemClick).toHaveBeenCalledTimes(0);
+  lastGenre.simulate(`click`, mockEvent);
+  expect(onGenreItemClick).toHaveBeenCalledTimes(2);
 });

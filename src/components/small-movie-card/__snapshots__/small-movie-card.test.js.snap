@@ -3,7 +3,6 @@
 exports[`small movie card rendered correct render SmallMovieCard 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
-  id={7}
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
@@ -24,7 +23,7 @@ exports[`small movie card rendered correct render SmallMovieCard 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      Midnight Special
+      War of the Worlds
     </a>
   </h3>
 </article>

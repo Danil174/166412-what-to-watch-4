@@ -50,6 +50,7 @@ class SmallMovieCard extends PureComponent {
   }
 }
 
+
 SmallMovieCard.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   selectFilm: PropTypes.func.isRequired,
@@ -69,6 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.getSelectedFilm(id));
   },
 });
+
 
 export {SmallMovieCard};
 export default connect(null, mapDispatchToProps)(SmallMovieCard);

@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import PropTypes from "prop-types";
 
 const withActiveVideo = (Component) => {
   class WithActiveVideo extends PureComponent {
@@ -15,14 +14,10 @@ const withActiveVideo = (Component) => {
     }
 
     handleMouseOver() {
-      const {id, onCardMouseEnter} = this.props;
-      onCardMouseEnter(id);
       this.setState({isPlaying: true});
     }
 
     handleMouseOut() {
-      const {onCardMouseLeave} = this.props;
-      onCardMouseLeave();
       this.setState({isPlaying: false});
     }
 
@@ -37,12 +32,6 @@ const withActiveVideo = (Component) => {
       />;
     }
   }
-
-  WithActiveVideo.propTypes = {
-    id: PropTypes.number.isRequired,
-    onCardMouseEnter: PropTypes.func.isRequired,
-    onCardMouseLeave: PropTypes.func.isRequired,
-  };
 
   return WithActiveVideo;
 };

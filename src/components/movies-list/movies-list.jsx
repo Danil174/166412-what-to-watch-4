@@ -6,29 +6,6 @@ import withActiveVideo from "../../hocs/with-active-video/with-active-video.js";
 const SmallMovieCardWrapper = withActiveVideo(SmallMovieCard);
 
 class MoviesList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      pointedCard: null,
-    };
-
-    this.onCardMouseEnterHandler = this.onCardMouseEnterHandler.bind(this);
-    this.onCardMouseLeaveHandler = this.onCardMouseLeaveHandler.bind(this);
-  }
-
-  onCardMouseEnterHandler(id) {
-    this.setState({
-      pointedCard: id
-    });
-  }
-
-  onCardMouseLeaveHandler() {
-    this.setState({
-      pointedCard: null
-    });
-  }
-
   render() {
     const {filmsList, onTitleOrImgClickHandler} = this.props;
     return (
@@ -39,8 +16,6 @@ class MoviesList extends PureComponent {
             film={film}
             id={film.id}
             onTitleOrImgClickHandler={onTitleOrImgClickHandler}
-            onCardMouseEnter={this.onCardMouseEnterHandler}
-            onCardMouseLeave={this.onCardMouseLeaveHandler}
           />
         ))}
       </div>

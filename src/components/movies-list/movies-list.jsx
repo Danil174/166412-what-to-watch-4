@@ -14,7 +14,6 @@ class MoviesList extends PureComponent {
           <SmallMovieCardWrapper
             key={film.id}
             film={film}
-            id={film.id}
             onTitleOrImgClickHandler={onTitleOrImgClickHandler}
           />
         ))}

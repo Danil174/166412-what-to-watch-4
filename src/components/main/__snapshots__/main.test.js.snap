@@ -193,7 +193,6 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          id={18}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
         >
@@ -220,7 +219,6 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          id={19}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
         >

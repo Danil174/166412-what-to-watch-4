@@ -1,10 +1,10 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import withActiveCard from "./with-active-card.js";
+import withActiveVideo from "./with-active-video.js";
 
 const MockComponent = () => <div />;
-const MockComponentWrapped = withActiveCard(MockComponent);
+const MockComponentWrapped = withActiveVideo(MockComponent);
 
 Enzyme.configure({
   adapter: new Adapter(),

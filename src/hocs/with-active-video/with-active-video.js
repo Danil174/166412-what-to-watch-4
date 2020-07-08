@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 
-const withActiveCard = (Component) => {
-  class WithActiveCard extends PureComponent {
+const withActiveVideo = (Component) => {
+  class WithActiveVideo extends PureComponent {
     constructor(props) {
       super(props);
 
@@ -38,13 +38,13 @@ const withActiveCard = (Component) => {
     }
   }
 
-  WithActiveCard.propTypes = {
+  WithActiveVideo.propTypes = {
     id: PropTypes.number.isRequired,
     onCardMouseEnter: PropTypes.func.isRequired,
     onCardMouseLeave: PropTypes.func.isRequired,
   };
 
-  return WithActiveCard;
+  return WithActiveVideo;
 };
 
-export default withActiveCard;
+export default withActiveVideo;

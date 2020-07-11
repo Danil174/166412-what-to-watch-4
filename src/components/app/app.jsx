@@ -26,7 +26,6 @@ class App extends PureComponent {
 
   _renderApp() {
     const {page} = this.state;
-    // eslint-disable-next-line react/prop-types
     const {films, selectedFilm, onGenreItemClick, genres, activeGenre} = this.props;
 
     switch (page) {
@@ -52,7 +51,6 @@ class App extends PureComponent {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const {selectedFilm} = this.props;
     return (
       <BrowserRouter>
@@ -76,6 +74,18 @@ App.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   films: PropTypes.array.isRequired,
+  selectedFilm: PropTypes.shape({
+    poster: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+    synopsis: PropTypes.arrayOf(PropTypes.string).isRequired,
+    movieScore: PropTypes.number.isRequired,
+    ratingCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 const mapStateToProps = (state) => ({

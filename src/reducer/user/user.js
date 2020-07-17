@@ -1,8 +1,4 @@
-
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+import {AuthorizationStatus} from "../../const.js";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -57,7 +53,6 @@ const Operation = {
 export {
   ActionCreator,
   ActionType,
-  AuthorizationStatus,
   Operation,
   reducer,
 };

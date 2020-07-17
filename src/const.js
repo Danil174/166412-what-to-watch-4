@@ -12,4 +12,11 @@ export const SmallCardVideoSettings = {
   IS_MUTED: true,
 };
 
+export const DEFAULT_GENRE = `All genres`;
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 export const smallCardVideoStartTimeOut = 1000;

@@ -1,14 +1,14 @@
 import mockFilms from "../../mocks/films.js";
 import {extend} from "../../utils/common.js";
+import {DEFAULT_GENRE} from "../../const.js";
 
-const defaultGenre = `All genres`;
 const genres = Array.from(new Set(mockFilms.map((film) => film.genre)));
-genres.unshift(defaultGenre);
+genres.unshift(DEFAULT_GENRE);
 
 const initialState = {
   films: mockFilms,
   selectedFilm: null,
-  activeGenre: defaultGenre,
+  activeGenre: DEFAULT_GENRE,
   genres
 };
 
@@ -29,7 +29,7 @@ const ActionCreator = {
   }),
 
   getFilmsByGenre: (genre) => {
-    if (genre === defaultGenre) {
+    if (genre === DEFAULT_GENRE) {
       return {
         type: ActionType.GET_FILMS_BY_GENRE,
         payload: initialState.films,
@@ -78,5 +78,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-
-export {reducer, ActionType, ActionCreator, defaultGenre, genres, getFilmsByGenre};
+export {reducer, ActionType, ActionCreator, genres, getFilmsByGenre};

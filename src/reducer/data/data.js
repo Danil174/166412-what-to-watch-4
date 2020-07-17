@@ -1,5 +1,5 @@
-import mockFilms from "./mocks/films.js";
-import {extend} from "./utils/common.js";
+import mockFilms from "../../mocks/films.js";
+import {extend} from "../../utils/common.js";
 
 const defaultGenre = `All genres`;
 const genres = Array.from(new Set(mockFilms.map((film) => film.genre)));

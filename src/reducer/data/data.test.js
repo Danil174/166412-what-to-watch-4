@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType, defaultGenre, genres, getFilmsByGenre} from "./reducer.js";
+import {reducer, ActionCreator, ActionType, defaultGenre, genres, getFilmsByGenre} from "./data.js";
 import mockFilms from "./mocks/films.js";
 
 it(`Reducer without additional parameters should return initial state`, () => {

@@ -7,8 +7,8 @@ export const getFilms = (state) => {
   return state[NameSpace.DATA].films;
 };
 
-export const getSelectedFilm = (state) => {
-  return state[NameSpace.DATA].selectedFilm;
+export const getSelectedFilmID = (state) => {
+  return state[NameSpace.DATA].selectedFilmID;
 };
 
 export const getActiveGenre = (state) => {

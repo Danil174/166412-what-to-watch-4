@@ -3,16 +3,6 @@ import PropTypes from "prop-types";
 
 import {getTextMovieRating} from "../../utils/common.js";
 
-const getDescParagraphs = (array) => {
-  return (
-    <>
-    {array.map((it) => {
-      return <p key={it}>{it}</p>;
-    })}
-    </>
-  );
-};
-
 const MoviePage = (props) => {
   const {film} = props;
   const {
@@ -124,7 +114,7 @@ const MoviePage = (props) => {
             </div>
 
             <div className="movie-card__text">
-              {getDescParagraphs(synopsis)}
+              {synopsis}
 
               <p className="movie-card__director"><strong>Director: {director}</strong></p>
 
@@ -203,7 +193,7 @@ MoviePage.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
-    synopsis: PropTypes.arrayOf(PropTypes.string).isRequired,
+    synopsis: PropTypes.string.isRequired,
     movieScore: PropTypes.number.isRequired,
     ratingCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,

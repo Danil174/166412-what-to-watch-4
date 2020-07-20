@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from '../../reducer/data/data.js';
-import {getActiveGenre, getSelectedFilm, getGenres, getFilmsByGenre} from "../../reducer/data/selectors.js";
+import {getActiveGenre, getSelectedFilmID, getGenres, getFilmsByGenre} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
@@ -27,7 +27,7 @@ class App extends PureComponent {
 
   _renderApp() {
     const {page} = this.state;
-    const {films, selectedFilm, onGenreItemClick, genres, activeGenre} = this.props;
+    const {films, selectedFilmID, onGenreItemClick, genres, activeGenre} = this.props;
 
     switch (page) {
       case `main`:
@@ -41,9 +41,12 @@ class App extends PureComponent {
           />
         );
       case `film`:
+        const index = films.findIndex((film) => film.id === selectedFilmID);
+        const selectedFilmtest = films[index];
+
         return (
           <MoviePage
-            film={selectedFilm}
+            film={selectedFilmtest}
           />
         );
     }
@@ -52,18 +55,17 @@ class App extends PureComponent {
   }
 
   render() {
-    const {selectedFilm} = this.props;
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-film">
+          {/* <Route exact path="/dev-film">
             <MoviePage
-              film = {selectedFilm}
+              film = {}
             />
-          </Route>
+          </Route> */}
         </Switch>
       </BrowserRouter>
     );
@@ -75,22 +77,11 @@ App.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   films: PropTypes.array.isRequired,
-  selectedFilm: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-    synopsis: PropTypes.arrayOf(PropTypes.string).isRequired,
-    movieScore: PropTypes.number.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }),
+  selectedFilmID: PropTypes.number,
 };
 
 const mapStateToProps = (state) => ({
-  selectedFilm: getSelectedFilm(state),
+  selectedFilmID: getSelectedFilmID(state),
   activeGenre: getActiveGenre(state),
   films: getFilmsByGenre(state),
   genres: getGenres(state),

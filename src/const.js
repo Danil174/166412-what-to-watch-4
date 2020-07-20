@@ -13,6 +13,7 @@ export const SmallCardVideoSettings = {
 };
 
 export const DEFAULT_GENRE = `All genres`;
+export const MAX_GENRES_LENGTH = 9;
 
 export const AuthorizationStatus = {
   AUTH: `AUTH`,

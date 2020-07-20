@@ -1,14 +1,11 @@
 import mockFilms from "../../mocks/films.js";
 import configureFilm from '../../adapter/adapter.js';
 import {extend} from "../../utils/common.js";
-import {DEFAULT_GENRE} from "../../const.js";
-
-const genres = Array.from(new Set(mockFilms.map((film) => film.genre)));
-genres.unshift(DEFAULT_GENRE);
+import {DEFAULT_GENRE, MAX_GENRES_LENGTH} from "../../const.js";
 
 const initialState = {
   films: [],
-  promoFilms: {},
+  promoFilm: {},
   genres: [],
   selectedFilm: null,
   activeGenre: DEFAULT_GENRE,
@@ -16,6 +13,7 @@ const initialState = {
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
+  GET_GENRES: `GET_GENRES`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
@@ -31,6 +29,13 @@ const ActionCreator = {
     return ({
       type: ActionType.LOAD_FILMS,
       payload: films
+    });
+  },
+
+  getGenres: (genres) => {
+    return ({
+      type: ActionType.GET_GENRES,
+      payload: genres
     });
   },
 
@@ -70,6 +75,13 @@ const Operation = {
     return api.get(`/films`)
       .then((response) => {
         const configuredFilm = response.data.map((film) => configureFilm(film));
+
+        const genresList = [
+          DEFAULT_GENRE,
+          ...new Set(configuredFilm.map((film) => film.genre).slice(0, MAX_GENRES_LENGTH))
+        ];
+
+        dispatch(ActionCreator.getGenres(genresList));
         dispatch(ActionCreator.loadFilms(configuredFilm));
       });
   },
@@ -80,6 +92,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FILMS:
       return extend(state, {
         films: action.payload
+      });
+
+    case ActionType.GET_GENRES:
+      return extend(state, {
+        genres: action.payload,
       });
 
     case ActionType.CHANGE_GENRE_FILTER:
@@ -104,4 +121,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionType, ActionCreator, genres, getFilmsByGenre, Operation};
+export {reducer, ActionType, ActionCreator, getFilmsByGenre, Operation};

@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from '../../reducer/data/data.js';
-import {getFilms, getActiveGenre, getSelectedFilm, getGenres} from "../../reducer/data/selectors.js";
+import {getActiveGenre, getSelectedFilm, getGenres, getFilmsByGenre} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
@@ -92,13 +92,12 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   selectedFilm: getSelectedFilm(state),
   activeGenre: getActiveGenre(state),
-  films: getFilms(state),
+  films: getFilmsByGenre(state),
   genres: getGenres(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
-    dispatch(ActionCreator.getFilmsByGenre(genre));
     dispatch(ActionCreator.changeFilter(genre));
   }
 });

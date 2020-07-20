@@ -1,4 +1,3 @@
-import mockFilms from "../../mocks/films.js";
 import configureFilm from '../../adapter/adapter.js';
 import {extend} from "../../utils/common.js";
 import {DEFAULT_GENRE, MAX_GENRES_LENGTH} from "../../const.js";

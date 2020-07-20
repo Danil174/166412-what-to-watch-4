@@ -6,13 +6,16 @@ const genres = Array.from(new Set(mockFilms.map((film) => film.genre)));
 genres.unshift(DEFAULT_GENRE);
 
 const initialState = {
-  films: mockFilms,
+  films: [],
+  promoFilms: {},
+  genres: [],
   selectedFilm: null,
   activeGenre: DEFAULT_GENRE,
-  genres
 };
 
 const ActionType = {
+  LOAD_FILMS: `LOAD_FILMS`,
+  LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
   GET_SELECT_FILM: `GET_SELECT_FILM`,
@@ -23,6 +26,13 @@ const getFilmsByGenre = (movies, genre) => {
 };
 
 const ActionCreator = {
+  loadFilms: (films) => {
+    return ({
+      type: ActionType.LOAD_FILMS,
+      payload: films
+    });
+  },
+
   changeFilter: (filter) => ({
     type: ActionType.CHANGE_GENRE_FILTER,
     payload: filter,
@@ -54,8 +64,22 @@ const ActionCreator = {
   },
 };
 
+const Operation = {
+  loadFilms: () => (dispatch, getState, api) => {
+    return api.get(`/films`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFilms(response.data));
+      });
+  },
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.LOAD_FILMS:
+      return extend(state, {
+        films: action.payload
+      });
+
     case ActionType.CHANGE_GENRE_FILTER:
 
       return extend(state, {
@@ -78,4 +102,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionType, ActionCreator, genres, getFilmsByGenre};
+export {reducer, ActionType, ActionCreator, genres, getFilmsByGenre, Operation};

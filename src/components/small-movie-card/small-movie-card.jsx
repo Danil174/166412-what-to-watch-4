@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/data/data.js";
 import PropTypes from "prop-types";
 import {SmallCardVideoSettings} from "../../const.js";
 

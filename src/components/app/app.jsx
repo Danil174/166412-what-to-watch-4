@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from '../../reducer/data/data.js';
+import {getFilms, getActiveGenre, getSelectedFilm, getGenres} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
@@ -27,6 +28,8 @@ class App extends PureComponent {
   _renderApp() {
     const {page} = this.state;
     const {films, selectedFilm, onGenreItemClick, genres, activeGenre} = this.props;
+
+    console.log(films);
 
     switch (page) {
       case `main`:
@@ -89,17 +92,17 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  selectedFilm: state.selectedFilm,
-  activeGenre: state.activeGenre,
-  films: state.films,
-  genres: state.genres
+  selectedFilm: getSelectedFilm(state),
+  activeGenre: getActiveGenre(state),
+  films: getFilms(state),
+  genres: getGenres(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
     dispatch(ActionCreator.getFilmsByGenre(genre));
     dispatch(ActionCreator.changeFilter(genre));
-  },
+  }
 });
 
 export {App};

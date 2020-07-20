@@ -1,4 +1,5 @@
 import mockFilms from "../../mocks/films.js";
+import configureFilm from '../../adapter/adapter.js';
 import {extend} from "../../utils/common.js";
 import {DEFAULT_GENRE} from "../../const.js";
 
@@ -68,7 +69,8 @@ const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.loadFilms(response.data));
+        const configuredFilm = response.data.map((film) => configureFilm(film));
+        dispatch(ActionCreator.loadFilms(configuredFilm));
       });
   },
 };

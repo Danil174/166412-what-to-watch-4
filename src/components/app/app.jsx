@@ -29,8 +29,6 @@ class App extends PureComponent {
     const {page} = this.state;
     const {films, selectedFilm, onGenreItemClick, genres, activeGenre} = this.props;
 
-    console.log(films);
-
     switch (page) {
       case `main`:
         return (

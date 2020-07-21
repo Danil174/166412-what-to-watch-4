@@ -7,6 +7,10 @@ export const getFilms = (state) => {
   return state[NameSpace.DATA].films;
 };
 
+export const getPromoFilm = (state) => {
+  return state[NameSpace.DATA].promoFilm;
+};
+
 export const getSelectedFilmID = (state) => {
   return state[NameSpace.DATA].selectedFilmID;
 };
@@ -21,6 +25,10 @@ export const getGenres = (state) => {
 
 export const getloadFilmsError = (state) => {
   return state[NameSpace.DATA].loadFilmsError;
+};
+
+export const getloadPromoError = (state) => {
+  return state[NameSpace.DATA].loadPromoError;
 };
 
 export const getFilmsByGenre = createSelector(

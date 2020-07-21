@@ -8,17 +8,19 @@ const initialState = {
   genres: [],
   selectedFilmID: null,
   activeGenre: DEFAULT_GENRE,
-  loadFilmsError: null
+  loadFilmsError: null,
+  loadPromoError: null,
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   GET_GENRES: `GET_GENRES`,
-  LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  LOAD_PROMO: `LOAD_PROMO`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
   GET_SELECT_FILM_ID: `GET_SELECT_FILM_ID`,
   SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
+  SET_LOAD_PROMO_ERROR: `SET_LOAD_PROMO_ERROR`,
 };
 
 const ActionCreator = {
@@ -26,6 +28,13 @@ const ActionCreator = {
     return ({
       type: ActionType.LOAD_FILMS,
       payload: films
+    });
+  },
+
+  loadPromo: (film) => {
+    return ({
+      type: ActionType.LOAD_PROMO,
+      payload: film
     });
   },
 
@@ -54,6 +63,13 @@ const ActionCreator = {
       payload: err,
     };
   },
+
+  setLoadPromoError: (err) => {
+    return {
+      type: ActionType.SET_LOAD_PROMO_ERROR,
+      payload: err,
+    };
+  },
 };
 
 const Operation = {
@@ -78,6 +94,19 @@ const Operation = {
         }
       });
   },
+  loadPromo: () => (dispatch, getState, api) => {
+    return api.get(`/films/promo`)
+      .then((response) => {
+        dispatch(ActionCreator.loadPromo(configureFilm(response.data)));
+      })
+      .catch((error) => {
+        if (error.response.status !== 200) {
+          dispatch(ActionCreator.setLoadPromoError(error.response.status));
+        } else {
+          dispatch(ActionCreator.setLoadPromoError(null));
+        }
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -85,6 +114,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FILMS:
       return extend(state, {
         films: action.payload
+      });
+
+    case ActionType.LOAD_PROMO:
+      return extend(state, {
+        promoFilm: action.payload
       });
 
     case ActionType.GET_GENRES:
@@ -114,6 +148,12 @@ const reducer = (state = initialState, action) => {
 
       return extend(state, {
         loadFilmsError: action.payload,
+      });
+
+    case ActionType.SET_LOAD_PROMO_ERROR:
+
+      return extend(state, {
+        loadPromoError: action.payload,
       });
   }
 

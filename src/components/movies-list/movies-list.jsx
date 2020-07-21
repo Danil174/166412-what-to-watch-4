@@ -16,7 +16,7 @@ class MoviesList extends PureComponent {
         <ErrorMessage
           errorStatus={loadFilmsError}
           errorMessage={LoadErrorsTexts.LIST_FAIL}
-        ></ErrorMessage> :
+        /> :
         <div className="catalog__movies-list">
           {filmsList.map((film) => (
             <SmallMovieCardWrapper

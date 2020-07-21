@@ -8,6 +8,7 @@ const initialState = {
   genres: [],
   selectedFilmID: null,
   activeGenre: DEFAULT_GENRE,
+  loadFilmsError: null
 };
 
 const ActionType = {
@@ -17,6 +18,7 @@ const ActionType = {
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
   GET_SELECT_FILM_ID: `GET_SELECT_FILM_ID`,
+  SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
 };
 
 const ActionCreator = {
@@ -45,6 +47,13 @@ const ActionCreator = {
       payload: id,
     };
   },
+
+  setLoadFilmsError: (err) => {
+    return {
+      type: ActionType.SET_LOAD_FILMS_ERROR,
+      payload: err,
+    };
+  },
 };
 
 const Operation = {
@@ -60,6 +69,13 @@ const Operation = {
 
         dispatch(ActionCreator.getGenres(genresList));
         dispatch(ActionCreator.loadFilms(configuredFilm));
+      })
+      .catch((error) => {
+        if (error.response.status !== 200) {
+          dispatch(ActionCreator.setLoadFilmsError(error.response.status));
+        } else {
+          dispatch(ActionCreator.setLoadFilmsError(null));
+        }
       });
   },
 };
@@ -92,6 +108,12 @@ const reducer = (state = initialState, action) => {
 
       return extend(state, {
         selectedFilmID: action.payload,
+      });
+
+    case ActionType.SET_LOAD_FILMS_ERROR:
+
+      return extend(state, {
+        loadFilmsError: action.payload,
       });
   }
 

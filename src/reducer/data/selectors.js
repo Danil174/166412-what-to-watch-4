@@ -19,6 +19,10 @@ export const getGenres = (state) => {
   return state[NameSpace.DATA].genres;
 };
 
+export const getloadFilmsError = (state) => {
+  return state[NameSpace.DATA].loadFilmsError;
+};
+
 export const getFilmsByGenre = createSelector(
     getFilms,
     getActiveGenre,

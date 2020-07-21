@@ -2,7 +2,7 @@ const configureFilm = (data) => {
   return ({
     id: data.id,
     title: data.name,
-    src: data.preview_image,
+    preview: data.preview_image,
     poster: data.poster_image,
     cover: data.background_image,
     bgColor: data.background_color,

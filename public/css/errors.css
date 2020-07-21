@@ -1,0 +1,16 @@
+.error {
+  color: #d9ca74;
+  font-size: 18px;
+  text-align: center;
+
+  padding-bottom: 40px;
+}
+
+.error p {
+  margin: 0px;
+}
+
+.error strong {
+  font-size: 20px;
+  text-decoration: underline;
+}

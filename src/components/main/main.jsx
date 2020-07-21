@@ -1,11 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
+import {getloadFilmsError} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
-  const {filmsList, onTitleOrImgClickHandler, onGenreItemClick, genres, activeGenre} = props;
+  const {filmsList, onTitleOrImgClickHandler, onGenreItemClick, genres, activeGenre, error} = props;
 
   return (
     <>
@@ -75,6 +77,7 @@ const Main = (props) => {
         />
 
         <MoviesList
+          loadFilmsError={error}
           filmsList={filmsList}
           onTitleOrImgClickHandler={onTitleOrImgClickHandler}
         />
@@ -103,6 +106,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  error: PropTypes.number,
   activeGenre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
@@ -110,4 +114,9 @@ Main.propTypes = {
   filmsList: PropTypes.array.isRequired,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  error: getloadFilmsError(state)
+});
+
+export {Main};
+export default connect(mapStateToProps)(Main);

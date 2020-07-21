@@ -6,19 +6,14 @@ const initialState = {
   films: [],
   promoFilm: {},
   genres: [],
-  selectedFilmID: null,
-  activeGenre: DEFAULT_GENRE,
   loadFilmsError: null,
   loadPromoError: null,
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
-  GET_GENRES: `GET_GENRES`,
   LOAD_PROMO: `LOAD_PROMO`,
-  CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
-  GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
-  GET_SELECT_FILM_ID: `GET_SELECT_FILM_ID`,
+  GET_GENRES: `GET_GENRES`,
   SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
   SET_LOAD_PROMO_ERROR: `SET_LOAD_PROMO_ERROR`,
 };
@@ -112,24 +107,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_GENRES:
       return extend(state, {
         genres: action.payload,
-      });
-
-    case ActionType.CHANGE_GENRE_FILTER:
-
-      return extend(state, {
-        activeGenre: action.payload,
-      });
-
-    case ActionType.GET_FILMS_BY_GENRE:
-
-      return extend(state, {
-        films: action.payload,
-      });
-
-    case ActionType.GET_SELECT_FILM_ID:
-
-      return extend(state, {
-        selectedFilmID: action.payload,
       });
 
     case ActionType.SET_LOAD_FILMS_ERROR:

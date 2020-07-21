@@ -1,8 +1,6 @@
 import {reducer, ActionType, ActionCreator} from "./app-state.js";
 import {DEFAULT_GENRE} from "../../const.js";
 
-const genres = [`All genres`, `Crime`, `Adventure`, `Action`, `Comedy`];
-
 const fakeFilms = [{
   actors: [`Leonardo DiCaprio`, `Cameron Diaz`, `Daniel Day-Lewis`],
   bgColor: `#A6B7AC`,
@@ -39,8 +37,7 @@ const fakeFilms = [{
   source: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
   synopsis: `A pair of young lovers flee their New England town, which causes a local search party to fan out to find them.`,
   title: `Moonrise Kingdom`,
-}
-];
+}];
 
 describe(`app-state reducer test`, () => {
   it(`Reducer without additional parameters should return initial stat`, () => {

@@ -81,6 +81,14 @@ App.propTypes = {
   onGenreItemClick: PropTypes.func.isRequired,
   films: PropTypes.array.isRequired,
   selectedFilmID: PropTypes.number,
+  loadPromoError: PropTypes.number,
+  promoFilm: PropTypes.shape({
+    poster: PropTypes.string,
+    cover: PropTypes.string,
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    releaseDate: PropTypes.number,
+  }).isRequired
 };
 
 const mapStateToProps = (state) => ({

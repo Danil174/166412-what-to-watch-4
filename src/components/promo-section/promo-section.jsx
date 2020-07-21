@@ -45,7 +45,7 @@ PromoSection.propTypes = {
     title: PropTypes.string,
     genre: PropTypes.string,
     releaseDate: PropTypes.number,
-  })
+  }).isRequired
 };
 
 export default PromoSection;

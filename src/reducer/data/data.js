@@ -45,18 +45,6 @@ const ActionCreator = {
     });
   },
 
-  changeFilter: (filter) => ({
-    type: ActionType.CHANGE_GENRE_FILTER,
-    payload: filter,
-  }),
-
-  getSelectedFilm: (id) => {
-    return {
-      type: ActionType.GET_SELECT_FILM_ID,
-      payload: id,
-    };
-  },
-
   setLoadFilmsError: (err) => {
     return {
       type: ActionType.SET_LOAD_FILMS_ERROR,

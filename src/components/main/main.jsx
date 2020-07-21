@@ -88,11 +88,19 @@ const Main = (props) => {
 
 Main.propTypes = {
   error: PropTypes.number,
+  loadPromoError: PropTypes.number,
   activeGenre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   onTitleOrImgClickHandler: PropTypes.func.isRequired,
   filmsList: PropTypes.array.isRequired,
+  promoFilm: PropTypes.shape({
+    poster: PropTypes.string,
+    cover: PropTypes.string,
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    releaseDate: PropTypes.number,
+  }).isRequired
 };
 
 const mapStateToProps = (state) => ({

@@ -1,3 +1,4 @@
+import {getActiveGenre} from "../app-state/selectors.js";
 import {createSelector} from "reselect";
 import NameSpace from "../name-space.js";
 import {DEFAULT_GENRE} from "../../const.js";
@@ -9,14 +10,6 @@ export const getFilms = (state) => {
 
 export const getPromoFilm = (state) => {
   return state[NameSpace.DATA].promoFilm;
-};
-
-export const getSelectedFilmID = (state) => {
-  return state[NameSpace.DATA].selectedFilmID;
-};
-
-export const getActiveGenre = (state) => {
-  return state[NameSpace.DATA].activeGenre;
 };
 
 export const getGenres = (state) => {

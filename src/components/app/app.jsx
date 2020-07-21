@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from '../../reducer/data/data.js';
-import {getActiveGenre, getSelectedFilmID, getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
+import {ActionCreator} from '../../reducer/app-state/app-state.js';
+import {getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
+import {getActiveGenre, getSelectedFilmID} from "../../reducer/app-state/selectors.js";
 import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";

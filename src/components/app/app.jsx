@@ -9,10 +9,12 @@ import history from "../../history.js";
 import {AppRoute} from "../../const.js";
 
 import PrivateRoute from "../private-route/private-route.jsx";
+import NotFound from "../not-found/not-found.jsx";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import UserList from "../user-list/user-list.jsx";
+import FilmRoot from "../film-root/film-root.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -74,11 +76,10 @@ class App extends PureComponent {
           <Route exact path={AppRoute.LOGIN}>
             <SignIn />
           </Route>
-          {/* <Route exact path={AppRoute.MOVIE_PAGE}>
-            <MoviePage
-              film={}
-            />
-          </Route> */}
+          <FilmRoot
+            exact
+            path={`${AppRoute.MOVIE_PAGE}/:id?`}
+          />
           <PrivateRoute
             exact
             path={AppRoute.FAVORITES}
@@ -87,6 +88,11 @@ class App extends PureComponent {
                 <UserList />
               );
             }}
+          />
+          <Route
+            render={() => (
+              <NotFound />
+            )}
           />
         </Switch>
       </Router>

@@ -26,3 +26,9 @@ export const LoadErrorsTexts = {
   LIST_FAIL: `Не удалось загрузить список фильмов.`,
   PROMO_FAIL: `Не удалось загрузить промо фильм.`,
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  MOVIE_PAGE: `/movie_page`,
+  ROOT: `/`,
+};

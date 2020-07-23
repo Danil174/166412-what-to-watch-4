@@ -11,7 +11,6 @@ import {AppRoute} from "../../const.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import NotFound from "../not-found/not-found.jsx";
 import Main from "../main/main.jsx";
-import MoviePage from "../movie-page/movie-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import UserList from "../user-list/user-list.jsx";
 import FilmRoot from "../film-root/film-root.jsx";
@@ -51,14 +50,7 @@ class App extends PureComponent {
           />
         );
       case `film`:
-        const index = films.findIndex((film) => film.id === selectedFilmID);
-        const selectedFilm = films[index];
-
-        return (
-          <MoviePage
-            film={selectedFilm}
-          />
-        );
+        return history.push(`${AppRoute.MOVIE_PAGE}/${selectedFilmID}`);
     }
 
     return null;

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import UserBlock from "../user-block/user-block.jsx";
 import {getTextMovieRating} from "../../utils/common.js";
 
 const MoviePage = (props) => {
@@ -47,9 +48,7 @@ const MoviePage = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
+            <UserBlock />
           </div>
         </header>
 

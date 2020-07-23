@@ -8,6 +8,7 @@ import ErrorMessage from "../error-message/error-message.jsx";
 import PromoSection from "../promo-section/promo-section.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
+import UserBlock from "../user-block/user-block.jsx";
 
 const Main = (props) => {
   const {filmsList, onTitleOrImgClickHandler, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
@@ -30,9 +31,7 @@ const Main = (props) => {
         </div>
 
         <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </div>
+          <UserBlock />
         </div>
       </header>
       {

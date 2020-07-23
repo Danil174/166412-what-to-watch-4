@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import NameSpace from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../const.js";
 
 const mockStore = configureStore([]);
 
@@ -95,6 +96,9 @@ describe(`AppTest`, () => {
       [NameSpace.DATA]: {
         loadFilmsError: null,
         loadPromoError: null,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
       },
     });
     const tree = renderer

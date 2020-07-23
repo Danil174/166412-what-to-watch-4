@@ -1,6 +1,6 @@
 import React from "react";
 
-const SingIn = () => {
+const SignIn = () => {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -50,4 +50,4 @@ const SingIn = () => {
   );
 };
 
-export default SingIn;
+export default SignIn;

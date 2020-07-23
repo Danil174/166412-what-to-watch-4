@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SingIn from "./sing-in.jsx";
+import SignIn from "./sign-in.jsx.js";
 
 describe(`SingInTest`, () => {
   it(`render SingIn`, () => {
     const tree = renderer
       .create(
-          <SingIn />
+          <SignIn />
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -1,13 +1,18 @@
 import React, {PureComponent} from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
 import {getActiveGenre, getSelectedFilmID} from "../../reducer/app-state/selectors.js";
 import PropTypes from "prop-types";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
+import PrivateRoute from "../private-route/private-route.jsx";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
+import UserList from "../user-list/user-list.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -45,11 +50,11 @@ class App extends PureComponent {
         );
       case `film`:
         const index = films.findIndex((film) => film.id === selectedFilmID);
-        const selectedFilmtest = films[index];
+        const selectedFilm = films[index];
 
         return (
           <MoviePage
-            film={selectedFilmtest}
+            film={selectedFilm}
           />
         );
     }
@@ -59,18 +64,32 @@ class App extends PureComponent {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.ROOT}>
             {this._renderApp()}
           </Route>
-          {/* <Route exact path="/dev-film">
+          <Route exact path={AppRoute.LOGIN}>
+            <SignIn />
+          </Route>
+          {/* <Route exact path={AppRoute.MOVIE_PAGE}>
             <MoviePage
-              film = {}
+              film={}
             />
           </Route> */}
+          <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => {
+              return (
+                <UserList />
+              );
+            }}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

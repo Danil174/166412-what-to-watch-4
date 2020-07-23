@@ -5,6 +5,7 @@ import {getTextMovieRating} from "../../utils/common.js";
 
 const MoviePage = (props) => {
   const {film} = props;
+  console.log(film);
   const {
     poster,
     cover,
@@ -16,6 +17,7 @@ const MoviePage = (props) => {
     ratingCount,
     director,
     actors,
+    isFavorite,
   } = film;
 
   const stringRating = (movieScore + ``).split(`.`).join(`,`);
@@ -68,9 +70,18 @@ const MoviePage = (props) => {
                 <span>Play</span>
               </button>
               <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
+                {
+                  isFavorite &&
+                  <svg viewBox="0 0 18 14" width="18" height="14">
+                    <use xlinkHref="#in-list"></use>
+                  </svg>
+                }
+                {
+                  !isFavorite &&
+                  <svg viewBox="0 0 19 20" width="19" height="20">
+                    <use xlinkHref="#add"></use>
+                  </svg>
+                }
                 <span>My list</span>
               </button>
               <a href="add-review.html" className="btn movie-card__button">Add review</a>
@@ -197,6 +208,7 @@ MoviePage.propTypes = {
     movieScore: PropTypes.number.isRequired,
     ratingCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string).isRequired,
   })
 };

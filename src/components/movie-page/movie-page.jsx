@@ -5,7 +5,6 @@ import {getTextMovieRating} from "../../utils/common.js";
 
 const MoviePage = (props) => {
   const {film} = props;
-  console.log(film);
   const {
     poster,
     cover,

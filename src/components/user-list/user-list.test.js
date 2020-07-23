@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SignIn from "./sign-in.jsx";
+import UserList from "./user-list.jsx";
 
-describe(`SignInTest`, () => {
-  it(`render SignIn`, () => {
+describe(`UserListTest`, () => {
+  it(`render UserList`, () => {
     const tree = renderer
       .create(
-          <SignIn />
+          <UserList />
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

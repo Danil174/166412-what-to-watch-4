@@ -4,6 +4,8 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../const.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 import {UserBlock} from "./user-block.jsx";
 
@@ -18,11 +20,11 @@ describe(`UserBlock`, () => {
     });
     const tree = renderer
       .create(
-          <Provider store={store}>
-            <UserBlock
-              authorizationStatus={`AUTH`}
-            />
-          </Provider>
+          <Router history={history}>
+            <Provider store={store}>
+              <UserBlock authorizationStatus={`AUTH`}/>
+            </Provider>
+          </Router>
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

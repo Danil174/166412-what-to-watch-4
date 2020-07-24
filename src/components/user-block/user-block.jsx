@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
@@ -7,9 +8,11 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 
 const Avatar = () => {
   return (
-    <div className="user-block__avatar">
-      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-    </div>
+    <Link to={AppRoute.FAVORITES}>
+      <div className="user-block__avatar">
+        <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+      </div>
+    </Link>
   );
 };
 

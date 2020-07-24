@@ -13,7 +13,7 @@ import NotFound from "../not-found/not-found.jsx";
 import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import UserList from "../user-list/user-list.jsx";
-import FilmRoot from "../film-root/film-root.jsx";
+import FilmRoot from "../film-route/film-route.jsx";
 
 class App extends PureComponent {
 

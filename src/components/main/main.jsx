@@ -11,7 +11,7 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import UserBlock from "../user-block/user-block.jsx";
 
 const Main = (props) => {
-  const {filmsList, onTitleOrImgClickHandler, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
+  const {filmsList, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
   return (
     <>
     <section className="movie-card">
@@ -59,7 +59,6 @@ const Main = (props) => {
         <MoviesList
           loadFilmsError={error}
           filmsList={filmsList}
-          onTitleOrImgClickHandler={onTitleOrImgClickHandler}
         />
 
         <div className="catalog__more">
@@ -91,7 +90,6 @@ Main.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-  onTitleOrImgClickHandler: PropTypes.func.isRequired,
   filmsList: PropTypes.array.isRequired,
   promoFilm: PropTypes.shape({
     poster: PropTypes.string,

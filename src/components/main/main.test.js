@@ -92,7 +92,6 @@ describe(`MainTest`, () => {
               onGenreItemClick={() => {}}
               genres={genres}
               activeGenre={`Comedies`}
-              onTitleOrImgClickHandler={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

@@ -112,7 +112,6 @@ describe(`AppTest`, () => {
               activeGenre={`Drama`}
               loadPromoError={null}
               loadFilmsError={null}
-              onTitleOrImgClickHandler={() => {}}
               onGenreItemClick={() => {}}
             />
           </Provider>, {

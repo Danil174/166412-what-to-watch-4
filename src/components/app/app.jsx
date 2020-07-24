@@ -16,44 +16,20 @@ import UserList from "../user-list/user-list.jsx";
 import FilmRoot from "../film-root/film-root.jsx";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      page: `main`,
-    };
-
-    this.changePage = this.changePage.bind(this);
-  }
-
-  changePage() {
-    this.setState({
-      page: `film`,
-    });
-  }
 
   _renderApp() {
-    const {page} = this.state;
-    const {films, promoFilm, selectedFilmID, onGenreItemClick, genres, activeGenre, loadPromoError} = this.props;
+    const {films, promoFilm, onGenreItemClick, genres, activeGenre, loadPromoError} = this.props;
 
-    switch (page) {
-      case `main`:
-        return (
-          <Main
-            promoFilm={promoFilm}
-            loadPromoError={loadPromoError}
-            filmsList={films}
-            genres={genres}
-            activeGenre={activeGenre}
-            onTitleOrImgClickHandler={this.changePage}
-            onGenreItemClick={onGenreItemClick}
-          />
-        );
-      case `film`:
-        return history.push(`${AppRoute.MOVIE_PAGE}/${selectedFilmID}`);
-    }
-
-    return null;
+    return (
+      <Main
+        promoFilm={promoFilm}
+        loadPromoError={loadPromoError}
+        filmsList={films}
+        genres={genres}
+        activeGenre={activeGenre}
+        onGenreItemClick={onGenreItemClick}
+      />
+    );
   }
 
   render() {

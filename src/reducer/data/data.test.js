@@ -111,6 +111,7 @@ describe(`dataReducerTest`, () => {
       genres: [],
       loadFilmsError: null,
       loadPromoError: null,
+      setFavoriteError: null,
     });
   });
 

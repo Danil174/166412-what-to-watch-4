@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import AddToList from "../add-to-list/add-to-list.jsx";
+
 const PromoSection = (props) => {
   const {film} = props;
-  const {title, genre, releaseDate, poster, isFavorite} = film;
+  const {title, genre, releaseDate, poster, isFavorite, id} = film;
 
   return (
     <div className="movie-card__wrap">
@@ -26,21 +28,10 @@ const PromoSection = (props) => {
               </svg>
               <span>Play</span>
             </button>
-            <button className="btn btn--list movie-card__button" type="button">
-              {
-                isFavorite &&
-                <svg viewBox="0 0 18 14" width="18" height="14">
-                  <use xlinkHref="#in-list"></use>
-                </svg>
-              }
-              {
-                !isFavorite &&
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-              }
-              <span>My list</span>
-            </button>
+            <AddToList
+              id={id}
+              isFavorite={isFavorite}
+            />
           </div>
         </div>
       </div>
@@ -50,6 +41,7 @@ const PromoSection = (props) => {
 
 PromoSection.propTypes = {
   film: PropTypes.shape({
+    id: PropTypes.number,
     poster: PropTypes.string,
     title: PropTypes.string,
     genre: PropTypes.string,

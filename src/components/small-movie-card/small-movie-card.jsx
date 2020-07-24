@@ -1,10 +1,7 @@
 import React, {PureComponent} from "react";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import PropTypes from "prop-types";
-import {SmallCardVideoSettings} from "../../const.js";
+import {SmallCardVideoSettings, AppRoute} from "../../const.js";
 import history from "../../history.js";
-import {AppRoute} from "../../const.js";
 
 import VideoPlayer from "../video/video.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
@@ -53,7 +50,6 @@ class SmallMovieCard extends PureComponent {
 
 SmallMovieCard.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  selectFilm: PropTypes.func.isRequired,
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
   film: PropTypes.shape({
@@ -64,12 +60,5 @@ SmallMovieCard.propTypes = {
   }).isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  selectFilm(id) {
-    dispatch(ActionCreator.getSelectedFilm(id));
-  },
-});
 
-
-export {SmallMovieCard};
-export default connect(null, mapDispatchToProps)(SmallMovieCard);
+export default SmallMovieCard;

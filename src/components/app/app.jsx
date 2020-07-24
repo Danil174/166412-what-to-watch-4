@@ -3,7 +3,7 @@ import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getSelectedFilmID} from "../../reducer/app-state/selectors.js";
+import {getActiveGenre} from "../../reducer/app-state/selectors.js";
 import PropTypes from "prop-types";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
@@ -73,7 +73,6 @@ App.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   films: PropTypes.array.isRequired,
-  selectedFilmID: PropTypes.number,
   loadPromoError: PropTypes.number,
   promoFilm: PropTypes.shape({
     poster: PropTypes.string,
@@ -85,7 +84,6 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  selectedFilmID: getSelectedFilmID(state),
   activeGenre: getActiveGenre(state),
   films: getFilmsByGenre(state),
   genres: getGenres(state),

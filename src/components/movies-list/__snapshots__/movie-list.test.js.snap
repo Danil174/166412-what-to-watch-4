@@ -26,7 +26,7 @@ exports[`MoviesListTest render MoviesList 1`] = `
         className="small-movie-card__link"
         href="movie-page.html"
       >
-        War of the Worlds
+        Gangs of new york
       </a>
     </h3>
   </article>
@@ -52,7 +52,7 @@ exports[`MoviesListTest render MoviesList 1`] = `
         className="small-movie-card__link"
         href="movie-page.html"
       >
-        We Need to Talk about Kevin
+        Gangs of new york
       </a>
     </h3>
   </article>
@@ -78,7 +78,7 @@ exports[`MoviesListTest render MoviesList 1`] = `
         className="small-movie-card__link"
         href="movie-page.html"
       >
-        What We Do in the Shadows
+        Gangs of new york
       </a>
     </h3>
   </article>

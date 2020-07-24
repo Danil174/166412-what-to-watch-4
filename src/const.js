@@ -12,4 +12,17 @@ export const SmallCardVideoSettings = {
   IS_MUTED: true,
 };
 
+export const DEFAULT_GENRE = `All genres`;
+export const MAX_GENRES_LENGTH = 9;
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 export const smallCardVideoStartTimeOut = 1000;
+
+export const LoadErrorsTexts = {
+  LIST_FAIL: `Не удалось загрузить список фильмов.`,
+  PROMO_FAIL: `Не удалось загрузить промо фильм.`,
+};

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import PropTypes from "prop-types";
 import {SmallCardVideoSettings} from "../../const.js";
 
@@ -11,7 +11,7 @@ const Video = withVideo(VideoPlayer);
 class SmallMovieCard extends PureComponent {
   render() {
     const {film, onTitleOrImgClickHandler, onMouseOver, onMouseOut, isPlaying, selectFilm} = this.props;
-    const {id, title, src, source} = film;
+    const {id, title, preview, source} = film;
 
     return (
       <article
@@ -27,7 +27,7 @@ class SmallMovieCard extends PureComponent {
           }}
         >
           <Video
-            poster={src}
+            preview={preview}
             source={source}
             isMuted={SmallCardVideoSettings.IS_MUTED}
             width={SmallCardVideoSettings.WIDTH}
@@ -60,7 +60,7 @@ SmallMovieCard.propTypes = {
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
   }).isRequired,
 };

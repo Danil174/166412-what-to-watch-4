@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 
 import Main from "./main.jsx";
 
@@ -9,57 +10,84 @@ const mockStore = configureStore([]);
 
 const testFilmsList = [
   {
-    id: 18,
-    genre: `Comedies`,
-    title: `We Need to Talk about Kevin`,
-    src: `img/we-need-to-talk-about-kevin.jpg`,
-    source: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    poster: `img/the-grand-budapest-hotel-poster.jpg`,
-    cover: `img/bg-the-grand-budapest-hotel.jpg`,
-    releaseDate: 2014,
-    synopsis: [
-      `In the 1930s`,
-      `test`,
-    ],
-    movieScore: 8.9,
-    ratingCount: 240,
-    director: `Wes Andreson`,
-    actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    actors: [`Leonardo DiCaprio`, `Cameron Diaz`, `Daniel Day-Lewis`],
+    bgColor: `#A6B7AC`,
+    cover: `https://htmlacademy-react-3.appspot.com/wtw/static/film/background/gangs_of_new_york.jpg`,
+    director: `Martin Scorsese`,
+    duration: 100,
+    genre: `Crime`,
+    id: 10,
+    isFavorite: false,
+    movieScore: 10,
+    poster: `https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Gangs_of_New_York_Poster.jpg`,
+    preview: `https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/gangs_of_new_york.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    ratingCount: 370881,
+    releaseDate: 2002,
+    source: `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`,
+    synopsis: `In 1862, his father's killer.`,
+    title: `Gangs of new york`,
   },
   {
-    id: 19,
-    genre: `Horror`,
-    title: `What We Do in the Shadows`,
-    src: `img/what-we-do-in-the-shadows.jpg`,
-    source: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    poster: `img/the-grand-budapest-hotel-poster.jpg`,
-    cover: `img/bg-the-grand-budapest-hotel.jpg`,
-    releaseDate: 2014,
-    synopsis: [
-      `In the 1930s`,
-      `test`,
-    ],
-    movieScore: 8.9,
-    ratingCount: 240,
-    director: `Wes Andreson`,
-    actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
-  }
+    actors: [`Leonardo DiCaprio`],
+    bgColor: `#A6B7AC`,
+    cover: `https://htmlacademy-react-3.appspot.com/wtw/static/film/background/gangs_of_new_york.jpg`,
+    director: `Martin Scorsese`,
+    duration: 500,
+    genre: `Crime`,
+    id: 55,
+    isFavorite: false,
+    movieScore: 10,
+    poster: `https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Gangs_of_New_York_Poster.jpg`,
+    preview: `https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/gangs_of_new_york.jpg`,
+    previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    ratingCount: 37088566781,
+    releaseDate: 2020,
+    source: `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`,
+    synopsis: `In 1862`,
+    title: `Gangs of new york`,
+  },
 ];
 
+const promoFilm = {
+  actors: [`Leonardo DiCaprio`, `Cameron Diaz`, `Daniel Day-Lewis`],
+  bgColor: `#A6B7AC`,
+  cover: `https://htmlacademy-react-3.appspot.com/wtw/static/film/background/gangs_of_new_york.jpg`,
+  director: `Martin Scorsese`,
+  duration: 100,
+  genre: `Crime`,
+  id: 10,
+  isFavorite: false,
+  movieScore: 10,
+  poster: `https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Gangs_of_New_York_Poster.jpg`,
+  preview: `https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/gangs_of_new_york.jpg`,
+  previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  ratingCount: 370881,
+  releaseDate: 2002,
+  source: `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`,
+  synopsis: `In 1862, his father's killer.`,
+  title: `Gangs of new york`,
+};
+
 const genres = [`Comedies`, `Crime`, `Documentary`];
-const activeGenre = `Comedies`;
 
 describe(`MainTest`, () => {
   it(`render Main`, () => {
-    const store = mockStore({});
+    const store = mockStore({
+      [NameSpace.DATA]: {
+        loadFilmsError: null,
+        loadPromoError: null,
+      },
+    });
     const tree = renderer
       .create(
           <Provider store={store}>
             <Main
+              filmsList = {testFilmsList}
+              promoFilm={promoFilm}
               onGenreItemClick={() => {}}
               genres={genres}
-              activeGenre={activeGenre}
-              filmsList = {testFilmsList}
+              activeGenre={`Comedies`}
               onTitleOrImgClickHandler={() => {}}
             />
           </Provider>, {

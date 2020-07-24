@@ -18,12 +18,12 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {source, poster, isMuted} = this.props;
+      const {source, preview, isMuted} = this.props;
 
       const video = this._videoRef.current;
 
       video.src = source;
-      video.poster = poster;
+      video.poster = preview;
       video.muted = isMuted;
 
       video.oncanplaythrough = () => {
@@ -73,7 +73,7 @@ const withVideo = (Component) => {
     width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     isMuted: PropTypes.bool.isRequired,
     isPlaying: PropTypes.bool.isRequired,
   };

@@ -27,7 +27,7 @@ const MockComponentWrapped = withVideo(MockComponent);
 it(`withVideo is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      poster={``}
+      preview={``}
       source={``}
       isMuted={SmallCardVideoSettings.IS_MUTED}
       width={SmallCardVideoSettings.WIDTH}

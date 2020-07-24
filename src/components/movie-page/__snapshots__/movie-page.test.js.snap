@@ -12,8 +12,8 @@ Array [
         className="movie-card__bg"
       >
         <img
-          alt="War of the Worlds"
-          src="img/bg-the-grand-budapest-hotel.jpg"
+          alt="Gangs of new york"
+          src="https://htmlacademy-react-3.appspot.com/wtw/static/film/background/gangs_of_new_york.jpg"
         />
       </div>
       <h1
@@ -72,7 +72,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            War of the Worlds
+            Gangs of new york
           </h2>
           <p
             className="movie-card__meta"
@@ -80,12 +80,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Documentary
+              Crime
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2002
             </span>
           </p>
           <div
@@ -145,9 +145,9 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="War of the Worlds poster"
+            alt="Gangs of new york poster"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Gangs_of_New_York_Poster.jpg"
             width="218"
           />
         </div>
@@ -198,7 +198,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              8,9
+              8,8
             </div>
             <p
               className="movie-rating__meta"
@@ -211,7 +211,7 @@ Array [
               <span
                 className="movie-rating__count"
               >
-                240
+                370881
                  ratings
               </span>
             </p>
@@ -219,18 +219,13 @@ Array [
           <div
             className="movie-card__text"
           >
-            <p>
-              In the 1930s
-            </p>
-            <p>
-              test
-            </p>
+            In 1862, Amsterdam Vallon returns to the Five Points area of New York City seeking revenge against Bill the Butcher, his father's killer.
             <p
               className="movie-card__director"
             >
               <strong>
                 Director: 
-                Wes Andreson
+                Martin Scorsese
               </strong>
             </p>
             <p
@@ -238,7 +233,7 @@ Array [
             >
               <strong>
                 Starring: 
-                Bill Murray, Edward Norton, Jude Law, Willem Dafoe
+                Leonardo DiCaprio, Cameron Diaz, Daniel Day-Lewis
                  and other
               </strong>
             </p>

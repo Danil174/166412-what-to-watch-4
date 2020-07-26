@@ -8,6 +8,7 @@ const initialState = {
   genres: [],
   loadFilmsError: null,
   loadPromoError: null,
+  setFavoriteError: null,
 };
 
 const ActionType = {
@@ -16,6 +17,10 @@ const ActionType = {
   GET_GENRES: `GET_GENRES`,
   SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
   SET_LOAD_PROMO_ERROR: `SET_LOAD_PROMO_ERROR`,
+  SET_FAVORITE: `SET_FAVORITE`,
+  SET_FAVORITE_ERROR: `SET_FAVORITE_ERROR`,
+  UPDATE_FILMS: `UPDATE_FILMS`,
+  UPDATE_PROMO: `UPDATE_PROMO`,
 };
 
 const ActionCreator = {
@@ -53,6 +58,27 @@ const ActionCreator = {
       payload: err,
     };
   },
+
+  setFavoriteError: (err) => {
+    return {
+      type: ActionType.SET_FAVORITE_ERROR,
+      payload: err,
+    };
+  },
+
+  updateFilms: (film) => {
+    return {
+      type: ActionType.UPDATE_FILMS,
+      payload: film,
+    };
+  },
+
+  updatePromo: (film) => {
+    return {
+      type: ActionType.UPDATE_PROMO,
+      payload: film,
+    };
+  },
 };
 
 const Operation = {
@@ -70,11 +96,7 @@ const Operation = {
         dispatch(ActionCreator.loadFilms(configuredFilm));
       })
       .catch((error) => {
-        if (error.response.status !== 200) {
-          dispatch(ActionCreator.setLoadFilmsError(error.response.status));
-        } else {
-          dispatch(ActionCreator.setLoadFilmsError(null));
-        }
+        dispatch(ActionCreator.setLoadFilmsError(error.response.status));
       });
   },
   loadPromo: () => (dispatch, getState, api) => {
@@ -83,12 +105,18 @@ const Operation = {
         dispatch(ActionCreator.loadPromo(configureFilm(response.data)));
       })
       .catch((error) => {
-        if (error.response.status !== 200) {
-          dispatch(ActionCreator.setLoadPromoError(error.response.status));
-        } else {
-          dispatch(ActionCreator.setLoadPromoError(null));
-        }
+        dispatch(ActionCreator.setLoadFilmsError(error.response.status));
       });
+  },
+  setFavorite: (filmId, favorite) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${filmId}/${favorite}`)
+    .then((response) => {
+      dispatch(ActionCreator.updateFilms(configureFilm(response.data)));
+      dispatch(ActionCreator.updatePromo(configureFilm(response.data)));
+    })
+    .catch((error) => {
+      dispatch(ActionCreator.setFavoriteError(error.response.status));
+    });
   },
 };
 
@@ -119,6 +147,29 @@ const reducer = (state = initialState, action) => {
 
       return extend(state, {
         loadPromoError: action.payload,
+      });
+
+    case ActionType.SET_FAVORITE_ERROR:
+      return extend(state, {
+        setFavoriteError: action.payload,
+      });
+
+    case ActionType.UPDATE_FILMS:
+      const newFilm = action.payload;
+      const oldFilms = state.films;
+      const index = oldFilms.findIndex((film) => film.id === newFilm.id);
+      const newFilms = [].concat(oldFilms.slice(0, index), newFilm, oldFilms.slice(index + 1));
+      return extend(state, {
+        films: newFilms,
+      });
+
+    case ActionType.UPDATE_PROMO:
+      let newPromo = state.promoFilm;
+      if (newPromo.id === action.payload.id) {
+        newPromo = action.payload;
+      }
+      return extend(state, {
+        promoFilm: newPromo,
       });
   }
 

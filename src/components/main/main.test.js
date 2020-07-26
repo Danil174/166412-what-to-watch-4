@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../const.js";
 
 import Main from "./main.jsx";
 
@@ -78,6 +79,9 @@ describe(`MainTest`, () => {
         loadFilmsError: null,
         loadPromoError: null,
       },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      },
     });
     const tree = renderer
       .create(
@@ -88,7 +92,6 @@ describe(`MainTest`, () => {
               onGenreItemClick={() => {}}
               genres={genres}
               activeGenre={`Comedies`}
-              onTitleOrImgClickHandler={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

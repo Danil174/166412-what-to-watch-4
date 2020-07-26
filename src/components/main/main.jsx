@@ -8,9 +8,10 @@ import ErrorMessage from "../error-message/error-message.jsx";
 import PromoSection from "../promo-section/promo-section.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
+import UserBlock from "../user-block/user-block.jsx";
 
 const Main = (props) => {
-  const {filmsList, onTitleOrImgClickHandler, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
+  const {filmsList, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
   return (
     <>
     <section className="movie-card">
@@ -30,9 +31,7 @@ const Main = (props) => {
         </div>
 
         <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </div>
+          <UserBlock />
         </div>
       </header>
       {
@@ -60,7 +59,6 @@ const Main = (props) => {
         <MoviesList
           loadFilmsError={error}
           filmsList={filmsList}
-          onTitleOrImgClickHandler={onTitleOrImgClickHandler}
         />
 
         <div className="catalog__more">
@@ -92,7 +90,6 @@ Main.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-  onTitleOrImgClickHandler: PropTypes.func.isRequired,
   filmsList: PropTypes.array.isRequired,
   promoFilm: PropTypes.shape({
     poster: PropTypes.string,

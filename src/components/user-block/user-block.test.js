@@ -4,19 +4,15 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../const.js";
-import PromoSection from "./promo-section.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
+
+import {UserBlock} from "./user-block.jsx";
 
 const mockStore = configureStore([]);
 
-const film = {
-  genre: `Crime`,
-  poster: `https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Gangs_of_New_York_Poster.jpg`,
-  releaseDate: 2002,
-  title: `Gangs of new york`,
-};
-
-describe(`PromoSectionTest`, () => {
-  it(`render PromoSection`, () => {
+describe(`UserBlock`, () => {
+  it(`render UserBlock`, () => {
     const store = mockStore({
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -24,11 +20,11 @@ describe(`PromoSectionTest`, () => {
     });
     const tree = renderer
       .create(
-          <Provider store={store}>
-            <PromoSection
-              film={film}
-            />
-          </Provider>
+          <Router history={history}>
+            <Provider store={store}>
+              <UserBlock authorizationStatus={`AUTH`}/>
+            </Provider>
+          </Router>
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

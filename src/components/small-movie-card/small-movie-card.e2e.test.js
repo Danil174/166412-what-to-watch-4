@@ -31,14 +31,9 @@ const film = {
   title: `Gangs of new york`,
 };
 
-const mockEvent = {
-  preventDefault() {}
-};
-
 it(`Small Movie card hovered`, () => {
   const onCardMouseEnter = jest.fn();
   const onCardMouseLeave = jest.fn();
-  const onTitleOrImgClickHandler = jest.fn();
   const store = mockStore({});
 
   const card = mount(
@@ -48,7 +43,6 @@ it(`Small Movie card hovered`, () => {
           film={film}
           onMouseOver={onCardMouseEnter}
           onMouseOut={onCardMouseLeave}
-          onTitleOrImgClickHandler={onTitleOrImgClickHandler}
         />
       </Provider>
   );
@@ -60,11 +54,4 @@ it(`Small Movie card hovered`, () => {
 
   currentCar.simulate(`mouseOut`);
   expect(onCardMouseLeave.mock.calls.length).toBe(1);
-
-  const title = card.find(`.small-movie-card__title`);
-  const imgWrapper = card.find(`.small-movie-card__image`);
-
-  imgWrapper.simulate(`click`);
-  title.simulate(`click`, mockEvent);
-  expect(onTitleOrImgClickHandler).toHaveBeenCalledTimes(2);
 });

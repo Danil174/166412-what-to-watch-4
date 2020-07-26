@@ -74,7 +74,6 @@ describe(`MoviesListTest`, () => {
           <Provider store={store}>
             <MoviesList
               filmsList = {testFilmsList}
-              onTitleOrImgClickHandler={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

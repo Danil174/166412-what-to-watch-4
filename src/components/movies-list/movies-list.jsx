@@ -10,7 +10,7 @@ const SmallMovieCardWrapper = withActiveVideo(SmallMovieCard);
 
 class MoviesList extends PureComponent {
   render() {
-    const {filmsList, onTitleOrImgClickHandler, loadFilmsError} = this.props;
+    const {filmsList, loadFilmsError} = this.props;
     return (
       loadFilmsError ?
         <ErrorMessage
@@ -22,7 +22,6 @@ class MoviesList extends PureComponent {
             <SmallMovieCardWrapper
               key={film.id}
               film={film}
-              onTitleOrImgClickHandler={onTitleOrImgClickHandler}
             />
           ))}
         </div>
@@ -32,7 +31,6 @@ class MoviesList extends PureComponent {
 
 MoviesList.propTypes = {
   loadFilmsError: PropTypes.number,
-  onTitleOrImgClickHandler: PropTypes.func.isRequired,
   filmsList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

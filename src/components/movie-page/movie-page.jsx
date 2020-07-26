@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import UserBlock from "../user-block/user-block.jsx";
+import AddToList from "../add-to-list/add-to-list.jsx";
 import {getTextMovieRating} from "../../utils/common.js";
 
 const MoviePage = (props) => {
@@ -16,6 +18,8 @@ const MoviePage = (props) => {
     ratingCount,
     director,
     actors,
+    isFavorite,
+    id,
   } = film;
 
   const stringRating = (movieScore + ``).split(`.`).join(`,`);
@@ -38,7 +42,7 @@ const MoviePage = (props) => {
 
         <header className="page-header movie-card__head">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <a href="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -46,9 +50,7 @@ const MoviePage = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
+            <UserBlock />
           </div>
         </header>
 
@@ -67,12 +69,10 @@ const MoviePage = (props) => {
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+              <AddToList
+                id={id}
+                isFavorite={isFavorite}
+              />
               <a href="add-review.html" className="btn movie-card__button">Add review</a>
             </div>
           </div>
@@ -170,7 +170,7 @@ const MoviePage = (props) => {
 
       <footer className="page-footer">
         <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
+          <a href="/" className="logo__link logo__link--light">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
@@ -188,6 +188,7 @@ const MoviePage = (props) => {
 
 MoviePage.propTypes = {
   film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     poster: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -197,6 +198,7 @@ MoviePage.propTypes = {
     movieScore: PropTypes.number.isRequired,
     ratingCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string).isRequired,
   })
 };

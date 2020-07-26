@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import PropTypes from "prop-types";
-import {SmallCardVideoSettings} from "../../const.js";
+import {SmallCardVideoSettings, AppRoute} from "../../const.js";
+import history from "../../history.js";
 
 import VideoPlayer from "../video/video.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
@@ -10,7 +9,7 @@ const Video = withVideo(VideoPlayer);
 
 class SmallMovieCard extends PureComponent {
   render() {
-    const {film, onTitleOrImgClickHandler, onMouseOver, onMouseOut, isPlaying, selectFilm} = this.props;
+    const {film, onMouseOver, onMouseOut, isPlaying} = this.props;
     const {id, title, preview, source} = film;
 
     return (
@@ -22,8 +21,7 @@ class SmallMovieCard extends PureComponent {
         <div
           className="small-movie-card__image"
           onClick={() => {
-            selectFilm(id);
-            onTitleOrImgClickHandler();
+            history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
           }}
         >
           <Video
@@ -38,8 +36,7 @@ class SmallMovieCard extends PureComponent {
         <h3
           onClick={(evt) => {
             evt.preventDefault();
-            selectFilm(id);
-            onTitleOrImgClickHandler();
+            history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
           }}
           className="small-movie-card__title"
         >
@@ -53,10 +50,8 @@ class SmallMovieCard extends PureComponent {
 
 SmallMovieCard.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  selectFilm: PropTypes.func.isRequired,
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
-  onTitleOrImgClickHandler: PropTypes.func.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -65,12 +60,5 @@ SmallMovieCard.propTypes = {
   }).isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  selectFilm(id) {
-    dispatch(ActionCreator.getSelectedFilm(id));
-  },
-});
 
-
-export {SmallMovieCard};
-export default connect(null, mapDispatchToProps)(SmallMovieCard);
+export default SmallMovieCard;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserBlock render UserBlock 1`] = `
+<a
+  href="/favorites"
+  onClick={[Function]}
+>
+  <div
+    className="user-block__avatar"
+  >
+    <img
+      alt="User avatar"
+      height="63"
+      src="img/avatar.jpg"
+      width="63"
+    />
+  </div>
+</a>
+`;

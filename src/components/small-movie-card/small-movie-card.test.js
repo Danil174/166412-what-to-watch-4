@@ -37,7 +37,6 @@ describe(`small movie card rendered correct`, () => {
               film={film}
               onMouseOver={() => {}}
               onMouseOut={() => {}}
-              onTitleOrImgClickHandler={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

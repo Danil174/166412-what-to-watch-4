@@ -39,14 +39,14 @@ const Operation = {
       });
   },
 
-  login: (authData) => (dispatch, getState, api) => {
+  login: () => (dispatch, getState, api) => {
     return api.post(`/login`, {
-      email: authData.login,
-      password: authData.password,
+      email: `newTest@yandex.ru`,
+      password: `test25072020`,
     })
-      .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      });
+    .then(() => {
+      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+    });
   },
 };
 

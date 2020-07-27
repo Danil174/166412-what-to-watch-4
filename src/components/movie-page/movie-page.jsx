@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 
 import UserBlock from "../user-block/user-block.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
+import MovieNav from "../movie-nav/movie-nav.jsx";
 import {getTextMovieRating} from "../../utils/common.js";
+import {MovieTabs} from "../../const.js";
 
 const MoviePage = (props) => {
   const {film} = props;
@@ -91,19 +93,8 @@ const MoviePage = (props) => {
           </div>
 
           <div className="movie-card__desc">
-            <nav className="movie-nav movie-card__nav">
-              <ul className="movie-nav__list">
-                <li className="movie-nav__item movie-nav__item--active">
-                  <a href="#" className="movie-nav__link">Overview</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Details</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Reviews</a>
-                </li>
-              </ul>
-            </nav>
+
+            <MovieNav tabs={MovieTabs} />
 
             <div className="movie-rating">
               <div className="movie-rating__score">{stringRating}</div>

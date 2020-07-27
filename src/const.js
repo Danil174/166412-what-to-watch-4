@@ -34,8 +34,8 @@ export const AppRoute = {
   ROOT: `/`,
 };
 
-export const MovieTabs = {
-  OVERVIEW: `Overview`,
-  DETAILS: `Details`,
-  REVIEWS: `Reviews`,
-};
+export const MovieTabs = [
+  `Overview`,
+  `Details`,
+  `Reviews`,
+];

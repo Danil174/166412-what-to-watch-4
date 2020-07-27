@@ -81,6 +81,7 @@ describe(`MainTest`, () => {
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userData: {avatarUrl: `test.jpg`},
       },
     });
     const tree = renderer

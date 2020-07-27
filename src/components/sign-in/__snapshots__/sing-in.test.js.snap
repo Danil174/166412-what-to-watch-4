@@ -43,18 +43,21 @@ exports[`SignInTest render SignIn 1`] = `
     <form
       action="#"
       className="sign-in__form"
+      ethod="post"
+      onSubmit={[Function]}
     >
       <div
         className="sign-in__fields"
       >
         <div
-          className="sign-in__field"
+          className="sign-in__field "
         >
           <input
             className="sign-in__input"
             id="user-email"
             name="user-email"
             placeholder="Email address"
+            required={true}
             type="email"
           />
           <label

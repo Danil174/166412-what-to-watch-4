@@ -1,20 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import {AuthorizationStatus, AppRoute} from "../../const.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getAuthorizationStatus, getUserData} from "../../reducer/user/selectors.js";
 
-const Avatar = () => {
-  return (
-    <Link to={AppRoute.FAVORITES}>
-      <div className="user-block__avatar">
-        <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-      </div>
-    </Link>
-  );
-};
+import Avatar from "../avatar/avatar.jsx";
 
 const SignIn = () => {
   return (
@@ -23,20 +14,25 @@ const SignIn = () => {
 };
 
 const UserBlock = (props) => {
-  const {authorizationStatus} = props;
+  const {authorizationStatus, userData} = props;
+  const {avatarUrl} = userData;
 
   return (
     authorizationStatus === AuthorizationStatus.AUTH
-      ? <Avatar /> : <SignIn />
+      ? <Avatar url={avatarUrl} /> : <SignIn />
   );
 };
 
 UserBlock.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  userData: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
+  userData: getUserData(state),
 });
 
 export {UserBlock};

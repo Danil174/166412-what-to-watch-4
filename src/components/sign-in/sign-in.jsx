@@ -100,7 +100,7 @@ class SignIn extends PureComponent {
       </div>
     );
   }
-};
+}
 
 
 SignIn.propTypes = {

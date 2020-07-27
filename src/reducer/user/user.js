@@ -1,3 +1,4 @@
+import {configureUserData} from '../../adapter/adapter.js';
 import {AuthorizationStatus} from "../../const.js";
 
 const initialState = {
@@ -65,10 +66,15 @@ const Operation = {
 
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setUserData(configureUserData(response.data)));
       })
       .catch((err) => {
+        if (err.status === 401) {
+          dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+          dispatch(ActionCreator.setUserData({}));
+        }
         throw err;
       });
   },
@@ -80,7 +86,7 @@ const Operation = {
     })
     .then((response) => {
       dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(ActionCreator.setUserData(response.data));
+      dispatch(ActionCreator.setUserData(configureUserData(response.data)));
       dispatch(ActionCreator.setLoginError(false));
     })
     .catch(() => {

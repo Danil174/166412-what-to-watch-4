@@ -4,6 +4,14 @@ import {connect} from 'react-redux';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {getLoginError} from '../../reducer/user/selectors.js';
 
+const ErrorMessage = () => {
+  return (
+    <div className="sign-in__message">
+      <p>We can’t recognize this email <br /> and password combination. Please try again.</p>
+    </div>
+  );
+};
+
 class SignIn extends PureComponent {
   constructor(props) {
     super(props);
@@ -53,6 +61,7 @@ class SignIn extends PureComponent {
             ethod="post"
             onSubmit={this._handleSubmit}
           >
+            {loginError && <ErrorMessage />}
             <div className="sign-in__fields">
               <div className={fieldClasses}>
                 <input

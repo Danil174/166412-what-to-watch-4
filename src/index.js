@@ -27,7 +27,8 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadFilms());
 store.dispatch(DataOperation.loadPromo());
-store.dispatch(UserOperation.login());
+// store.dispatch(UserOperation.logout());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

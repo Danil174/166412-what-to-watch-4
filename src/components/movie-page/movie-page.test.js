@@ -5,7 +5,7 @@ import MoviePage from "./movie-page.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
-import {AuthorizationStatus} from "../../const.js";
+import {AuthorizationStatus, MovieTabs} from "../../const.js";
 
 const mockStore = configureStore([]);
 
@@ -36,11 +36,15 @@ describe(`MoviePageTest`, () => {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
         userData: {avatarUrl: `test.jpg`},
       },
+      [NameSpace.APP_STATE]: {
+        activeMovieTab: MovieTabs[0]
+      },
     });
     const tree = renderer
       .create(
           <Provider store={store}>
             <MoviePage
+              activeMovieTab={`Overview`}
               film={fakeFilm}
             />
           </Provider>

@@ -18,3 +18,13 @@ export const getTextMovieRating = (raiting) => {
       return TextMovieRatings.AWESOME;
   }
 };
+
+export const checkNavTagretClick = (target, oldTarget) => {
+  if (target.tagName !== `A` || oldTarget === target.dataset.item) {
+    return oldTarget;
+  }
+
+  const newTarget = target.dataset.item;
+
+  return newTarget;
+};

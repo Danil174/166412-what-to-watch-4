@@ -152,11 +152,11 @@ Array [
         onClick={[Function]}
       >
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
         >
           <a
             className="catalog__genres-link"
-            data-genre="All genres"
+            data-item="All genres"
             href="#"
           >
             All genres
@@ -167,29 +167,29 @@ Array [
         >
           <a
             className="catalog__genres-link"
-            data-genre="Drama"
+            data-item="Drama"
             href="#"
           >
             Drama
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
         >
           <a
             className="catalog__genres-link"
-            data-genre="Documentary"
+            data-item="Documentary"
             href="#"
           >
             Documentary
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
         >
           <a
             className="catalog__genres-link"
-            data-genre="Horror"
+            data-item="Horror"
             href="#"
           >
             Horror

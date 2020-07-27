@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
+import {checkNavTagretClick} from "../../utils/common.js";
 import PropTypes from "prop-types";
 
 const renderTab = (tab, activeTab) => {
@@ -14,24 +15,13 @@ const renderTab = (tab, activeTab) => {
       className={tabClass}>
       <a
         className="movie-nav__link"
-        data-tab={tab}
+        data-item={tab}
       >
         {tab}
       </a>
     </li>
   );
 };
-
-const checkClickTarget = (target, oldTarget) => {
-  if (target.tagName !== `A` || oldTarget === target.dataset.tab) {
-    return oldTarget;
-  }
-
-  const tab = target.dataset.tab;
-
-  return tab;
-};
-
 const MovieNav = (props) => {
   const {tabs, activeTab, onTabItemClick} = props;
   return (
@@ -39,7 +29,7 @@ const MovieNav = (props) => {
       className="movie-nav movie-card__nav"
       onClick={(evt) => {
         evt.preventDefault();
-        const tab = checkClickTarget(evt.target, activeTab);
+        const tab = checkNavTagretClick(evt.target, activeTab);
         onTabItemClick(tab);
       }}
     >

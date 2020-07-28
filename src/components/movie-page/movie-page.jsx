@@ -18,7 +18,7 @@ const getSelectedTab = (tab, film) => {
     case (MovieTabsMap.DETAILS):
       return <MovieDetails film={film} />;
     case (MovieTabsMap.REVIEWS):
-      return <MovieReviews film={film} />;
+      return <MovieReviews />;
     default:
       return <>error</>;
   }
@@ -188,10 +188,6 @@ MoviePage.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
-    synopsis: PropTypes.string.isRequired,
-    movieScore: PropTypes.number.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string).isRequired,
   })

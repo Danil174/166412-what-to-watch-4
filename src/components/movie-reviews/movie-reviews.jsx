@@ -1,8 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const MovieReviews = (props) => {
-  const {film} = props;
+const MovieReviews = () => {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
@@ -34,7 +32,7 @@ const MovieReviews = (props) => {
 
         <div className="review">
           <blockquote className="review__quote">
-            <p className="review__text">I didnt find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.</p>
+            <p className="review__text">I didnt find it amusing, and while I can appreciate the creativity, its an hour and 40 minutes I wish I could take back.</p>
 
             <footer className="review__details">
               <cite className="review__author">Amanda Greever</cite>

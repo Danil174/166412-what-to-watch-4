@@ -38,4 +38,14 @@ const MovieOverview = (props) => {
   );
 };
 
+MovieOverview.propTypes = {
+  film: PropTypes.shape({
+    director: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
+    ratingCount: PropTypes.number.isRequired,
+    synopsis: PropTypes.string.isRequired,
+    movieScore: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
 export default MovieOverview;

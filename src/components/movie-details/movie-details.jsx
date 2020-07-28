@@ -48,4 +48,14 @@ const MovieDetails = (props) => {
   );
 };
 
+MovieDetails.propTypes = {
+  film: PropTypes.shape({
+    director: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
 export default MovieDetails;

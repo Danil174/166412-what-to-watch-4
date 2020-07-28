@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
+import {getFilms} from "../../reducer/data/selectors.js";
 
 import UserBlock from "../user-block/user-block.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
@@ -9,6 +10,7 @@ import MovieNav from "../movie-nav/movie-nav.jsx";
 import MovieOverview from "../movie-overview/movie-overview.jsx";
 import MovieDetails from "../movie-details/movie-details.jsx";
 import MovieReviews from "../movie-reviews/movie-reviews.jsx";
+import MoviesList from "../movies-list/movies-list.jsx";
 import {MovieTabs, MovieTabsMap} from "../../const.js";
 
 const getSelectedTab = (tab, film) => {
@@ -25,7 +27,7 @@ const getSelectedTab = (tab, film) => {
 };
 
 const MoviePage = (props) => {
-  const {film, activeTab} = props;
+  const {film, activeTab, films} = props;
   const {
     poster,
     cover,
@@ -36,6 +38,8 @@ const MoviePage = (props) => {
     bgColor,
     id,
   } = film;
+
+  const similarFilms = films.filter((it) => it.genre === genre).slice(0, 4);
 
   const posterAlt = `${title} poster`;
 
@@ -121,43 +125,10 @@ const MoviePage = (props) => {
       <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
 
-        <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-            </h3>
-          </article>
-        </div>
+        <MoviesList
+          loadFilmsError={null}
+          filmsList={similarFilms}
+        />
       </section>
 
       <footer className="page-footer">
@@ -180,6 +151,7 @@ const MoviePage = (props) => {
 
 MoviePage.propTypes = {
   activeTab: PropTypes.string.isRequired,
+  films: PropTypes.array.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     bgColor: PropTypes.string.isRequired,
@@ -194,7 +166,8 @@ MoviePage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeTab: getActiveMovieTab(state)
+  activeTab: getActiveMovieTab(state),
+  films: getFilms(state),
 });
 
 export {MoviePage};

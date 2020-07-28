@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserBlock render UserBlock 1`] = `
+exports[`Avatar render Avatar 1`] = `
 <a
   href="/favorites"
   onClick={[Function]}

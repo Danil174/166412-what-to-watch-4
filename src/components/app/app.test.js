@@ -99,6 +99,7 @@ describe(`AppTest`, () => {
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userData: {avatarUrl: `test.jpg`},
       },
     });
     const tree = renderer
@@ -113,6 +114,7 @@ describe(`AppTest`, () => {
               loadPromoError={null}
               loadFilmsError={null}
               onGenreItemClick={() => {}}
+              authorizationStatus={AuthorizationStatus.NO_AUTH}
             />
           </Provider>, {
             createNodeMock: () => {

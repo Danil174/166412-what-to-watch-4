@@ -1,12 +1,13 @@
 import React, {PureComponent} from "react";
-import {Switch, Route, Router} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
 import {getActiveGenre} from "../../reducer/app-state/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import PropTypes from "prop-types";
 import history from "../../history.js";
-import {AppRoute} from "../../const.js";
+import {AuthorizationStatus, AppRoute} from "../../const.js";
 
 import PrivateRoute from "../private-route/private-route.jsx";
 import NotFound from "../not-found/not-found.jsx";
@@ -33,6 +34,8 @@ class App extends PureComponent {
   }
 
   render() {
+    const {authorizationStatus} = this.props;
+    const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
     return (
       <Router
         history={history}
@@ -41,9 +44,13 @@ class App extends PureComponent {
           <Route exact path={AppRoute.ROOT}>
             {this._renderApp()}
           </Route>
-          <Route exact path={AppRoute.LOGIN}>
-            <SignIn />
-          </Route>
+          <Route
+            exact path={AppRoute.LOGIN}
+            render = {() => isAuth
+              ? <Redirect to={AppRoute.ROOT} />
+              : <SignIn />
+            }
+          />
           <FilmRoot
             exact
             path={`${AppRoute.MOVIE_PAGE}/:id?`}
@@ -69,6 +76,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   activeGenre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
@@ -89,6 +97,7 @@ const mapStateToProps = (state) => ({
   genres: getGenres(state),
   promoFilm: getPromoFilm(state),
   loadPromoError: getloadPromoError(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

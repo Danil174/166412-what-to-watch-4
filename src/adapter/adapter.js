@@ -1,4 +1,4 @@
-const configureFilm = (data) => {
+export const configureFilm = (data) => {
   return ({
     id: data.id,
     title: data.name,
@@ -20,4 +20,8 @@ const configureFilm = (data) => {
   });
 };
 
-export default configureFilm;
+export const configureUserData = (data) => {
+  return ({
+    avatarUrl: data.avatar_url,
+  });
+};

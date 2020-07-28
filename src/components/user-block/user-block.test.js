@@ -11,18 +11,24 @@ import {UserBlock} from "./user-block.jsx";
 
 const mockStore = configureStore([]);
 
+const userData = {avatarUrl: `test.jpg`};
+
 describe(`UserBlock`, () => {
   it(`render UserBlock`, () => {
     const store = mockStore({
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userData: {avatarUrl: `test.jpg`},
       },
     });
     const tree = renderer
       .create(
           <Router history={history}>
             <Provider store={store}>
-              <UserBlock authorizationStatus={`AUTH`}/>
+              <UserBlock
+                authorizationStatus={`AUTH`}
+                userData={userData}
+              />
             </Provider>
           </Router>
       ).toJSON();

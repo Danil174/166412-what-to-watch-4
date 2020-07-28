@@ -39,3 +39,9 @@ export const MovieTabs = [
   `Details`,
   `Reviews`,
 ];
+
+export const MovieTabsMap = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`,
+};

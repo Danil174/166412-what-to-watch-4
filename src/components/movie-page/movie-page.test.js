@@ -1,11 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MoviePage from "./movie-page.jsx";
+import {MoviePage} from "./movie-page.jsx";
 
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
-import {AuthorizationStatus, MovieTabs} from "../../const.js";
+import {AuthorizationStatus, MovieTabsMap} from "../../const.js";
 
 const mockStore = configureStore([]);
 
@@ -37,14 +37,14 @@ describe(`MoviePageTest`, () => {
         userData: {avatarUrl: `test.jpg`},
       },
       [NameSpace.APP_STATE]: {
-        activeMovieTab: MovieTabs[0]
+        activeMovieTab: MovieTabsMap.OVERVIEW,
       },
     });
     const tree = renderer
       .create(
           <Provider store={store}>
             <MoviePage
-              activeMovieTab={`Overview`}
+              activeTab={MovieTabsMap.OVERVIEW}
               film={fakeFilm}
             />
           </Provider>

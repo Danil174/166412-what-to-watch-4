@@ -1,37 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
 
 import UserBlock from "../user-block/user-block.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
 import MovieNav from "../movie-nav/movie-nav.jsx";
-import {getTextMovieRating} from "../../utils/common.js";
-import {MovieTabs} from "../../const.js";
+import MovieOverview from "../movie-overview/movie-overview.jsx";
+import MovieDetails from "../movie-details/movie-details.jsx";
+import MovieReviews from "../movie-reviews/movie-reviews.jsx";
+import {MovieTabs, MovieTabsMap} from "../../const.js";
+
+const getSelectedTab = (tab, film) => {
+  switch (tab) {
+    case MovieTabsMap.OVERVIEW:
+      return <MovieOverview film={film}/>;
+    case (MovieTabsMap.DETAILS):
+      return <MovieDetails film={film} />;
+    case (MovieTabsMap.REVIEWS):
+      return <MovieReviews film={film} />;
+    default:
+      return <>error</>;
+  }
+};
 
 const MoviePage = (props) => {
-  const {film} = props;
+  const {film, activeTab} = props;
   const {
     poster,
     cover,
     title,
     genre,
     releaseDate,
-    synopsis,
-    movieScore,
-    ratingCount,
-    director,
-    actors,
     isFavorite,
+    bgColor,
     id,
   } = film;
 
-  const stringRating = (movieScore + ``).split(`.`).join(`,`);
   const posterAlt = `${title} poster`;
-  const actorsString = actors.join(`, `);
-  const textRating = getTextMovieRating(movieScore);
+
+  const sectionColor = {backgroundColor: bgColor};
 
   return (
   <>
-    <section className="movie-card movie-card--full">
+    <section
+      style={sectionColor}
+      className="movie-card movie-card--full"
+    >
       <div className="movie-card__hero">
         <div className="movie-card__bg">
           <img
@@ -96,21 +111,7 @@ const MoviePage = (props) => {
 
             <MovieNav tabs={MovieTabs} />
 
-            <div className="movie-rating">
-              <div className="movie-rating__score">{stringRating}</div>
-              <p className="movie-rating__meta">
-                <span className="movie-rating__level">{textRating}</span>
-                <span className="movie-rating__count">{ratingCount} ratings</span>
-              </p>
-            </div>
-
-            <div className="movie-card__text">
-              {synopsis}
-
-              <p className="movie-card__director"><strong>Director: {director}</strong></p>
-
-              <p className="movie-card__starring"><strong>Starring: {actorsString} and other</strong></p>
-            </div>
+            {getSelectedTab(activeTab, film)}
           </div>
         </div>
       </div>
@@ -178,8 +179,10 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
+  activeTab: PropTypes.string.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    bgColor: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -194,4 +197,9 @@ MoviePage.propTypes = {
   })
 };
 
-export default MoviePage;
+const mapStateToProps = (state) => ({
+  activeTab: getActiveMovieTab(state)
+});
+
+export {MoviePage};
+export default connect(mapStateToProps)(MoviePage);

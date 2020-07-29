@@ -10,7 +10,7 @@ describe(`ShowMoreBtnTest`, () => {
     const tree = renderer
       .create(
           <ShowMoreBtn
-            onMouseClick={() => {}}
+            onShowMoreBtnClick={() => {}}
           />
       ).toJSON();
     expect(tree).toMatchSnapshot();

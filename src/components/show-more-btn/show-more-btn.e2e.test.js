@@ -16,12 +16,12 @@ it(`ShowMoreBtn clicked`, () => {
 
   const component = mount(
       <ShowMoreBtn
-        onClick={onShowMoreBtnClick}
+        onShowMoreBtnClick={onShowMoreBtnClick}
       />
   );
 
   const button = component.find(`.catalog__button`);
 
   button.simulate(`click`, mockEvent);
-  expect(onShowMoreBtnClick).toHaveBeenCalledTimes(0);
+  expect(onShowMoreBtnClick).toHaveBeenCalledTimes(1);
 });

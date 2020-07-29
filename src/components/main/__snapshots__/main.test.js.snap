@@ -187,59 +187,17 @@ Array [
       </ul>
       <div
         className="catalog__movies-list"
+      />
+      <div
+        className="catalog__more"
       >
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
+        <button
+          className="catalog__button"
+          onClick={[Function]}
+          type="button"
         >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              height="100%"
-              width="100%"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Gangs of new york
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              height="100%"
-              width="100%"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Gangs of new york
-            </a>
-          </h3>
-        </article>
+          Show more
+        </button>
       </div>
     </section>
     <footer

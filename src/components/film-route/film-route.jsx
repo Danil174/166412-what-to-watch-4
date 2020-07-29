@@ -12,7 +12,6 @@ import PlayerPage from "../player-page/player-page.jsx";
 
 const renderPlayerOrPage = (path, film) => {
   const globalPath = path.replace(`/:id?`, ``);
-  console.log(globalPath);
   switch (globalPath) {
     case AppRoute.MOVIE_PAGE:
       return <MoviePage film={film} />;

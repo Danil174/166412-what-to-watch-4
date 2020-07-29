@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import history from "../../history.js";
 
 const PlayerPage = (props) => {
   const {film} = props;
@@ -6,13 +8,21 @@ const PlayerPage = (props) => {
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button
+        type="button"
+        className="player__exit"
+        onClick={() => {
+          history.go(-1);
+        }}
+      >
+        Exit
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
             <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{"left" : "30%"}}>Toggler</div>
+            <div className="player__toggler">Toggler</div>
           </div>
           <div className="player__time-value">1:30:29</div>
         </div>
@@ -24,7 +34,7 @@ const PlayerPage = (props) => {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{film.title}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
@@ -37,5 +47,12 @@ const PlayerPage = (props) => {
     </div>
   );
 };
+
+PlayerPage.propTypes = {
+  film: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }).isRequired
+};
+
 
 export default PlayerPage;

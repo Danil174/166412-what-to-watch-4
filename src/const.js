@@ -28,9 +28,11 @@ export const LoadErrorsTexts = {
 };
 
 export const AppRoute = {
+  ROOT: `/`,
   LOGIN: `/login`,
+  MY_LIST: `/mylist`,
   MOVIE_PAGE: `/films`,
   PLAYER_PAGE: `/player`,
   FAVORITES: `/favorites`,
-  ROOT: `/`,
+  REVIEW: `/review`,
 };

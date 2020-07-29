@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {AppRoute} from "../../const.js";
+import history from "../../history.js";
 
 import AddToList from "../add-to-list/add-to-list.jsx";
 
@@ -22,7 +24,13 @@ const PromoSection = (props) => {
           </p>
 
           <div className="movie-card__buttons">
-            <button className="btn btn--play movie-card__button" type="button">
+            <button
+              className="btn btn--play movie-card__button"
+              type="button"
+              onClick={() => {
+                history.push(`${AppRoute.PLAYER_PAGE}/${id}`);
+              }}
+            >
               <svg viewBox="0 0 19 19" width="19" height="19">
                 <use xlinkHref="#play-s"></use>
               </svg>

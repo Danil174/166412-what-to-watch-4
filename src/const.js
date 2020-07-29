@@ -29,7 +29,8 @@ export const LoadErrorsTexts = {
 
 export const AppRoute = {
   LOGIN: `/login`,
-  MOVIE_PAGE: `/movie_page`,
+  MOVIE_PAGE: `/films`,
+  PLAYER_PAGE: `/player`,
   FAVORITES: `/favorites`,
   ROOT: `/`,
 };

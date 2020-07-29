@@ -12,9 +12,13 @@ module.exports = {
     port: 1337,
     historyApiFallback: true,
     proxy: {
-      '/movie_page/*': {
+      '/films/*': {
         target: `http://localhost:1337/`,
-        pathRewrite: {'^/movie_page/*': ``},
+        pathRewrite: {'^/films/*': ``},
+      },
+      '/player/*': {
+        target: `http://localhost:1337/`,
+        pathRewrite: {'^/player/*': ``},
       },
     },
   },

@@ -3,9 +3,25 @@ import {connect} from "react-redux";
 import {getFilmsByGenre} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 import {Route} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 import NotFound from "../not-found/not-found.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import PlayerPage from "../player-page/player-page.jsx";
+
+
+const renderPlayerOrPage = (path, film) => {
+  const globalPath = path.replace(`/:id?`, ``);
+  console.log(globalPath);
+  switch (globalPath) {
+    case AppRoute.MOVIE_PAGE:
+      return <MoviePage film={film} />;
+    case AppRoute.PLAYER_PAGE:
+      return <PlayerPage film={film} />;
+    default:
+      return <>error</>;
+  }
+};
 
 
 const FilmRoot = (props) => {
@@ -21,9 +37,7 @@ const FilmRoot = (props) => {
       render={() => {
         return (
           selectedFilm !== undefined
-            ? <MoviePage
-              film={selectedFilm}
-            />
+            ? renderPlayerOrPage(path, selectedFilm)
             : <NotFound />
         );
       }}

@@ -44,6 +44,7 @@ exports[`PromoSectionTest render PromoSection 1`] = `
       >
         <button
           className="btn btn--play movie-card__button"
+          onClick={[Function]}
           type="button"
         >
           <svg

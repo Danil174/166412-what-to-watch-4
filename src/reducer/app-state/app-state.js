@@ -1,14 +1,14 @@
 import {extend} from "../../utils/common.js";
-import {DEFAULT_GENRE} from "../../const.js";
+import {DEFAULT_GENRE, MovieTabs} from "../../const.js";
 
 const initialState = {
-  selectedFilmID: null,
   activeGenre: DEFAULT_GENRE,
+  activeMovieTab: MovieTabs[0],
 };
 
 const ActionType = {
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
-  GET_SELECT_FILM_ID: `GET_SELECT_FILM_ID`,
+  CHANGE_ACTIVE_MOVIE_TAB: `CHANGE_ACTIVE_MOVIE_TAB`,
 };
 
 const ActionCreator = {
@@ -16,13 +16,10 @@ const ActionCreator = {
     type: ActionType.CHANGE_GENRE_FILTER,
     payload: filter,
   }),
-
-  getSelectedFilm: (id) => {
-    return {
-      type: ActionType.GET_SELECT_FILM_ID,
-      payload: id,
-    };
-  },
+  changeMovieTab: (tab) => ({
+    type: ActionType.CHANGE_ACTIVE_MOVIE_TAB,
+    payload: tab,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,11 +29,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeGenre: action.payload,
       });
-
-    case ActionType.GET_SELECT_FILM_ID:
+    case ActionType.CHANGE_ACTIVE_MOVIE_TAB:
 
       return extend(state, {
-        selectedFilmID: action.payload,
+        activeMovieTab: action.payload,
       });
   }
 

@@ -33,3 +33,15 @@ export const AppRoute = {
   FAVORITES: `/favorites`,
   ROOT: `/`,
 };
+
+export const MovieTabs = [
+  `Overview`,
+  `Details`,
+  `Reviews`,
+];
+
+export const MovieTabsMap = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`,
+};

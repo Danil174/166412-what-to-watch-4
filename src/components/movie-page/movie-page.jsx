@@ -1,35 +1,56 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
+import {getFilms} from "../../reducer/data/selectors.js";
 
 import UserBlock from "../user-block/user-block.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
-import {getTextMovieRating} from "../../utils/common.js";
+import MovieNav from "../movie-nav/movie-nav.jsx";
+import MovieOverview from "../movie-overview/movie-overview.jsx";
+import MovieDetails from "../movie-details/movie-details.jsx";
+import MovieReviews from "../movie-reviews/movie-reviews.jsx";
+import MoviesList from "../movies-list/movies-list.jsx";
+import {MovieTabs, MovieTabsMap} from "../../const.js";
+
+const getSelectedTab = (tab, film) => {
+  switch (tab) {
+    case MovieTabsMap.OVERVIEW:
+      return <MovieOverview film={film}/>;
+    case (MovieTabsMap.DETAILS):
+      return <MovieDetails film={film} />;
+    case (MovieTabsMap.REVIEWS):
+      return <MovieReviews />;
+    default:
+      return <>error</>;
+  }
+};
 
 const MoviePage = (props) => {
-  const {film} = props;
+  const {film, activeTab, films} = props;
   const {
     poster,
     cover,
     title,
     genre,
     releaseDate,
-    synopsis,
-    movieScore,
-    ratingCount,
-    director,
-    actors,
     isFavorite,
+    bgColor,
     id,
   } = film;
 
-  const stringRating = (movieScore + ``).split(`.`).join(`,`);
+  const similarFilms = films.filter((it) => it.genre === genre).slice(0, 4);
+
   const posterAlt = `${title} poster`;
-  const actorsString = actors.join(`, `);
-  const textRating = getTextMovieRating(movieScore);
+
+  const sectionColor = {backgroundColor: bgColor};
 
   return (
   <>
-    <section className="movie-card movie-card--full">
+    <section
+      style={sectionColor}
+      className="movie-card movie-card--full"
+    >
       <div className="movie-card__hero">
         <div className="movie-card__bg">
           <img
@@ -91,35 +112,10 @@ const MoviePage = (props) => {
           </div>
 
           <div className="movie-card__desc">
-            <nav className="movie-nav movie-card__nav">
-              <ul className="movie-nav__list">
-                <li className="movie-nav__item movie-nav__item--active">
-                  <a href="#" className="movie-nav__link">Overview</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Details</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Reviews</a>
-                </li>
-              </ul>
-            </nav>
 
-            <div className="movie-rating">
-              <div className="movie-rating__score">{stringRating}</div>
-              <p className="movie-rating__meta">
-                <span className="movie-rating__level">{textRating}</span>
-                <span className="movie-rating__count">{ratingCount} ratings</span>
-              </p>
-            </div>
+            <MovieNav tabs={MovieTabs} />
 
-            <div className="movie-card__text">
-              {synopsis}
-
-              <p className="movie-card__director"><strong>Director: {director}</strong></p>
-
-              <p className="movie-card__starring"><strong>Starring: {actorsString} and other</strong></p>
-            </div>
+            {getSelectedTab(activeTab, film)}
           </div>
         </div>
       </div>
@@ -129,43 +125,10 @@ const MoviePage = (props) => {
       <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
 
-        <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-            </h3>
-          </article>
-        </div>
+        <MoviesList
+          loadFilmsError={null}
+          filmsList={similarFilms}
+        />
       </section>
 
       <footer className="page-footer">
@@ -187,20 +150,25 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
+  activeTab: PropTypes.string.isRequired,
+  films: PropTypes.array.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    bgColor: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
-    synopsis: PropTypes.string.isRequired,
-    movieScore: PropTypes.number.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string).isRequired,
   })
 };
 
-export default MoviePage;
+const mapStateToProps = (state) => ({
+  activeTab: getActiveMovieTab(state),
+  films: getFilms(state),
+});
+
+export {MoviePage};
+export default connect(mapStateToProps)(MoviePage);

@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {checkNavTagretClick} from "../../utils/common.js";
 
-const listItem = (genre, isActive) => {
-  const defaultClass = `catalog__genres-item`;
-  const activeClass = isActive ? ` catalog__genres-item--active` : ``;
-  const itemClass = defaultClass + activeClass;
+const listItem = (genre, activeGenre) => {
+
+  const activeClass = activeGenre === genre ? `catalog__genres-item--active` : ``;
+  const itemClass = `catalog__genres-item ${activeClass}`;
+
   return (
     <li
       key={genre}
@@ -13,7 +15,7 @@ const listItem = (genre, isActive) => {
       <a
         href="#"
         className="catalog__genres-link"
-        data-genre={genre}
+        data-item={genre}
       >
         {genre}
       </a>
@@ -21,33 +23,18 @@ const listItem = (genre, isActive) => {
   );
 };
 
-const checkGenre = (target, oldGenge) => {
-  if (target.tagName !== `A` || oldGenge === target.dataset.genre) {
-    return oldGenge;
-  }
-
-  const genre = target.dataset.genre;
-
-  return genre;
-};
-
 const GenresList = (props) => {
   const {genres, onGenreItemClick, activeGenre} = props;
-
-  const listItems = genres.map((genre) => {
-    const isActive = activeGenre === genre;
-    return listItem(genre, isActive);
-  });
 
   return (
     <ul
       className="catalog__genres-list"
       onClick={(evt) => {
         evt.preventDefault();
-        const ganre = checkGenre(evt.target, activeGenre);
+        const ganre = checkNavTagretClick(evt.target, activeGenre);
         onGenreItemClick(ganre);
       }}>
-      {listItems}
+      {genres.map((ganre) => listItem(ganre, activeGenre))}
     </ul>
   );
 };

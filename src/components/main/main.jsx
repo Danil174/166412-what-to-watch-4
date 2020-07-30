@@ -9,6 +9,9 @@ import PromoSection from "../promo-section/promo-section.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import UserBlock from "../user-block/user-block.jsx";
+import withShowMoreBtn from "../../hocs/with-show-more-btn/with-show-more-btn.js";
+
+const MoviesListWrapper = withShowMoreBtn(MoviesList);
 
 const Main = (props) => {
   const {filmsList, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
@@ -56,14 +59,10 @@ const Main = (props) => {
           genres={genres}
         />
 
-        <MoviesList
+        <MoviesListWrapper
           loadFilmsError={error}
           filmsList={filmsList}
         />
-
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
       </section>
 
       <footer className="page-footer">

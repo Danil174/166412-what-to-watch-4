@@ -10,95 +10,95 @@ exports[`GenresListTest render GenresList 1`] = `
   >
     <a
       className="catalog__genres-link"
-      data-genre="Comedies"
+      data-item="Comedies"
       href="#"
     >
       Comedies
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Crime"
+      data-item="Crime"
       href="#"
     >
       Crime
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Documentary"
+      data-item="Documentary"
       href="#"
     >
       Documentary
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Dramas"
+      data-item="Dramas"
       href="#"
     >
       Dramas
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Horror"
+      data-item="Horror"
       href="#"
     >
       Horror
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Kids & Family"
+      data-item="Kids & Family"
       href="#"
     >
       Kids & Family
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Romance"
+      data-item="Romance"
       href="#"
     >
       Romance
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Sci-Fi"
+      data-item="Sci-Fi"
       href="#"
     >
       Sci-Fi
     </a>
   </li>
   <li
-    className="catalog__genres-item"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
-      data-genre="Thrillers"
+      data-item="Thrillers"
       href="#"
     >
       Thrillers

@@ -4,6 +4,11 @@ exports[`MoviePageTest render MoviePage 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
+    style={
+      Object {
+        "backgroundColor": "#A6B7AC",
+      }
+    }
   >
     <div
       className="movie-card__hero"
@@ -154,6 +159,7 @@ Array [
         >
           <nav
             className="movie-nav movie-card__nav"
+            onClick={[Function]}
           >
             <ul
               className="movie-nav__list"
@@ -163,27 +169,27 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  data-item="Overview"
                 >
                   Overview
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item 0"
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  data-item="Details"
                 >
                   Details
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item 0"
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  data-item="Reviews"
                 >
                   Reviews
                 </a>
@@ -196,7 +202,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              8,8
+              10
             </div>
             <p
               className="movie-rating__meta"
@@ -204,7 +210,7 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Very good
+                Awesome
               </span>
               <span
                 className="movie-rating__count"
@@ -217,7 +223,7 @@ Array [
           <div
             className="movie-card__text"
           >
-            In 1862, Amsterdam Vallon returns to the Five Points area of New York City seeking revenge against Bill the Butcher, his father's killer.
+            In 1862, his father's killer.
             <p
               className="movie-card__director"
             >
@@ -256,97 +262,79 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
+            <video
+              height="100%"
+              width="100%"
             />
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Fantastic Beasts: The Crimes of Grindelwald
+              Gangs of new york
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="img/bohemian-rhapsody.jpg"
-              width="280"
+            <video
+              height="100%"
+              width="100%"
             />
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Bohemian Rhapsody
+              Gangs of new york
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="img/macbeth.jpg"
-              width="280"
+            <video
+              height="100%"
+              width="100%"
             />
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Macbeth
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Aviator"
-              height="175"
-              src="img/aviator.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Aviator
+              Gangs of new york
             </a>
           </h3>
         </article>

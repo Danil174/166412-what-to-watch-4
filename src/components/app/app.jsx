@@ -14,7 +14,7 @@ import NotFound from "../not-found/not-found.jsx";
 import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import UserList from "../user-list/user-list.jsx";
-import FilmRoot from "../film-route/film-route.jsx";
+import FilmRout from "../film-route/film-route.jsx";
 
 class App extends PureComponent {
 
@@ -51,9 +51,13 @@ class App extends PureComponent {
               : <SignIn />
             }
           />
-          <FilmRoot
+          <FilmRout
             exact
             path={`${AppRoute.MOVIE_PAGE}/:id?`}
+          />
+          <FilmRout
+            exact
+            path={`${AppRoute.PLAYER_PAGE}/:id?`}
           />
           <PrivateRoute
             exact

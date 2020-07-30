@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import history from "../../history.js";
 import {connect} from "react-redux";
 import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
 import {getFilms} from "../../reducer/data/selectors.js";
+import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH} from "../../const.js";
 
 import UserBlock from "../user-block/user-block.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
@@ -11,7 +13,6 @@ import MovieOverview from "../movie-overview/movie-overview.jsx";
 import MovieDetails from "../movie-details/movie-details.jsx";
 import MovieReviews from "../movie-reviews/movie-reviews.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
-import {MovieTabs, MovieTabsMap} from "../../const.js";
 
 const getSelectedTab = (tab, film) => {
   switch (tab) {
@@ -39,7 +40,7 @@ const MoviePage = (props) => {
     id,
   } = film;
 
-  const similarFilms = films.filter((it) => it.genre === genre).slice(0, 4);
+  const similarFilms = films.filter((it) => it.genre === genre).slice(0, SIMILAR_LIST_LENGTH);
 
   const posterAlt = `${title} poster`;
 
@@ -84,7 +85,13 @@ const MoviePage = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button
+                className="btn btn--play movie-card__button"
+                type="button"
+                onClick={() => {
+                  history.push(`${AppRoute.PLAYER_PAGE}/${id}`);
+                }}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -126,7 +133,6 @@ const MoviePage = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <MoviesList
-          loadFilmsError={null}
           filmsList={similarFilms}
         />
       </section>

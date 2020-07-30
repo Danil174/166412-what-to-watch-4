@@ -30,10 +30,13 @@ export const LoadErrorsTexts = {
 };
 
 export const AppRoute = {
-  LOGIN: `/login`,
-  MOVIE_PAGE: `/movie_page`,
-  FAVORITES: `/favorites`,
   ROOT: `/`,
+  LOGIN: `/login`,
+  MY_LIST: `/mylist`,
+  MOVIE_PAGE: `/films`,
+  PLAYER_PAGE: `/player`,
+  FAVORITES: `/favorites`,
+  REVIEW: `/review`,
 };
 
 export const MovieTabs = [

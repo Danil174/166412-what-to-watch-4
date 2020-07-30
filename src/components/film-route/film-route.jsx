@@ -9,6 +9,9 @@ import NotFound from "../not-found/not-found.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import PlayerPage from "../player-page/player-page.jsx";
 
+import withPlayer from "../../hocs/with-player/with-player.js";
+const PlayerPageWrapped = withPlayer(PlayerPage);
+
 
 const renderPlayerOrPage = (path, film) => {
   const globalPath = path.replace(`/:id?`, ``);
@@ -16,7 +19,7 @@ const renderPlayerOrPage = (path, film) => {
     case AppRoute.MOVIE_PAGE:
       return <MoviePage film={film} />;
     case AppRoute.PLAYER_PAGE:
-      return <PlayerPage film={film} />;
+      return <PlayerPageWrapped film={film} />;
     default:
       return <>error</>;
   }

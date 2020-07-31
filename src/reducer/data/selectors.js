@@ -16,12 +16,20 @@ export const getGenres = (state) => {
   return state[NameSpace.DATA].genres;
 };
 
+export const getComments = (state) => {
+  return state[NameSpace.DATA].comments;
+};
+
 export const getloadFilmsError = (state) => {
   return state[NameSpace.DATA].loadFilmsError;
 };
 
 export const getloadPromoError = (state) => {
   return state[NameSpace.DATA].loadPromoError;
+};
+
+export const getLoadPromoError = (state) => {
+  return state[NameSpace.DATA].loadCommentsError;
 };
 
 export const getFilmsByGenre = createSelector(

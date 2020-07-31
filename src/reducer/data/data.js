@@ -1,4 +1,4 @@
-import {configureFilm} from '../../adapter/adapter.js';
+import {configureFilm, configureComment} from '../../adapter/adapter.js';
 import {extend} from "../../utils/common.js";
 import {DEFAULT_GENRE, MAX_GENRES_LENGTH} from "../../const.js";
 
@@ -6,21 +6,26 @@ const initialState = {
   films: [],
   promoFilm: {},
   genres: [],
+  comments: [],
   loadFilmsError: null,
   loadPromoError: null,
+  loadCommentsError: null,
   setFavoriteError: null,
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO: `LOAD_PROMO`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
   GET_GENRES: `GET_GENRES`,
   SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
   SET_LOAD_PROMO_ERROR: `SET_LOAD_PROMO_ERROR`,
+  SET_LOAD_COMMENTS_ERROR: `SET_LOAD_COMMENTS_ERROR`,
   SET_FAVORITE: `SET_FAVORITE`,
   SET_FAVORITE_ERROR: `SET_FAVORITE_ERROR`,
   UPDATE_FILMS: `UPDATE_FILMS`,
   UPDATE_PROMO: `UPDATE_PROMO`,
+  DELETE_COMMENTS: `DELETE_COMMENTS`,
 };
 
 const ActionCreator = {
@@ -35,6 +40,13 @@ const ActionCreator = {
     return ({
       type: ActionType.LOAD_PROMO,
       payload: film
+    });
+  },
+
+  loadComments: (comments) => {
+    return ({
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments
     });
   },
 
@@ -59,6 +71,13 @@ const ActionCreator = {
     };
   },
 
+  setLoadCommentsError: (err) => {
+    return {
+      type: ActionType.SET_LOAD_COMMENTS_ERROR,
+      payload: err,
+    };
+  },
+
   setFavoriteError: (err) => {
     return {
       type: ActionType.SET_FAVORITE_ERROR,
@@ -77,6 +96,13 @@ const ActionCreator = {
     return {
       type: ActionType.UPDATE_PROMO,
       payload: film,
+    };
+  },
+
+  deleteComments: () => {
+    return {
+      type: ActionType.DELETE_COMMENTS,
+      payload: null
     };
   },
 };
@@ -118,6 +144,17 @@ const Operation = {
       dispatch(ActionCreator.setFavoriteError(error.response.status));
     });
   },
+  loadComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        const configuredComments = response.data.map((comment) => configureComment(comment));
+        console.log(configuredComments);
+        dispatch(ActionCreator.loadComments(configuredComments));
+      })
+      .catch((error) => {
+        dispatch(ActionCreator.setLoadCommentsError(error.response.status));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -130,6 +167,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_PROMO:
       return extend(state, {
         promoFilm: action.payload
+      });
+
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload
       });
 
     case ActionType.GET_GENRES:
@@ -154,6 +196,11 @@ const reducer = (state = initialState, action) => {
         setFavoriteError: action.payload,
       });
 
+    case ActionType.SET_LOAD_COMMENTS_ERROR:
+      return extend(state, {
+        loadCommentsError: action.payload
+      });
+
     case ActionType.UPDATE_FILMS:
       const newFilm = action.payload;
       const oldFilms = state.films;
@@ -170,6 +217,11 @@ const reducer = (state = initialState, action) => {
       }
       return extend(state, {
         promoFilm: newPromo,
+      });
+
+    case ActionType.DELETE_COMMENTS:
+      return extend(state, {
+        comments: [],
       });
   }
 

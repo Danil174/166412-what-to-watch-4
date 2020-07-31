@@ -29,8 +29,8 @@ export const configureUserData = (data) => {
 export const configureComment = (data) => {
   return ({
     commentID: data.id,
-    userId: data.user.id,
-    userName: data.user.namme,
+    userID: data.user.id,
+    userName: data.user.name,
     rating: data.rating,
     text: data.comment,
     date: new Date(data.date),

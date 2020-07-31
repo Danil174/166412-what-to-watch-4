@@ -25,3 +25,14 @@ export const configureUserData = (data) => {
     avatarUrl: data.avatar_url,
   });
 };
+
+export const configureComment = (data) => {
+  return ({
+    commentID: data.id,
+    userId: data.user.id,
+    userName: data.user.namme,
+    rating: data.rating,
+    text: data.comment,
+    date: new Date(data.date),
+  });
+};

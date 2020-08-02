@@ -1,0 +1,26 @@
+import MoviePage from "./movie-page.jsx";
+import {connect} from "react-redux";
+
+import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
+import {getFilms, getComments} from "../../reducer/data/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as DataOperation, ActionCreator} from '../../reducer/data/data.js';
+
+const mapStateToProps = (state) => ({
+  comments: getComments(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  activeTab: getActiveMovieTab(state),
+  films: getFilms(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  componentMounted(id) {
+    dispatch(DataOperation.loadComments(id));
+  },
+  componentUnmounted() {
+    dispatch(ActionCreator.deleteComments());
+  }
+});
+
+export {MoviePage};
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

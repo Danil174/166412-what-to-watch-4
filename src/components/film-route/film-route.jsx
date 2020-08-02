@@ -6,7 +6,7 @@ import {Route} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 
 import NotFound from "../not-found/not-found.jsx";
-import MoviePage from "../movie-page/movie-page.jsx";
+import MoviePage from "../movie-page/movie-page.connect.js";
 import PlayerPage from "../player-page/player-page.jsx";
 
 import withPlayer from "../../hocs/with-player/with-player.js";

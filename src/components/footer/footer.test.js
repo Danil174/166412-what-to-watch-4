@@ -2,14 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
-import UserList from "./user-list.jsx";
+import Footer from "./footer.jsx";
 
-describe(`UserListTest`, () => {
-  it(`render UserList`, () => {
+describe(`FooterTest`, () => {
+  it(`render Footer`, () => {
     const tree = renderer
       .create(
           <Router history={history}>
-            <UserList />
+            <Footer/>
           </Router>
       ).toJSON();
 

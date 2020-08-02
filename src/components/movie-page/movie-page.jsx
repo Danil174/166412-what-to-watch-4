@@ -1,11 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
-import {getFilms, getComments} from "../../reducer/data/selectors.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {Operation as DataOperation, ActionCreator} from '../../reducer/data/data.js';
 import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationStatus} from "../../const.js";
 
 import UserBlock from "../user-block/user-block.jsx";
@@ -194,22 +189,5 @@ MoviePage.propTypes = {
   })
 };
 
-const mapStateToProps = (state) => ({
-  comments: getComments(state),
-  authorizationStatus: getAuthorizationStatus(state),
-  activeTab: getActiveMovieTab(state),
-  films: getFilms(state),
-});
-
-
-const mapDispatchToProps = (dispatch) => ({
-  componentMounted(id) {
-    dispatch(DataOperation.loadComments(id));
-  },
-  componentUnmounted() {
-    dispatch(ActionCreator.deleteComments());
-  }
-});
-
 export {MoviePage};
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+export default MoviePage;

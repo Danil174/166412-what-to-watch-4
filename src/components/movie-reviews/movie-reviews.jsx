@@ -25,16 +25,16 @@ const renderComment = (comment) => {
 
 const MovieReviews = (props) => {
   let {comments} = props;
-
-  const secondPart = comments.splice(0, comments.length / 2);
+  const firstPart = comments.slice();
+  const secondPart = firstPart.splice(0, Math.round(comments.length / 2));
 
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        {comments.map((it) => renderComment(it))}
+        {secondPart.map((it) => renderComment(it))}
       </div>
       <div className="movie-card__reviews-col">
-        {secondPart.map((it) => renderComment(it))}
+        {firstPart.map((it) => renderComment(it))}
       </div>
     </div>
   );

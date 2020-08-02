@@ -106,9 +106,11 @@ const fakePromo = {
 describe(`dataReducerTest`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
+      comments: [],
       films: [],
       promoFilm: {},
       genres: [],
+      loadCommentsError: null,
       loadFilmsError: null,
       loadPromoError: null,
       setFavoriteError: null,

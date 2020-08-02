@@ -1,13 +1,33 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MoviePage from "./movie-page.jsx";
-
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus, MovieTabsMap} from "../../const.js";
 
 const mockStore = configureStore([]);
+
+const fakeComments = [
+  {
+    commentID: 1,
+    date: new Date(),
+    rating: 5.5,
+    text: `test test`,
+    userID: 55,
+    userName: `Tom`,
+  },
+  {
+    commentID: 45,
+    date: new Date(),
+    rating: 8,
+    text: `test test`,
+    userID: 11,
+    userName: `Den`,
+  },
+];
 
 const fakeFilm = {
   actors: [`Leonardo DiCaprio`, `Cameron Diaz`, `Daniel Day-Lewis`],
@@ -101,19 +121,26 @@ describe(`MoviePageTest`, () => {
       },
       [NameSpace.DATA]: {
         films: testFilms,
+        comments: []
       },
     });
     const tree = renderer
       .create(
-          <Provider store={store}>
-            <MoviePage
-              preview={``}
-              source={``}
-              activeTab={MovieTabsMap.OVERVIEW}
-              films={testFilms}
-              film={fakeFilm}
-            />
-          </Provider>, {
+          <Router history={history}>
+            <Provider store={store}>
+              <MoviePage
+                comments={fakeComments}
+                preview={``}
+                source={``}
+                activeTab={MovieTabsMap.OVERVIEW}
+                films={testFilms}
+                film={fakeFilm}
+                componentMounted={()=>{}}
+                componentUnmounted={()=>{}}
+                authorizationStatus={AuthorizationStatus.NO_AUTH}
+              />
+            </Provider>
+          </Router>, {
             createNodeMock: () => {
               return {};
             }

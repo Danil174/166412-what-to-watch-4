@@ -2,14 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
-import UserList from "./user-list.jsx";
+import Logo from "./logo.jsx";
 
-describe(`UserListTest`, () => {
-  it(`render UserList`, () => {
+describe(`LogoTest`, () => {
+  it(`render Logo`, () => {
     const tree = renderer
       .create(
           <Router history={history}>
-            <UserList />
+            <Logo isLight={false} />
           </Router>
       ).toJSON();
 

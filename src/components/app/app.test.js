@@ -115,6 +115,9 @@ describe(`AppTest`, () => {
               loadFilmsError={null}
               onGenreItemClick={() => {}}
               authorizationStatus={AuthorizationStatus.NO_AUTH}
+              loadFilms={()=>{}}
+              loadPromo={()=>{}}
+              checkAuthStatus={()=>{}}
             />
           </Provider>, {
             createNodeMock: () => {

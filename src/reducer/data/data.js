@@ -148,7 +148,6 @@ const Operation = {
     return api.get(`/comments/${id}`)
       .then((response) => {
         const configuredComments = response.data.map((comment) => configureComment(comment));
-        console.log(configuredComments);
         dispatch(ActionCreator.loadComments(configuredComments));
       })
       .catch((error) => {

@@ -13,6 +13,7 @@ exports[`SignInTest render SignIn 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -31,11 +32,16 @@ exports[`SignInTest render SignIn 1`] = `
         </span>
       </a>
     </div>
-    <h1
-      className="page-title user-page__title"
+    <div
+      className="user-block"
     >
-      Sign in
-    </h1>
+      <a
+        className="user-block__link"
+        href="/login"
+      >
+        Sign in
+      </a>
+    </div>
   </header>
   <div
     className="sign-in user-page__content"

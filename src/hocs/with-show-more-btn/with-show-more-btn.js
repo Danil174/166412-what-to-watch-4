@@ -15,6 +15,15 @@ const withShowMoreBtn = (Component) => {
       this.handleMouseClick = this.handleMouseClick.bind(this);
     }
 
+    componentDidMount(prevProps) {
+      if (prevProps !== this.props) {
+        this.setState({
+          films: this.props.filmsList.slice(0, INITTIAL_LIST_LENGTH),
+          showBtn: this.props.filmsList.length > INITTIAL_LIST_LENGTH
+        });
+      }
+    }
+
     componentDidUpdate(prevProps) {
       if (prevProps !== this.props) {
         this.setState({

@@ -5,6 +5,8 @@ import {ActionCreator} from '../../reducer/app-state/app-state.js';
 import {getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
 import {getActiveGenre} from "../../reducer/app-state/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
 import PropTypes from "prop-types";
 import history from "../../history.js";
 import {AuthorizationStatus, AppRoute} from "../../const.js";
@@ -18,6 +20,12 @@ import FilmRout from "../film-route/film-route.jsx";
 import AddReview from "../add-review/add-review.jsx";
 
 class App extends PureComponent {
+
+  componentDidMount() {
+    this.props.loadFilms();
+    this.props.loadPromo();
+    this.props.checkAuthStatus();
+  }
 
   _renderApp() {
     const {films, promoFilm, onGenreItemClick, genres, activeGenre, loadPromoError} = this.props;
@@ -102,7 +110,10 @@ App.propTypes = {
     title: PropTypes.string,
     genre: PropTypes.string,
     releaseDate: PropTypes.number,
-  }).isRequired
+  }).isRequired,
+  loadFilms: PropTypes.func.isRequired,
+  loadPromo: PropTypes.func.isRequired,
+  checkAuthStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -117,7 +128,16 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
     dispatch(ActionCreator.changeFilter(genre));
-  }
+  },
+  loadFilms() {
+    dispatch(DataOperation.loadFilms());
+  },
+  loadPromo() {
+    dispatch(DataOperation.loadPromo());
+  },
+  checkAuthStatus() {
+    dispatch(UserOperation.checkAuth());
+  },
 });
 
 export {App};

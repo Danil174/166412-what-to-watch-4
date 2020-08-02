@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import history from "../../history.js";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
 import {getFilms} from "../../reducer/data/selectors.js";
-import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH} from "../../const.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationStatus} from "../../const.js";
 
 import UserBlock from "../user-block/user-block.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
@@ -21,14 +22,14 @@ const getSelectedTab = (tab, film) => {
     case (MovieTabsMap.DETAILS):
       return <MovieDetails film={film} />;
     case (MovieTabsMap.REVIEWS):
-      return <MovieReviews />;
+      return <MovieReviews filmID={film.id} />;
     default:
       return <>error</>;
   }
 };
 
 const MoviePage = (props) => {
-  const {film, activeTab, films} = props;
+  const {film, activeTab, films, authorizationStatus} = props;
   const {
     poster,
     cover,
@@ -39,6 +40,8 @@ const MoviePage = (props) => {
     bgColor,
     id,
   } = film;
+
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   const similarFilms = films.filter((it) => it.genre === genre).slice(0, SIMILAR_LIST_LENGTH);
 
@@ -85,23 +88,31 @@ const MoviePage = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button
+
+              <Link
+                to={`${AppRoute.PLAYER_PAGE}/${id}`}
                 className="btn btn--play movie-card__button"
                 type="button"
-                onClick={() => {
-                  history.push(`${AppRoute.PLAYER_PAGE}/${id}`);
-                }}
               >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
+
               <AddToList
                 id={id}
                 isFavorite={isFavorite}
               />
-              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+              {
+                isAuth &&
+                <Link
+                  to={`${AppRoute.MOVIE_PAGE}/${id}${AppRoute.REVIEW}`}
+                  className="btn movie-card__button"
+                >
+                  Add review
+                </Link>
+              }
             </div>
           </div>
         </div>
@@ -156,6 +167,7 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   activeTab: PropTypes.string.isRequired,
   films: PropTypes.array.isRequired,
   film: PropTypes.shape({
@@ -172,6 +184,7 @@ MoviePage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
   activeTab: getActiveMovieTab(state),
   films: getFilms(state),
 });

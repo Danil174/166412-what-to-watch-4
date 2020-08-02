@@ -34,7 +34,7 @@ const PlayerPage = (props) => {
         type="button"
         className="player__exit"
         onClick={() => {
-          history.go(-1);
+          history.goBack();
         }}
       >
         Exit

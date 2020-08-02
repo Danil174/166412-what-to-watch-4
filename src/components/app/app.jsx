@@ -15,6 +15,7 @@ import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import UserList from "../user-list/user-list.jsx";
 import FilmRout from "../film-route/film-route.jsx";
+import AddReview from "../add-review/add-review.jsx";
 
 class App extends PureComponent {
 
@@ -50,6 +51,15 @@ class App extends PureComponent {
               ? <Redirect to={AppRoute.ROOT} />
               : <SignIn />
             }
+          />
+          <PrivateRoute
+            exact
+            path={`${AppRoute.REVIEW}/:id?`}
+            render={() => {
+              return (
+                <AddReview />
+              );
+            }}
           />
           <FilmRout
             exact

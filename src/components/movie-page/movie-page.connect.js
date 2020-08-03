@@ -2,16 +2,19 @@ import MoviePage from "./movie-page.jsx";
 import {connect} from "react-redux";
 
 import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
-import {getFilms, getComments} from "../../reducer/data/selectors.js";
+import {getFilms, getComments, getFilmByID} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation, ActionCreator} from '../../reducer/data/data.js';
 
-const mapStateToProps = (state) => ({
-  comments: getComments(state),
-  authorizationStatus: getAuthorizationStatus(state),
-  activeTab: getActiveMovieTab(state),
-  films: getFilms(state),
-});
+const mapStateToProps = (state, props) => {
+  return ({
+    comments: getComments(state),
+    authorizationStatus: getAuthorizationStatus(state),
+    activeTab: getActiveMovieTab(state),
+    films: getFilms(state),
+    currentFilm: getFilmByID(props.match.params.id, state),
+  });
+};
 
 const mapDispatchToProps = (dispatch) => ({
   componentMounted(id) {

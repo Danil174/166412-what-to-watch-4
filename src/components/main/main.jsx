@@ -12,7 +12,7 @@ import Footer from "../footer/footer.jsx";
 const MoviesListWrapper = withShowMoreBtn(MoviesList);
 
 const Main = (props) => {
-  const {filmsList, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
+  const {films, onGenreItemClick, genres, activeGenre, error, promoFilm, loadPromoError} = props;
   return (
     <>
     <PromoSection
@@ -31,7 +31,7 @@ const Main = (props) => {
 
         <MoviesListWrapper
           loadFilmsError={error}
-          filmsList={filmsList}
+          filmsList={films}
         />
       </section>
 
@@ -47,7 +47,7 @@ Main.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-  filmsList: PropTypes.array.isRequired,
+  films: PropTypes.array.isRequired,
   promoFilm: PropTypes.shape({
     poster: PropTypes.string,
     cover: PropTypes.string,

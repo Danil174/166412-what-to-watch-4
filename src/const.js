@@ -51,8 +51,8 @@ export const AppRoute = {
   MY_LIST: `/mylist`,
   MOVIE_PAGE: `/films`,
   PLAYER_PAGE: `/player`,
-  FAVORITES: `/favorites`,
   REVIEW: `/review`,
+  NOT_FOUND: `/not-found`,
 };
 
 export const MovieTabs = [

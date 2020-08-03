@@ -8,6 +8,10 @@ export const getFilms = (state) => {
   return state[NameSpace.DATA].films;
 };
 
+export const getLoadingStatus = (state) => {
+  return state[NameSpace.DATA].loading;
+};
+
 export const getPromoFilm = (state) => {
   return state[NameSpace.DATA].promoFilm;
 };
@@ -42,3 +46,17 @@ export const getFilmsByGenre = createSelector(
       return films.filter((film) => film.genre === genre);
     }
 );
+
+export const getFilmByID = createSelector(
+    (id, state) => {
+      const index = state[NameSpace.DATA].films.findIndex((film) => film.id === +id);
+
+      if (index === -1) {
+        return index;
+      }
+
+      return state[NameSpace.DATA].films[index];
+    },
+    (film) => film
+);
+

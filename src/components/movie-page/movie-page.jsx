@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationStatus} from "../../const.js";
 
+import Preload from "../preload/preload.jsx";
 import Header from "../header/header.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
 import MovieNav from "../movie-nav/movie-nav.jsx";
@@ -27,14 +28,16 @@ const getSelectedTab = (tab, film, comments) => {
 
 class MoviePage extends PureComponent {
   componentDidMount() {
-    const {componentMounted, film} = this.props;
-    componentMounted(film.id);
+    if (this.props.currentFilm) {
+      const {componentMounted, currentFilm} = this.props;
+      componentMounted(currentFilm.id);
+    }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.film.id !== this.props.film.id) {
-      const {componentMounted, film} = this.props;
-      componentMounted(film.id);
+    if (prevProps.currentFilm.id !== this.props.currentFilm.id) {
+      const {componentMounted, currentFilm} = this.props;
+      componentMounted(currentFilm.id);
     }
   }
 
@@ -43,7 +46,16 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {film, activeTab, films, authorizationStatus, comments} = this.props;
+    const {currentFilm, activeTab, films, authorizationStatus, comments} = this.props;
+
+    if (!currentFilm) {
+      return <Preload />;
+    }
+
+    if (currentFilm === -1) {
+      return <Redirect to={AppRoute.NOT_FOUND} />;
+    }
+
     const {
       poster,
       cover,
@@ -53,7 +65,7 @@ class MoviePage extends PureComponent {
       isFavorite,
       bgColor,
       id,
-    } = film;
+    } = currentFilm;
 
     const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
@@ -109,7 +121,7 @@ class MoviePage extends PureComponent {
                 {
                   isAuth &&
                   <Link
-                    to={`${AppRoute.MOVIE_PAGE}/${id}${AppRoute.REVIEW}`}
+                    to={`${AppRoute.REVIEW}/${id}`}
                     className="btn movie-card__button"
                   >
                     Add review
@@ -135,7 +147,7 @@ class MoviePage extends PureComponent {
 
               <MovieNav tabs={MovieTabs} />
 
-              {getSelectedTab(activeTab, film, comments)}
+              {getSelectedTab(activeTab, currentFilm, comments)}
             </div>
           </div>
         </div>
@@ -164,17 +176,20 @@ MoviePage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   activeTab: PropTypes.string.isRequired,
   films: PropTypes.array.isRequired,
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    bgColor: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  })
+  currentFilm: PropTypes.oneOfType([
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      bgColor: PropTypes.string.isRequired,
+      poster: PropTypes.string.isRequired,
+      cover: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      releaseDate: PropTypes.number.isRequired,
+      isFavorite: PropTypes.bool.isRequired,
+      actors: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }),
+    PropTypes.number
+  ]).isRequired,
 };
 
 export {MoviePage};

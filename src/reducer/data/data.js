@@ -7,6 +7,7 @@ const initialState = {
   promoFilm: {},
   genres: [],
   comments: [],
+  loading: false,
   loadFilmsError: null,
   loadPromoError: null,
   loadCommentsError: null,
@@ -18,6 +19,7 @@ const ActionType = {
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   GET_GENRES: `GET_GENRES`,
+  START_LOADING: `START_LOADING`,
   SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
   SET_LOAD_PROMO_ERROR: `SET_LOAD_PROMO_ERROR`,
   SET_LOAD_COMMENTS_ERROR: `SET_LOAD_COMMENTS_ERROR`,
@@ -54,6 +56,12 @@ const ActionCreator = {
     return ({
       type: ActionType.GET_GENRES,
       payload: genres
+    });
+  },
+
+  startLoading: () => {
+    return ({
+      type: ActionType.START_LOADING,
     });
   },
 
@@ -109,6 +117,24 @@ const ActionCreator = {
 
 const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.startLoading());
+    // setTimeout(()=> {
+    //   return api.get(`/films`)
+    //   .then((response) => {
+    //     const configuredFilm = response.data.map((film) => configureFilm(film));
+
+    //     const genresList = [
+    //       DEFAULT_GENRE,
+    //       ...new Set(configuredFilm.map((film) => film.genre).slice(0, MAX_GENRES_LENGTH))
+    //     ];
+
+    //     dispatch(ActionCreator.getGenres(genresList));
+    //     dispatch(ActionCreator.loadFilms(configuredFilm));
+    //   })
+    //   .catch((error) => {
+    //     dispatch(ActionCreator.setLoadFilmsError(error.response.status));
+    //   });
+    // }, 15000);
     return api.get(`/films`)
       .then((response) => {
         const configuredFilm = response.data.map((film) => configureFilm(film));
@@ -160,7 +186,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
       return extend(state, {
-        films: action.payload
+        films: action.payload,
+        loading: false,
       });
 
     case ActionType.LOAD_PROMO:
@@ -178,10 +205,16 @@ const reducer = (state = initialState, action) => {
         genres: action.payload,
       });
 
+    case ActionType.START_LOADING:
+      return Object.assign(state, {
+        loading: true
+      });
+
     case ActionType.SET_LOAD_FILMS_ERROR:
 
       return extend(state, {
         loadFilmsError: action.payload,
+        loading: false,
       });
 
     case ActionType.SET_LOAD_PROMO_ERROR:

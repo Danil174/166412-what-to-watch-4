@@ -1,4 +1,6 @@
 import React, {createRef, PureComponent} from "react";
+import {connect} from "react-redux";
+import {getFilmByID, getLoadingStatus} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 
 const withPlayer = (Component) => {
@@ -19,31 +21,30 @@ const withPlayer = (Component) => {
     }
 
     componentDidMount() {
-      const {film} = this.props;
-      const {source, cover} = film;
-
       const video = this._videoRef.current;
 
-      video.src = source;
-      video.poster = cover;
+      if (this.props.film) {
+        video.src = this.props.film.source;
+        video.poster = this.props.film.cover;
 
-      video.onloadedmetadata = () => {
-        this.setState({
-          duration: video.duration,
+        video.onloadedmetadata = () => {
+          this.setState({
+            duration: video.duration,
+          });
+        };
+
+        video.onplay = () => this.setState({
+          isPlaying: true,
         });
-      };
 
-      video.onplay = () => this.setState({
-        isPlaying: true,
-      });
+        video.onpause = () => this.setState({
+          isPlaying: false,
+        });
 
-      video.onpause = () => this.setState({
-        isPlaying: false,
-      });
-
-      video.ontimeupdate = () => this.setState({
-        progress: Math.floor(video.currentTime),
-      });
+        video.ontimeupdate = () => this.setState({
+          progress: Math.floor(video.currentTime),
+        });
+      }
     }
 
     componentDidUpdate() {
@@ -59,13 +60,15 @@ const withPlayer = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
 
-      video.src = ``;
-      video.poster = ``;
+      if (this.props.film) {
+        video.src = ``;
+        video.poster = ``;
 
-      video.onloadedmetadata = null;
-      video.onplay = null;
-      video.onpause = null;
-      video.ontimeupdate = null;
+        video.onloadedmetadata = null;
+        video.onplay = null;
+        video.onpause = null;
+        video.ontimeupdate = null;
+      }
     }
 
     fullScreenHandler() {
@@ -101,13 +104,19 @@ const withPlayer = (Component) => {
 
   WithPlayer.propTypes = {
     film: PropTypes.shape({
-      source: PropTypes.string.isRequired,
-      cover: PropTypes.string.isRequired,
-    }).isRequired,
+      source: PropTypes.string,
+      cover: PropTypes.string,
+    }),
   };
 
+  const mapStateToProps = (state, props) => {
+    return ({
+      film: getFilmByID(props.match.params.id, state),
+      loading: getLoadingStatus(state),
+    });
+  };
 
-  return WithPlayer;
+  return connect(mapStateToProps)(WithPlayer);
 };
 
 export default withPlayer;

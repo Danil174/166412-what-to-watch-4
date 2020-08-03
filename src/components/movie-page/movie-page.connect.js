@@ -2,7 +2,7 @@ import MoviePage from "./movie-page.jsx";
 import {connect} from "react-redux";
 
 import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
-import {getFilms, getComments, getFilmByID} from "../../reducer/data/selectors.js";
+import {getFilms, getComments, getFilmByID, getLoadingStatus} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation, ActionCreator} from '../../reducer/data/data.js';
 
@@ -13,6 +13,7 @@ const mapStateToProps = (state, props) => {
     activeTab: getActiveMovieTab(state),
     films: getFilms(state),
     currentFilm: getFilmByID(props.match.params.id, state),
+    loading: getLoadingStatus(state),
   });
 };
 

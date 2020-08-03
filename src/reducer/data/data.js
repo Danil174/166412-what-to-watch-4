@@ -20,6 +20,7 @@ const ActionType = {
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   GET_GENRES: `GET_GENRES`,
   START_LOADING: `START_LOADING`,
+  END_LOADING: `END_LOADING`,
   SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
   SET_LOAD_PROMO_ERROR: `SET_LOAD_PROMO_ERROR`,
   SET_LOAD_COMMENTS_ERROR: `SET_LOAD_COMMENTS_ERROR`,
@@ -62,6 +63,12 @@ const ActionCreator = {
   startLoading: () => {
     return ({
       type: ActionType.START_LOADING,
+    });
+  },
+
+  endLoading: () => {
+    return ({
+      type: ActionType.END_LOADING,
     });
   },
 
@@ -143,11 +150,12 @@ const Operation = {
           DEFAULT_GENRE,
           ...new Set(configuredFilm.map((film) => film.genre).slice(0, MAX_GENRES_LENGTH))
         ];
-
+        dispatch(ActionCreator.endLoading());
         dispatch(ActionCreator.getGenres(genresList));
         dispatch(ActionCreator.loadFilms(configuredFilm));
       })
       .catch((error) => {
+        dispatch(ActionCreator.endLoading());
         dispatch(ActionCreator.setLoadFilmsError(error.response.status));
       });
   },
@@ -186,8 +194,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
       return extend(state, {
-        films: action.payload,
-        loading: false,
+        films: action.payload
       });
 
     case ActionType.LOAD_PROMO:
@@ -210,11 +217,15 @@ const reducer = (state = initialState, action) => {
         loading: true
       });
 
+    case ActionType.END_LOADING:
+      return Object.assign(state, {
+        loading: false
+      });
+
     case ActionType.SET_LOAD_FILMS_ERROR:
 
       return extend(state, {
         loadFilmsError: action.payload,
-        loading: false,
       });
 
     case ActionType.SET_LOAD_PROMO_ERROR:

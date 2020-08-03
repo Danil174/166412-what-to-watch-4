@@ -16,10 +16,9 @@ import NotFound from "../not-found/not-found.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import UserList from "../user-list/user-list.jsx";
 import AddReview from "../add-review/add-review.jsx";
-import PlayerPage from "../player-page/player-page.jsx";
+import PlayerPage from "../player-page/player-page.connect.js";
 
 import withPlayer from "../../hocs/with-player/with-player.js";
-const PlayerPageWrapped = withPlayer(PlayerPage);
 
 class App extends PureComponent {
 
@@ -30,6 +29,7 @@ class App extends PureComponent {
   }
 
   render() {
+    const PlayerPageWrapped = withPlayer(PlayerPage);
     if (this.props.loading) {
       return <Preload />;
     }

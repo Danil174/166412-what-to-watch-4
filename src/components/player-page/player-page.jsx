@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import history from "../../history.js";
 
+import Preload from "../preload/preload.jsx";
+
 const prettifyRemainingTime = (time) => {
   const hours = Math.round(time / 3600).toString();
   const min = Math.round((time % 3600) / 60).toString().padStart(2, `0`);
@@ -20,6 +22,11 @@ const getProgressPercent = (duration, progress) => {
 
 const PlayerPage = (props) => {
   const {film, children, onFullScreenBtnClick, playPauseSetter, progress, isPlaying, duration} = props;
+
+  if (!film) {
+    return <Preload />;
+  }
+
   const {title} = film;
 
   const remainingTime = getRemainingTime(duration, progress);
@@ -101,8 +108,8 @@ PlayerPage.propTypes = {
   progress: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
   film: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-  }).isRequired,
+    title: PropTypes.string,
+  }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

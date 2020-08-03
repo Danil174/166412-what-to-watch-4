@@ -35,9 +35,11 @@ class MoviePage extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.currentFilm.id !== this.props.currentFilm.id) {
-      const {componentMounted, currentFilm} = this.props;
-      componentMounted(currentFilm.id);
+    if (this.props.currentFilm && prevProps.currentFilm) {
+      if (prevProps.currentFilm.id !== this.props.currentFilm.id) {
+        const {componentMounted, currentFilm} = this.props;
+        componentMounted(currentFilm.id);
+      }
     }
   }
 
@@ -50,10 +52,6 @@ class MoviePage extends PureComponent {
 
     if (!currentFilm) {
       return <Preload />;
-    }
-
-    if (currentFilm === -1) {
-      return <Redirect to={AppRoute.NOT_FOUND} />;
     }
 
     const {
@@ -176,20 +174,17 @@ MoviePage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   activeTab: PropTypes.string.isRequired,
   films: PropTypes.array.isRequired,
-  currentFilm: PropTypes.oneOfType([
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      bgColor: PropTypes.string.isRequired,
-      poster: PropTypes.string.isRequired,
-      cover: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      releaseDate: PropTypes.number.isRequired,
-      isFavorite: PropTypes.bool.isRequired,
-      actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-    PropTypes.number
-  ]).isRequired,
+  currentFilm: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    bgColor: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 export {MoviePage};

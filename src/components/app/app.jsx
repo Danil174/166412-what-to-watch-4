@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
-import {getLoadingStatus} from "../../reducer/data/selectors.js";
+import {getLoadingStatus} from "../../reducer/films/selectors.js";
 import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {Operation as DataFilms} from '../../reducer/films/films.js';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
 import PropTypes from "prop-types";
 import history from "../../history.js";
@@ -89,7 +90,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadFilms() {
-    dispatch(DataOperation.loadFilms());
+    dispatch(DataFilms.loadFilms());
   },
   loadPromo() {
     dispatch(DataOperation.loadPromo());

@@ -1,30 +1,19 @@
 import {configureFilm, configureComment} from '../../adapter/adapter.js';
 import {extend} from "../../utils/common.js";
-import {DEFAULT_GENRE, MAX_GENRES_LENGTH} from "../../const.js";
 
 const initialState = {
-  films: [],
   promoFilm: {},
-  genres: [],
   comments: [],
-  loading: false,
-  loadFilmsError: null,
   loadPromoError: null,
   loadCommentsError: null,
   setFavoriteError: null,
 };
 
 const ActionType = {
-  LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  GET_GENRES: `GET_GENRES`,
-  START_LOADING: `START_LOADING`,
-  END_LOADING: `END_LOADING`,
-  SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
   SET_LOAD_PROMO_ERROR: `SET_LOAD_PROMO_ERROR`,
   SET_LOAD_COMMENTS_ERROR: `SET_LOAD_COMMENTS_ERROR`,
-  SET_FAVORITE: `SET_FAVORITE`,
   SET_FAVORITE_ERROR: `SET_FAVORITE_ERROR`,
   UPDATE_FILMS: `UPDATE_FILMS`,
   UPDATE_PROMO: `UPDATE_PROMO`,
@@ -32,13 +21,6 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  loadFilms: (films) => {
-    return ({
-      type: ActionType.LOAD_FILMS,
-      payload: films
-    });
-  },
-
   loadPromo: (film) => {
     return ({
       type: ActionType.LOAD_PROMO,
@@ -51,32 +33,6 @@ const ActionCreator = {
       type: ActionType.LOAD_COMMENTS,
       payload: comments
     });
-  },
-
-  getGenres: (genres) => {
-    return ({
-      type: ActionType.GET_GENRES,
-      payload: genres
-    });
-  },
-
-  startLoading: () => {
-    return ({
-      type: ActionType.START_LOADING,
-    });
-  },
-
-  endLoading: () => {
-    return ({
-      type: ActionType.END_LOADING,
-    });
-  },
-
-  setLoadFilmsError: (err) => {
-    return {
-      type: ActionType.SET_LOAD_FILMS_ERROR,
-      payload: err,
-    };
   },
 
   setLoadPromoError: (err) => {
@@ -123,42 +79,6 @@ const ActionCreator = {
 };
 
 const Operation = {
-  loadFilms: () => (dispatch, getState, api) => {
-    dispatch(ActionCreator.startLoading());
-    // setTimeout(()=> {
-    //   return api.get(`/films`)
-    //   .then((response) => {
-    //     const configuredFilm = response.data.map((film) => configureFilm(film));
-
-    //     const genresList = [
-    //       DEFAULT_GENRE,
-    //       ...new Set(configuredFilm.map((film) => film.genre).slice(0, MAX_GENRES_LENGTH))
-    //     ];
-
-    //     dispatch(ActionCreator.getGenres(genresList));
-    //     dispatch(ActionCreator.loadFilms(configuredFilm));
-    //   })
-    //   .catch((error) => {
-    //     dispatch(ActionCreator.setLoadFilmsError(error.response.status));
-    //   });
-    // }, 15000);
-    return api.get(`/films`)
-      .then((response) => {
-        const configuredFilm = response.data.map((film) => configureFilm(film));
-
-        const genresList = [
-          DEFAULT_GENRE,
-          ...new Set(configuredFilm.map((film) => film.genre).slice(0, MAX_GENRES_LENGTH))
-        ];
-        dispatch(ActionCreator.endLoading());
-        dispatch(ActionCreator.getGenres(genresList));
-        dispatch(ActionCreator.loadFilms(configuredFilm));
-      })
-      .catch((error) => {
-        dispatch(ActionCreator.endLoading());
-        dispatch(ActionCreator.setLoadFilmsError(error.response.status));
-      });
-  },
   loadPromo: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
       .then((response) => {
@@ -192,11 +112,6 @@ const Operation = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_FILMS:
-      return extend(state, {
-        films: action.payload
-      });
-
     case ActionType.LOAD_PROMO:
       return extend(state, {
         promoFilm: action.payload
@@ -205,27 +120,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       return extend(state, {
         comments: action.payload
-      });
-
-    case ActionType.GET_GENRES:
-      return extend(state, {
-        genres: action.payload,
-      });
-
-    case ActionType.START_LOADING:
-      return Object.assign(state, {
-        loading: true
-      });
-
-    case ActionType.END_LOADING:
-      return Object.assign(state, {
-        loading: false
-      });
-
-    case ActionType.SET_LOAD_FILMS_ERROR:
-
-      return extend(state, {
-        loadFilmsError: action.payload,
       });
 
     case ActionType.SET_LOAD_PROMO_ERROR:

@@ -1,7 +1,8 @@
 import Main from "./main.jsx";
 import {connect} from "react-redux";
 
-import {getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
+import {getGenres, getFilmsByGenre} from "../../reducer/films/selectors.js";
+import {getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
 import {getActiveGenre} from "../../reducer/app-state/selectors.js";
 import {ActionCreator} from '../../reducer/app-state/app-state.js';
 

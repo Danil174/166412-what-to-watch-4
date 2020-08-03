@@ -2,7 +2,8 @@ import MoviePage from "./movie-page.jsx";
 import {connect} from "react-redux";
 
 import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
-import {getFilms, getComments, getFilmByID, getLoadingStatus} from "../../reducer/data/selectors.js";
+import {getComments} from "../../reducer/data/selectors.js";
+import {getFilms, getFilmByID, getLoadingStatus} from "../../reducer/films/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation, ActionCreator} from '../../reducer/data/data.js';
 

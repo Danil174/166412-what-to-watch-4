@@ -1,6 +1,6 @@
 import React, {createRef, PureComponent} from "react";
 import {connect} from "react-redux";
-import {getFilmByID, getLoadingStatus} from "../../reducer/data/selectors.js";
+import {getFilmByID} from "../../reducer/films/selectors.js";
 import PropTypes from "prop-types";
 
 const withPlayer = (Component) => {
@@ -112,7 +112,6 @@ const withPlayer = (Component) => {
   const mapStateToProps = (state, props) => {
     return ({
       film: getFilmByID(props.match.params.id, state),
-      loading: getLoadingStatus(state),
     });
   };
 

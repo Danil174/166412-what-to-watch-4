@@ -51,10 +51,6 @@ export const getFilmByID = createSelector(
     (id, state) => {
       const index = state[NameSpace.DATA].films.findIndex((film) => film.id === +id);
 
-      if (index === -1) {
-        return index;
-      }
-
       return state[NameSpace.DATA].films[index];
     },
     (film) => film

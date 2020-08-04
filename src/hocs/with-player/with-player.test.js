@@ -23,6 +23,10 @@ const testFilm = {
   title: `Gangs of new york`,
 };
 
+const match = {
+  params: {id: `1`}
+};
+
 const MockComponent = (props) => {
   const {children} = props;
   return (
@@ -45,6 +49,8 @@ it(`withPlayer is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
       film={testFilm}
+      films={[testFilm]}
+      match={match}
     />
   ), {
     createNodeMock(element) {

@@ -91,11 +91,13 @@ describe(`MainTest`, () => {
           <Provider store={store}>
             <Router history={history}>
               <Main
-                filmsList={testFilmsList}
+                films={testFilmsList}
                 promoFilm={promoFilm}
                 onGenreItemClick={() => {}}
                 genres={genres}
                 activeGenre={`Comedies`}
+                error={null}
+                loadPromoError={null}
               />
             </Router>
           </Provider>, {

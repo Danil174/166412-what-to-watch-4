@@ -87,7 +87,6 @@ const withPlayer = (Component) => {
           duration={this.state.duration}
           progress={this.state.progress}
           isPlaying={this.state.isPlaying}
-          film
         >
           <video
             className="player__video"

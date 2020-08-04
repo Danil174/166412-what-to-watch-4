@@ -14,21 +14,14 @@ import Main from "../main/main.connect.js";
 import MoviePage from "../movie-page/movie-page.connect.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import NotFound from "../not-found/not-found.jsx";
-import SignIn from "../sign-in/sign-in.jsx";
+import SignIn from "../sign-in/sign-in.connect.js";
 import UserList from "../user-list/user-list.jsx";
-import AddReview from "../add-review/add-review.jsx";
+import AddReview from "../add-review/add-review.connect.js";
 import PlayerPage from "../player-page/player-page.connect.js";
 
 import withPlayer from "../../hocs/with-player/with-player.js";
 
 class App extends PureComponent {
-
-  componentDidMount() {
-    this.props.loadFilms();
-    this.props.loadPromo();
-    this.props.checkAuthStatus();
-  }
-
   render() {
     const PlayerPageWrapped = withPlayer(PlayerPage);
     if (this.props.loading) {
@@ -44,15 +37,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path={`${AppRoute.MOVIE_PAGE}/:id?`} component={MoviePage} />
           <Route exact path={`${AppRoute.PLAYER_PAGE}/:id?`} component={PlayerPageWrapped} />
-          <PrivateRoute
-            exact
-            path={`${AppRoute.REVIEW}/:id?`}
-            render={() => {
-              return (
-                <AddReview />
-              );
-            }}
-          />
+          <PrivateRoute exact path={`${AppRoute.REVIEW}/:id?`} render={(props) => {
+            return <AddReview {...props} />;
+          }}/>
           <PrivateRoute
             exact
             path={AppRoute.MY_LIST}

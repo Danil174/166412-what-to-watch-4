@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
-import {getLoadingStatus} from "../../reducer/films/selectors.js";
+import {getLoadingStatus, getFilms} from "../../reducer/films/selectors.js";
 import PropTypes from "prop-types";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
@@ -35,7 +35,9 @@ class App extends PureComponent {
             <Main />
           </Route>
           <Route exact path={`${AppRoute.MOVIE_PAGE}/:id?`} component={MoviePage} />
-          <Route exact path={`${AppRoute.PLAYER_PAGE}/:id?`} component={PlayerPageWrapped} />
+          <Route exact path={`${AppRoute.PLAYER_PAGE}/:id?`} render={(props) => {
+            return <PlayerPageWrapped films={this.props.films} {...props} />;
+          }}/>
           <PrivateRoute exact path={`${AppRoute.REVIEW}/:id?`} render={(props) => {
             return <AddReviewWrapped {...props} />;
           }}/>
@@ -69,6 +71,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   loading: getLoadingStatus(state),
+  films: getFilms(state),
 });
 export {App};
 export default connect(mapStateToProps)(App);

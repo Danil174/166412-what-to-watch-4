@@ -6,7 +6,7 @@ const initialState = {
   films: [],
   genres: [],
   loading: false,
-  error: null,
+  loadingFilmError: null,
 };
 
 const ActionType = {
@@ -14,7 +14,7 @@ const ActionType = {
   GET_GENRES: `GET_GENRES`,
   START_LOADING: `START_LOADING`,
   END_LOADING: `END_LOADING`,
-  SET_LOAD_FILMS_ERROR: `SET__ERROR`,
+  SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
 };
 
 const ActionCreator = {
@@ -97,10 +97,10 @@ const reducer = (state = initialState, action) => {
         loading: false
       });
 
-    case ActionType.SET_ERROR:
+    case ActionType.SET_LOAD_FILMS_ERROR:
 
       return extend(state, {
-        loadFilmsError: action.payload,
+        loadingFilmError: action.payload,
       });
   }
 

@@ -2,7 +2,7 @@
 
 exports[`UserBlock render UserBlock 1`] = `
 <a
-  href="/favorites"
+  href="/mylist"
   onClick={[Function]}
 >
   <div

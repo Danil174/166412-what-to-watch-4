@@ -16,7 +16,7 @@ MockComponent.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired,
+  ])
 };
 
 const MockComponentWrapped = withReview(MockComponent);

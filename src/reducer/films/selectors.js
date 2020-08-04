@@ -17,7 +17,7 @@ export const getLoadingStatus = (state) => {
 };
 
 export const getFilmsError = (state) => {
-  return state[NameSpace.FILMS].error;
+  return state[NameSpace.FILMS].loadingFilmError;
 };
 
 export const getFilmsByGenre = createSelector(

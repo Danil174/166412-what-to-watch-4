@@ -135,8 +135,6 @@ describe(`MoviePageTest`, () => {
                 activeTab={MovieTabsMap.OVERVIEW}
                 films={testFilms}
                 film={fakeFilm}
-                componentMounted={()=>{}}
-                componentUnmounted={()=>{}}
                 authorizationStatus={AuthorizationStatus.NO_AUTH}
               />
             </Provider>

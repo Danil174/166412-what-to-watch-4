@@ -25,6 +25,7 @@ describe(`SignInTest`, () => {
           <Router history={history}>
             <Provider store={store}>
               <SignIn
+                authorizationStatus={AuthorizationStatus.NO_AUTH}
                 onFormSubmit={()=>{}}
                 loginError={false}
               />

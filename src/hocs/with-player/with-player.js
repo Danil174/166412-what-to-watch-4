@@ -1,6 +1,4 @@
 import React, {createRef, PureComponent} from "react";
-import {connect} from "react-redux";
-import {getFilmByID} from "../../reducer/films/selectors.js";
 import PropTypes from "prop-types";
 
 const withPlayer = (Component) => {
@@ -23,28 +21,26 @@ const withPlayer = (Component) => {
     componentDidMount() {
       const video = this._videoRef.current;
 
-      if (this.props.film) {
-        video.src = this.props.film.source;
-        video.poster = this.props.film.cover;
+      video.src = this.props.film.source;
+      video.poster = this.props.film.cover;
 
-        video.onloadedmetadata = () => {
-          this.setState({
-            duration: video.duration,
-          });
-        };
-
-        video.onplay = () => this.setState({
-          isPlaying: true,
+      video.onloadedmetadata = () => {
+        this.setState({
+          duration: video.duration,
         });
+      };
 
-        video.onpause = () => this.setState({
-          isPlaying: false,
-        });
+      video.onplay = () => this.setState({
+        isPlaying: true,
+      });
 
-        video.ontimeupdate = () => this.setState({
-          progress: Math.floor(video.currentTime),
-        });
-      }
+      video.onpause = () => this.setState({
+        isPlaying: false,
+      });
+
+      video.ontimeupdate = () => this.setState({
+        progress: Math.floor(video.currentTime),
+      });
     }
 
     componentDidUpdate() {
@@ -60,15 +56,13 @@ const withPlayer = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
 
-      if (this.props.film) {
-        video.src = ``;
-        video.poster = ``;
+      video.src = ``;
+      video.poster = ``;
 
-        video.onloadedmetadata = null;
-        video.onplay = null;
-        video.onpause = null;
-        video.ontimeupdate = null;
-      }
+      video.onloadedmetadata = null;
+      video.onplay = null;
+      video.onpause = null;
+      video.ontimeupdate = null;
     }
 
     fullScreenHandler() {
@@ -109,13 +103,7 @@ const withPlayer = (Component) => {
     }),
   };
 
-  const mapStateToProps = (state, props) => {
-    return ({
-      film: getFilmByID(props.match.params.id, state),
-    });
-  };
-
-  return connect(mapStateToProps)(WithPlayer);
+  return WithPlayer;
 };
 
 export default withPlayer;

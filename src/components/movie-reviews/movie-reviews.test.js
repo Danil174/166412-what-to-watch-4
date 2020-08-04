@@ -26,6 +26,8 @@ describe(`MovieReviewsTest`, () => {
     const tree = renderer
       .create(
           <MovieReviews
+            componentMounted={()=>{}}
+            componentUnmounted={()=>{}}
             comments={fakeComments}
           />
       ).toJSON();

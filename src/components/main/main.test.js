@@ -91,7 +91,7 @@ describe(`MainTest`, () => {
           <Provider store={store}>
             <Router history={history}>
               <Main
-                filmsList = {testFilmsList}
+                filmsList={testFilmsList}
                 promoFilm={promoFilm}
                 onGenreItemClick={() => {}}
                 genres={genres}

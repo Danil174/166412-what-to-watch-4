@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationStatus} from "../../const.js";
 
 import Preload from "../preload/preload.jsx";
@@ -187,5 +187,4 @@ MoviePage.propTypes = {
   }),
 };
 
-export {MoviePage};
 export default MoviePage;

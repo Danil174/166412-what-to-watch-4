@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {Months} from "../../const.js";
 
@@ -23,24 +23,47 @@ const renderComment = (comment) => {
   );
 };
 
-const MovieReviews = (props) => {
-  let {comments} = props;
-  const firstPart = comments.slice();
-  const secondPart = firstPart.splice(0, Math.round(comments.length / 2));
+class MovieReviews extends PureComponent {
+  componentDidMount() {
+    if (this.props.id) {
+      const {componentMounted, id} = this.props;
+      componentMounted(id);
+    }
+  }
 
-  return (
-    <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
-        {secondPart.map((it) => renderComment(it))}
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id || prevProps.id === undefined) {
+      const {componentMounted, id} = this.props;
+      componentMounted(id);
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.componentUnmounted();
+  }
+
+  render() {
+    let {comments} = this.props;
+    const firstPart = comments.slice();
+    const secondPart = firstPart.splice(0, Math.round(comments.length / 2));
+
+    return (
+      <div className="movie-card__reviews movie-card__row">
+        <div className="movie-card__reviews-col">
+          {secondPart.map((it) => renderComment(it))}
+        </div>
+        <div className="movie-card__reviews-col">
+          {firstPart.map((it) => renderComment(it))}
+        </div>
       </div>
-      <div className="movie-card__reviews-col">
-        {firstPart.map((it) => renderComment(it))}
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 MovieReviews.propTypes = {
+  id: PropTypes.number,
+  componentMounted: PropTypes.func.isRequired,
+  componentUnmounted: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentID: PropTypes.number,
     date: PropTypes.date,
@@ -52,3 +75,4 @@ MovieReviews.propTypes = {
 };
 
 export default MovieReviews;
+

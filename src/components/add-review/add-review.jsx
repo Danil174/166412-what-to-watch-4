@@ -1,10 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import Header from "../header/header.jsx";
-import {AppRoute} from "../../const.js";
-import Preload from "../preload/preload.jsx";
+import {AppRoute, LoadErrorsTexts, REVIEW_OPTIONS} from "../../const.js";
 
-const renderRatingControls = (pending) => {
+import Header from "../header/header.jsx";
+import Preload from "../preload/preload.jsx";
+import ErrorMessage from "../error-message/error-message.jsx";
+
+const renderRatingControls = (isDisabled, rating, changeRating) => {
   const ratingStarts = [];
   for (let i = 1; i <= 5; i++) {
     const input = (
@@ -15,8 +18,11 @@ const renderRatingControls = (pending) => {
           type="radio"
           name="rating"
           value={i}
-          defaultChecked={i === 3}
-          disabled={pending}
+          defaultChecked={i === rating}
+          disabled={isDisabled}
+          onChange={(evt)=>{
+            changeRating(Number(evt.target.value));
+          }}
         />
         <label className="rating__label" htmlFor={`star-${i}`}>{`Rating ${i}`}</label>
       </React.Fragment>
@@ -27,8 +33,19 @@ const renderRatingControls = (pending) => {
 };
 
 const AddReview = (props) => {
-  console.log(props);
-  const {film, pending, error, onSubmit} = props;
+  const {
+    film,
+    pending,
+    error,
+    rating,
+    comment,
+    onFormSubmit,
+    changeRating,
+    changeComment,
+    blocked,
+    onBtnClick,
+    onOkBtnClick,
+  } = props;
 
   if (!film) {
     return <Preload />;
@@ -40,12 +57,6 @@ const AddReview = (props) => {
     poster,
     cover,
   } = film;
-
-  let formClasses = `add-review__form`;
-
-  if (pending) {
-    formClasses += ` add-review__form--disabled`;
-  }
 
   return (
     <section className="movie-card movie-card--full">
@@ -82,37 +93,67 @@ const AddReview = (props) => {
       <div className="add-review">
         <form
           action="#"
-          className={formClasses}
+          className="add-review__form"
           onSubmit={(evt)=> {
             evt.preventDefault();
-            const data = new FormData(evt.target);
-            console.log(data);
-            // onSubmit(id, data);
+            if (!blocked) {
+              onFormSubmit(id, {
+                rating,
+                comment,
+              });
+            }
           }}
         >
           <div className="rating">
             <div className="rating__stars">
-              {renderRatingControls(pending)}
+              {renderRatingControls(pending || blocked, props.rating, changeRating)}
             </div>
           </div>
-
+          {
+            blocked &&
+            <p className="error__review">
+              Длина комментария не менее {REVIEW_OPTIONS.MIN_LENGTH} знаков и не более {REVIEW_OPTIONS.MAX_LENGTH}. <br />У вас: {comment.length} знаков.
+              <button
+                className="add-review__btn"
+                type="button"
+                onClick= {(evt) => {
+                  evt.preventDefault();
+                  onOkBtnClick();
+                }}
+              >
+                OK
+              </button>
+            </p>
+          }
+          {
+            error &&
+            <ErrorMessage
+              errorStatus={error}
+              errorMessage={LoadErrorsTexts.SEND_REVIEW_FAIL}
+            />
+          }
           <div className="add-review__text">
             <textarea
               className="add-review__textarea"
               name="review-text"
               id="review-text"
               placeholder="Review text"
-
-              minLength={50}
-              maxLength={400}
-              disabled={pending}
+              value={comment}
+              onChange={(evt)=> {
+                evt.preventDefault();
+                changeComment(evt.target.value);
+              }}
+              disabled={pending || blocked}
             >
             </textarea>
             <div className="add-review__submit">
               <button
                 className="add-review__btn"
                 type="submit"
-                disabled={pending}
+                disabled={pending || blocked}
+                onClick= {() => {
+                  onBtnClick();
+                }}
               >
                 {pending ? `Sending...` : `Post`}
               </button>
@@ -124,6 +165,22 @@ const AddReview = (props) => {
 
     </section>
   );
+};
+
+AddReview.propTypes = {
+  film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+  }),
+  pending: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  rating: PropTypes.number.isRequired,
+  comment: PropTypes.string.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
+  changeRating: PropTypes.func.isRequired,
+  changeComment: PropTypes.func.isRequired,
 };
 
 export default AddReview;

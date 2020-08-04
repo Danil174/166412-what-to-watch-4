@@ -68,3 +68,15 @@ section.loading .dot:first-child {
     transform: translate(0, 0);
   }
 }
+
+.error__review {
+  color: #ff0000;
+  font-size: 18px;
+}
+
+.error__review .add-review__btn {
+  display: inline-block;
+  margin-left: 10px;
+  border: 1px solid;
+  padding: 0px 8px;
+}

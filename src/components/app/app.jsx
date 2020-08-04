@@ -19,11 +19,13 @@ import UserList from "../user-list/user-list.jsx";
 import AddReview from "../add-review/add-review.connect.js";
 import PlayerPage from "../player-page/player-page.connect.js";
 
+import withReview from "../../hocs/with-review/with-review.js";
 import withPlayer from "../../hocs/with-player/with-player.js";
 
 class App extends PureComponent {
   render() {
     const PlayerPageWrapped = withPlayer(PlayerPage);
+    const AddReviewWrapped = withReview(AddReview);
     if (this.props.loading) {
       return <Preload />;
     }
@@ -38,7 +40,7 @@ class App extends PureComponent {
           <Route exact path={`${AppRoute.MOVIE_PAGE}/:id?`} component={MoviePage} />
           <Route exact path={`${AppRoute.PLAYER_PAGE}/:id?`} component={PlayerPageWrapped} />
           <PrivateRoute exact path={`${AppRoute.REVIEW}/:id?`} render={(props) => {
-            return <AddReview {...props} />;
+            return <AddReviewWrapped {...props} />;
           }}/>
           <PrivateRoute
             exact

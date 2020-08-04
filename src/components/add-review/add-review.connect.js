@@ -15,7 +15,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(id, data) {
+  onFormSubmit(id, data) {
     dispatch(ReviewOperations.postComment(id, data));
   },
 });

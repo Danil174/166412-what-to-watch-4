@@ -1,6 +1,9 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {AuthorizationStatus, AppRoute} from "../../const.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {getLoginError} from '../../reducer/user/selectors.js';
 
@@ -42,6 +45,10 @@ class SignIn extends PureComponent {
     const {loginError} = this.props;
     const errorClass = loginError ? `sign-in__field--error` : ``;
     const fieldClasses = `sign-in__field ${errorClass}`;
+
+    if (this.props.authorizationStatus === AuthorizationStatus.AUTH) {
+      return <Redirect to={AppRoute.ROOT} />;
+    }
 
     return (
       <div className="user-page">
@@ -94,12 +101,14 @@ class SignIn extends PureComponent {
 
 
 SignIn.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
   loginError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  loginError: getLoginError(state)
+  loginError: getLoginError(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

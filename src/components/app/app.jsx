@@ -67,6 +67,7 @@ class App extends PureComponent {
 
 App.propTypes = {
   loading: PropTypes.bool.isRequired,
+  films: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({

@@ -168,6 +168,9 @@ const AddReview = (props) => {
 };
 
 AddReview.propTypes = {
+  blocked: PropTypes.bool.isRequired,
+  onBtnClick: PropTypes.func.isRequired,
+  onOkBtnClick: PropTypes.func.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

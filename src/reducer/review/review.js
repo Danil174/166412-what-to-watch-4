@@ -36,8 +36,8 @@ const Operation = {
   postComment: (id, data) => (dispatch, getState, api) => {
     dispatch(ActionCreator.startPending());
     return api.post(`/comments/${id}`, {
-      rating: data.get(`rating`),
-      comment: data.get(`review-text`)
+      rating: data.rating,
+      comment: data.comment,
     })
     .then(() => {
       dispatch(ActionCreator.endPending());

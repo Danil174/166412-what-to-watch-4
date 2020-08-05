@@ -19,9 +19,11 @@ const withPlayer = (Component) => {
       this.playPauseSetter = this.playPauseSetter.bind(this);
     }
 
-    componentDidMount() {
+    _initialize() {
       const currentFilm = this.props.films.find((it) => it.id === Number(this.props.match.params.id));
-
+      if (!currentFilm) {
+        return;
+      }
       const video = this._videoRef.current;
       video.src = currentFilm.source;
       video.poster = currentFilm.cover;
@@ -45,8 +47,17 @@ const withPlayer = (Component) => {
       });
     }
 
+    componentDidMount() {
+      this._initialize();
+    }
+
     componentDidUpdate() {
       const video = this._videoRef.current;
+      const currentFilm = this.props.films.find((it) => it.id === Number(this.props.match.params.id));
+
+      if (this._videoRef.current.src !== currentFilm.source) {
+        this._initialize();
+      }
 
       if (this.state.isPlaying) {
         video.play();
@@ -58,6 +69,9 @@ const withPlayer = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
 
+      if  (!video) {
+        return;
+      }
       video.src = ``;
       video.poster = ``;
 

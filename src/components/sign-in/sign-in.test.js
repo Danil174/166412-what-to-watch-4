@@ -1,5 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../const.js";
@@ -20,12 +22,15 @@ describe(`SignInTest`, () => {
     });
     const tree = renderer
       .create(
-          <Provider store={store}>
-            <SignIn
-              onFormSubmit={()=>{}}
-              loginError={false}
-            />
-          </Provider>
+          <Router history={history}>
+            <Provider store={store}>
+              <SignIn
+                authorizationStatus={AuthorizationStatus.NO_AUTH}
+                onFormSubmit={()=>{}}
+                loginError={false}
+              />
+            </Provider>
+          </Router>
       ).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -1,78 +1,64 @@
 import React, {PureComponent} from "react";
-import {Switch, Route, Router, Redirect} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from '../../reducer/app-state/app-state.js';
-import {getGenres, getFilmsByGenre, getPromoFilm, getloadPromoError} from "../../reducer/data/selectors.js";
-import {getActiveGenre} from "../../reducer/app-state/selectors.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getLoadingStatus, getFilms} from "../../reducer/films/selectors.js";
 import PropTypes from "prop-types";
 import history from "../../history.js";
-import {AuthorizationStatus, AppRoute} from "../../const.js";
+import {AppRoute} from "../../const.js";
 
+import Preload from "../preload/preload.jsx";
+import Main from "../main/main.connect.js";
+import MoviePage from "../movie-page/movie-page.connect.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import NotFound from "../not-found/not-found.jsx";
-import Main from "../main/main.jsx";
-import SignIn from "../sign-in/sign-in.jsx";
+import SignIn from "../sign-in/sign-in.connect.js";
 import UserList from "../user-list/user-list.jsx";
-import FilmRout from "../film-route/film-route.jsx";
+import AddReview from "../add-review/add-review.connect.js";
+import PlayerPage from "../player-page/player-page.connect.js";
+
+import withReview from "../../hocs/with-review/with-review.js";
+import withPlayer from "../../hocs/with-player/with-player.js";
 
 class App extends PureComponent {
-
-  _renderApp() {
-    const {films, promoFilm, onGenreItemClick, genres, activeGenre, loadPromoError} = this.props;
-
-    return (
-      <Main
-        promoFilm={promoFilm}
-        loadPromoError={loadPromoError}
-        filmsList={films}
-        genres={genres}
-        activeGenre={activeGenre}
-        onGenreItemClick={onGenreItemClick}
-      />
-    );
-  }
-
   render() {
-    const {authorizationStatus} = this.props;
-    const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
+    const PlayerPageWrapped = withPlayer(PlayerPage);
+    const AddReviewWrapped = withReview(AddReview);
+    if (this.props.loading) {
+      return <Preload />;
+    }
     return (
       <Router
         history={history}
       >
         <Switch>
           <Route exact path={AppRoute.ROOT}>
-            {this._renderApp()}
+            <Main />
           </Route>
-          <Route
-            exact path={AppRoute.LOGIN}
-            render = {() => isAuth
-              ? <Redirect to={AppRoute.ROOT} />
-              : <SignIn />
-            }
-          />
-          <FilmRout
-            exact
-            path={`${AppRoute.MOVIE_PAGE}/:id?`}
-          />
-          <FilmRout
-            exact
-            path={`${AppRoute.PLAYER_PAGE}/:id?`}
-          />
+          <Route exact path={`${AppRoute.MOVIE_PAGE}/:id?`} component={MoviePage} />
+          <Route exact path={`${AppRoute.PLAYER_PAGE}/:id?`} render={(props) => {
+            return <PlayerPageWrapped films={this.props.films} {...props} />;
+          }}/>
+          <PrivateRoute exact path={`${AppRoute.REVIEW}/:id?`} render={(props) => {
+            return <AddReviewWrapped {...props} />;
+          }}/>
           <PrivateRoute
             exact
-            path={AppRoute.FAVORITES}
+            path={AppRoute.MY_LIST}
             render={() => {
               return (
                 <UserList />
               );
             }}
           />
-          <Route
-            render={() => (
-              <NotFound />
-            )}
-          />
+          <Route exact path={AppRoute.LOGIN}>
+            <SignIn />
+          </Route>
+          <Route exact path={AppRoute.NOT_FOUND}>
+            <NotFound />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
         </Switch>
       </Router>
     );
@@ -80,35 +66,13 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onGenreItemClick: PropTypes.func.isRequired,
-  films: PropTypes.array.isRequired,
-  loadPromoError: PropTypes.number,
-  promoFilm: PropTypes.shape({
-    poster: PropTypes.string,
-    cover: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    releaseDate: PropTypes.number,
-  }).isRequired
+  loading: PropTypes.bool.isRequired,
+  films: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
-  activeGenre: getActiveGenre(state),
-  films: getFilmsByGenre(state),
-  genres: getGenres(state),
-  promoFilm: getPromoFilm(state),
-  loadPromoError: getloadPromoError(state),
-  authorizationStatus: getAuthorizationStatus(state),
+  loading: getLoadingStatus(state),
+  films: getFilms(state),
 });
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreItemClick(genre) {
-    dispatch(ActionCreator.changeFilter(genre));
-  }
-});
-
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

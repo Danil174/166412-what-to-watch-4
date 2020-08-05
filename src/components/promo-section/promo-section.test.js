@@ -20,6 +20,7 @@ describe(`PromoSectionTest`, () => {
     const store = mockStore({
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userData: {avatarUrl: `test.jpg`},
       },
     });
     const tree = renderer

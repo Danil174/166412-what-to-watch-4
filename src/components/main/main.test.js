@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../const.js";
@@ -87,13 +89,17 @@ describe(`MainTest`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <Main
-              filmsList = {testFilmsList}
-              promoFilm={promoFilm}
-              onGenreItemClick={() => {}}
-              genres={genres}
-              activeGenre={`Comedies`}
-            />
+            <Router history={history}>
+              <Main
+                films={testFilmsList}
+                promoFilm={promoFilm}
+                onGenreItemClick={() => {}}
+                genres={genres}
+                activeGenre={`Comedies`}
+                error={null}
+                loadPromoError={null}
+              />
+            </Router>
           </Provider>, {
             createNodeMock: () => {
               return {};

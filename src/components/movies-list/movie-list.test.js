@@ -73,7 +73,7 @@ describe(`MoviesListTest`, () => {
       .create(
           <Provider store={store}>
             <MoviesList
-              filmsList = {testFilmsList}
+              filmsList={testFilmsList}
             />
           </Provider>, {
             createNodeMock: () => {

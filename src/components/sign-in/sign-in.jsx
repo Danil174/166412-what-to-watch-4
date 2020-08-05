@@ -1,8 +1,10 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
-import {getLoginError} from '../../reducer/user/selectors.js';
+import {Redirect} from "react-router-dom";
+import {AuthorizationStatus, AppRoute} from "../../const.js";
+
+import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
 
 const ErrorMessage = () => {
   return (
@@ -40,19 +42,13 @@ class SignIn extends PureComponent {
     const errorClass = loginError ? `sign-in__field--error` : ``;
     const fieldClasses = `sign-in__field ${errorClass}`;
 
+    if (this.props.authorizationStatus === AuthorizationStatus.AUTH) {
+      return <Redirect to={AppRoute.ROOT} />;
+    }
+
     return (
       <div className="user-page">
-        <header className="page-header user-page__head">
-          <div className="logo">
-            <a href="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <h1 className="page-title user-page__title">Sign in</h1>
-        </header>
+        <Header userPage={true} />
 
         <div className="sign-in user-page__content">
           <form
@@ -93,39 +89,16 @@ class SignIn extends PureComponent {
           </form>
         </div>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="/" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     );
   }
 }
 
-
 SignIn.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
   loginError: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  loginError: getLoginError(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onFormSubmit(authData) {
-    dispatch(UserOperation.login(authData));
-  }
-});
-
-export {SignIn};
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default SignIn;

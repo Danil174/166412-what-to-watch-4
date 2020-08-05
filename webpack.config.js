@@ -20,6 +20,10 @@ module.exports = {
         target: `http://localhost:1337/`,
         pathRewrite: {'^/player/*': ``},
       },
+      '/add-review': {
+        target: `http://localhost:1337/`,
+        pathRewrite: {'^/add-review/*': ``},
+      },
     },
   },
   module: {

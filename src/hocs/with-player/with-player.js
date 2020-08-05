@@ -9,6 +9,7 @@ const withPlayer = (Component) => {
       this._videoRef = createRef();
 
       this.state = {
+        film: null,
         isPlaying: true,
         progress: 0,
         duration: 0,
@@ -19,13 +20,11 @@ const withPlayer = (Component) => {
     }
 
     componentDidMount() {
-      const {film} = this.props;
-      const {source, cover} = film;
+      const currentFilm = this.props.films.find((it) => it.id === Number(this.props.match.params.id));
 
       const video = this._videoRef.current;
-
-      video.src = source;
-      video.poster = cover;
+      video.src = currentFilm.source;
+      video.poster = currentFilm.cover;
 
       video.onloadedmetadata = () => {
         this.setState({
@@ -100,12 +99,17 @@ const withPlayer = (Component) => {
   }
 
   WithPlayer.propTypes = {
-    film: PropTypes.shape({
-      source: PropTypes.string.isRequired,
-      cover: PropTypes.string.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }),
     }).isRequired,
+    films: PropTypes.array,
+    film: PropTypes.shape({
+      source: PropTypes.string,
+      cover: PropTypes.string,
+    }),
   };
-
 
   return WithPlayer;
 };

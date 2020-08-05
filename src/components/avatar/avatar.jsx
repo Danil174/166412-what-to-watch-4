@@ -8,7 +8,7 @@ const Avatar = (props) => {
   const src = `https://htmlacademy-react-3.appspot.com${url}`;
 
   return (
-    <Link to={AppRoute.FAVORITES}>
+    <Link to={AppRoute.MY_LIST}>
       <div className="user-block__avatar">
         <img src={src} alt="User avatar" width="63" height="63" />
       </div>

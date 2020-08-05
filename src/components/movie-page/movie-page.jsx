@@ -1,34 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
-import history from "../../history.js";
-import {connect} from "react-redux";
-import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
-import {getFilms} from "../../reducer/data/selectors.js";
-import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH} from "../../const.js";
+import {Link} from "react-router-dom";
+import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationStatus} from "../../const.js";
 
-import UserBlock from "../user-block/user-block.jsx";
+import Preload from "../preload/preload.jsx";
+import Header from "../header/header.jsx";
 import AddToList from "../add-to-list/add-to-list.jsx";
 import MovieNav from "../movie-nav/movie-nav.jsx";
 import MovieOverview from "../movie-overview/movie-overview.jsx";
 import MovieDetails from "../movie-details/movie-details.jsx";
-import MovieReviews from "../movie-reviews/movie-reviews.jsx";
+import MovieReviews from "../movie-reviews/movie-reviews.connect.js";
 import MoviesList from "../movies-list/movies-list.jsx";
+import Footer from "../footer/footer.jsx";
 
-const getSelectedTab = (tab, film) => {
+const getSelectedTab = (tab, film, comments) => {
   switch (tab) {
     case MovieTabsMap.OVERVIEW:
       return <MovieOverview film={film}/>;
     case (MovieTabsMap.DETAILS):
       return <MovieDetails film={film} />;
     case (MovieTabsMap.REVIEWS):
-      return <MovieReviews />;
+      return <MovieReviews comments={comments} id={film.id} />;
     default:
       return <>error</>;
   }
 };
 
 const MoviePage = (props) => {
-  const {film, activeTab, films} = props;
+  const {currentFilm, activeTab, films, authorizationStatus, comments} = props;
+
+  if (!currentFilm) {
+    return <Preload />;
+  }
+
   const {
     poster,
     cover,
@@ -38,7 +42,9 @@ const MoviePage = (props) => {
     isFavorite,
     bgColor,
     id,
-  } = film;
+  } = currentFilm;
+
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   const similarFilms = films.filter((it) => it.genre === genre).slice(0, SIMILAR_LIST_LENGTH);
 
@@ -62,19 +68,7 @@ const MoviePage = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a href="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <UserBlock />
-          </div>
-        </header>
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
@@ -85,23 +79,31 @@ const MoviePage = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button
+
+              <Link
+                to={`${AppRoute.PLAYER_PAGE}/${id}`}
                 className="btn btn--play movie-card__button"
                 type="button"
-                onClick={() => {
-                  history.push(`${AppRoute.PLAYER_PAGE}/${id}`);
-                }}
               >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
+
               <AddToList
                 id={id}
                 isFavorite={isFavorite}
               />
-              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+              {
+                isAuth &&
+                <Link
+                  to={`${AppRoute.REVIEW}/${id}`}
+                  className="btn movie-card__button"
+                >
+                  Add review
+                </Link>
+              }
             </div>
           </div>
         </div>
@@ -122,7 +124,7 @@ const MoviePage = (props) => {
 
             <MovieNav tabs={MovieTabs} />
 
-            {getSelectedTab(activeTab, film)}
+            {getSelectedTab(activeTab, currentFilm, comments)}
           </div>
         </div>
       </div>
@@ -137,28 +139,18 @@ const MoviePage = (props) => {
         />
       </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="/" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   </>
   );
 };
 
 MoviePage.propTypes = {
+  comments: PropTypes.array.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   activeTab: PropTypes.string.isRequired,
   films: PropTypes.array.isRequired,
-  film: PropTypes.shape({
+  currentFilm: PropTypes.shape({
     id: PropTypes.number.isRequired,
     bgColor: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
@@ -168,13 +160,7 @@ MoviePage.propTypes = {
     releaseDate: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  })
+  }),
 };
 
-const mapStateToProps = (state) => ({
-  activeTab: getActiveMovieTab(state),
-  films: getFilms(state),
-});
-
-export {MoviePage};
-export default connect(mapStateToProps)(MoviePage);
+export default MoviePage;

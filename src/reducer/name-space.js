@@ -4,6 +4,7 @@ const NameSpace = {
   REVIEW: `REVIEW`,
   USER: `USER`,
   APP_STATE: `APP_STATE`,
+  MY_LIST: `MY_LIST`,
 };
 
 export default NameSpace;

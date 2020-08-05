@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
-import UserList from "./user-list.jsx";
+import UserList from "./my-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {AuthorizationStatus} from "../../const.js";

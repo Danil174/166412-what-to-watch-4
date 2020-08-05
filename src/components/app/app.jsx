@@ -12,7 +12,7 @@ import MoviePage from "../movie-page/movie-page.connect.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import NotFound from "../not-found/not-found.jsx";
 import SignIn from "../sign-in/sign-in.connect.js";
-import UserList from "../user-list/user-list.jsx";
+import MyList from "../my-list/my-list.jsx";
 import AddReview from "../add-review/add-review.connect.js";
 import PlayerPage from "../player-page/player-page.connect.js";
 
@@ -46,7 +46,7 @@ class App extends PureComponent {
             path={AppRoute.MY_LIST}
             render={() => {
               return (
-                <UserList />
+                <MyList />
               );
             }}
           />

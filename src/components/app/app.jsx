@@ -1,7 +1,5 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
-import {connect} from "react-redux";
-import {getLoadingStatus, getFilms} from "../../reducer/films/selectors.js";
 import PropTypes from "prop-types";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
@@ -70,9 +68,4 @@ App.propTypes = {
   films: PropTypes.array,
 };
 
-const mapStateToProps = (state) => ({
-  loading: getLoadingStatus(state),
-  films: getFilms(state),
-});
-export {App};
-export default connect(mapStateToProps)(App);
+export default App;

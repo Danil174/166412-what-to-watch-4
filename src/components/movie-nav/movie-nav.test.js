@@ -1,8 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MovieNav from "./movie-nav.jsx";
-
-import {Provider} from "react-redux";
 import {MovieTabsMap, MovieTabs} from "../../const.js";
 
 

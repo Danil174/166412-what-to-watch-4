@@ -12,7 +12,7 @@ import MoviePage from "../movie-page/movie-page.connect.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import NotFound from "../not-found/not-found.jsx";
 import SignIn from "../sign-in/sign-in.connect.js";
-import MyList from "../my-list/my-list.jsx";
+import MyList from "../my-list/my-list.connect.js";
 import AddReview from "../add-review/add-review.connect.js";
 import PlayerPage from "../player-page/player-page.connect.js";
 

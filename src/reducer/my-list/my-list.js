@@ -4,7 +4,7 @@ import {extend} from "../../utils/common.js";
 const initialState = {
   myFilms: [],
   loadStatus: false,
-  error: null,
+  myListError: null,
 };
 
 const ActionType = {
@@ -52,9 +52,9 @@ const Operation = {
         dispatch(ActionCreator.endLoadingMyList());
         dispatch(ActionCreator.loadMyList(configuredFilm));
       })
-      .catch((error) => {
+      .catch((myListError) => {
         dispatch(ActionCreator.endLoadingMyList(false));
-        dispatch(ActionCreator.setError(error.response.status));
+        dispatch(ActionCreator.setError(myListError.response.status));
       });
   },
 };
@@ -79,7 +79,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_LOAD_MY_LIST_ERROR:
 
       return extend(state, {
-        error: action.payload,
+        myListError: action.payload,
       });
   }
 

@@ -8,5 +8,5 @@ export const getLoadingStatus = (state) => {
 };
 
 export const getMyListError = (state) => {
-  return state[NameSpace.MY_LIST].error;
+  return state[NameSpace.MY_LIST].myListError;
 };

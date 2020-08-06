@@ -15,6 +15,7 @@ const ActionType = {
   START_LOADING: `START_LOADING`,
   END_LOADING: `END_LOADING`,
   SET_LOAD_FILMS_ERROR: `SET_LOAD_FILMS_ERROR`,
+  UPDATE_FILMS: `UPDATE_FILMS`,
 };
 
 const ActionCreator = {
@@ -48,6 +49,13 @@ const ActionCreator = {
     return {
       type: ActionType.SET_LOAD_FILMS_ERROR,
       payload: err,
+    };
+  },
+
+  updateFilms: (film) => {
+    return {
+      type: ActionType.UPDATE_FILMS,
+      payload: film,
     };
   },
 };
@@ -101,6 +109,15 @@ const reducer = (state = initialState, action) => {
 
       return extend(state, {
         loadingFilmError: action.payload,
+      });
+
+    case ActionType.UPDATE_FILMS:
+      const newFilm = action.payload;
+      const oldFilms = state.films;
+      const index = oldFilms.findIndex((film) => film.id === newFilm.id);
+      const newFilms = [].concat(oldFilms.slice(0, index), newFilm, oldFilms.slice(index + 1));
+      return extend(state, {
+        films: newFilms,
       });
   }
 

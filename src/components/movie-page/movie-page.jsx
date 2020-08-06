@@ -5,7 +5,7 @@ import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationSta
 
 import Preload from "../preload/preload.jsx";
 import Header from "../header/header.jsx";
-import AddToList from "../add-to-list/add-to-list.jsx";
+import AddToList from "../add-to-list/add-to-list.connect.js";
 import MovieNav from "../movie-nav/movie-nav.jsx";
 import MovieOverview from "../movie-overview/movie-overview.jsx";
 import MovieDetails from "../movie-details/movie-details.jsx";

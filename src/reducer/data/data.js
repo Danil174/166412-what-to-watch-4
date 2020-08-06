@@ -1,4 +1,5 @@
 import {configureFilm, configureComment} from '../../adapter/adapter.js';
+import {ActionCreator as FilmsActionCreator} from "../films/films.js";
 import {extend} from "../../utils/common.js";
 
 const initialState = {
@@ -56,13 +57,6 @@ const ActionCreator = {
     };
   },
 
-  updateFilms: (film) => {
-    return {
-      type: ActionType.UPDATE_FILMS,
-      payload: film,
-    };
-  },
-
   updatePromo: (film) => {
     return {
       type: ActionType.UPDATE_PROMO,
@@ -91,7 +85,7 @@ const Operation = {
   setFavorite: (filmId, favorite) => (dispatch, getState, api) => {
     return api.post(`/favorite/${filmId}/${favorite}`)
     .then((response) => {
-      dispatch(ActionCreator.updateFilms(configureFilm(response.data)));
+      dispatch(FilmsActionCreator.updateFilms(configureFilm(response.data)));
       dispatch(ActionCreator.updatePromo(configureFilm(response.data)));
     })
     .catch((error) => {
@@ -136,15 +130,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_LOAD_COMMENTS_ERROR:
       return extend(state, {
         loadCommentsError: action.payload
-      });
-
-    case ActionType.UPDATE_FILMS:
-      const newFilm = action.payload;
-      const oldFilms = state.films;
-      const index = oldFilms.findIndex((film) => film.id === newFilm.id);
-      const newFilms = [].concat(oldFilms.slice(0, index), newFilm, oldFilms.slice(index + 1));
-      return extend(state, {
-        films: newFilms,
       });
 
     case ActionType.UPDATE_PROMO:

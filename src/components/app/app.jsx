@@ -1,7 +1,5 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
-import {connect} from "react-redux";
-import {getLoadingStatus, getFilms} from "../../reducer/films/selectors.js";
 import PropTypes from "prop-types";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
@@ -9,10 +7,10 @@ import {AppRoute} from "../../const.js";
 import Preload from "../preload/preload.jsx";
 import Main from "../main/main.connect.js";
 import MoviePage from "../movie-page/movie-page.connect.js";
-import PrivateRoute from "../private-route/private-route.jsx";
+import PrivateRoute from "../private-route/private-route.connect.js";
 import NotFound from "../not-found/not-found.jsx";
 import SignIn from "../sign-in/sign-in.connect.js";
-import UserList from "../user-list/user-list.jsx";
+import MyList from "../my-list/my-list.connect.js";
 import AddReview from "../add-review/add-review.connect.js";
 import PlayerPage from "../player-page/player-page.connect.js";
 
@@ -46,7 +44,7 @@ class App extends PureComponent {
             path={AppRoute.MY_LIST}
             render={() => {
               return (
-                <UserList />
+                <MyList />
               );
             }}
           />
@@ -70,9 +68,4 @@ App.propTypes = {
   films: PropTypes.array,
 };
 
-const mapStateToProps = (state) => ({
-  loading: getLoadingStatus(state),
-  films: getFilms(state),
-});
-export {App};
-export default connect(mapStateToProps)(App);
+export default App;

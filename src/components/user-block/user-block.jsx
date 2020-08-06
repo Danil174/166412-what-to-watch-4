@@ -1,9 +1,7 @@
 import React from "react";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import {AuthorizationStatus, AppRoute} from "../../const.js";
-import {getAuthorizationStatus, getUserData} from "../../reducer/user/selectors.js";
 
 import Avatar from "../avatar/avatar.jsx";
 
@@ -30,10 +28,4 @@ UserBlock.propTypes = {
   }),
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  userData: getUserData(state),
-});
-
-export {UserBlock};
-export default connect(mapStateToProps)(UserBlock);
+export default UserBlock;

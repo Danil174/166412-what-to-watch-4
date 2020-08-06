@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import UserBlock from "../user-block/user-block.jsx";
+import UserBlock from "../user-block/user-block.connect.js";
 import Logo from "../logo/logo.jsx";
 
 const Header = (props) => {

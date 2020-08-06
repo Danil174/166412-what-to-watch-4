@@ -1,6 +1,4 @@
 import React from "react";
-import {connect} from "react-redux";
-import {getloadFilmsError} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 
 import PromoSection from "../promo-section/promo-section.jsx";
@@ -57,9 +55,4 @@ Main.propTypes = {
   }).isRequired
 };
 
-const mapStateToProps = (state) => ({
-  error: getloadFilmsError(state)
-});
-
-export {Main};
-export default connect(mapStateToProps)(Main);
+export default Main;

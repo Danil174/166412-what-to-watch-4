@@ -5,7 +5,7 @@ import history from "../../history.js";
 
 import ErrorMessage from "../error-message/error-message.jsx";
 
-import UserBlock from "../user-block/user-block.jsx";
+import UserBlock from "../user-block/user-block.connect.js";
 import AddToList from "../add-to-list/add-to-list.connect.js";
 
 const PromoSection = (props) => {

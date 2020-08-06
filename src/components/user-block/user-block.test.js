@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
 
-import {UserBlock} from "./user-block.jsx";
+import UserBlock from "./user-block.jsx";
 
 const userData = {avatarUrl: `test.jpg`};
 

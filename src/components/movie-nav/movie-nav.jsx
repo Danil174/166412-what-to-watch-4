@@ -1,7 +1,4 @@
 import React from "react";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/app-state/app-state.js";
-import {getActiveMovieTab} from "../../reducer/app-state/selectors.js";
 import {checkNavTagretClick} from "../../utils/common.js";
 import PropTypes from "prop-types";
 
@@ -46,15 +43,4 @@ MovieNav.propTypes = {
   activeTab: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeTab: getActiveMovieTab(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onTabItemClick(tab) {
-    dispatch(ActionCreator.changeMovieTab(tab));
-  }
-});
-
-export {MovieNav};
-export default connect(mapStateToProps, mapDispatchToProps)(MovieNav);
+export default MovieNav;

@@ -9,7 +9,7 @@ import {AppRoute} from "../../const.js";
 import Preload from "../preload/preload.jsx";
 import Main from "../main/main.connect.js";
 import MoviePage from "../movie-page/movie-page.connect.js";
-import PrivateRoute from "../private-route/private-route.jsx";
+import PrivateRoute from "../private-route/private-route.connect.js";
 import NotFound from "../not-found/not-found.jsx";
 import SignIn from "../sign-in/sign-in.connect.js";
 import MyList from "../my-list/my-list.connect.js";

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyListTest render MyList 1`] = `
+<section
+  className="loading"
+>
+  <div
+    className="page-content"
+  >
+    <h1
+      className="loading__title"
+    >
+      LOADING
+    </h1>
+    <div
+      className="preload-wrapp"
+    >
+      <div
+        className="dot"
+      />
+      <div
+        className="dot"
+      />
+      <div
+        className="dot"
+      />
+      <div
+        className="dot"
+      />
+    </div>
+  </div>
+</section>
+`;

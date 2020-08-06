@@ -34,7 +34,7 @@ const ActionCreator = {
     });
   },
 
-  setError: (err) => {
+  setMyListError: (err) => {
     return {
       type: ActionType.SET_LOAD_MY_LIST_ERROR,
       payload: err,
@@ -54,7 +54,7 @@ const Operation = {
       })
       .catch((myListError) => {
         dispatch(ActionCreator.endLoadingMyList(false));
-        dispatch(ActionCreator.setError(myListError.response.status));
+        dispatch(ActionCreator.setMyListError(myListError.response.status));
       });
   },
 };

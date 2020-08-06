@@ -37,6 +37,7 @@ class MyList extends PureComponent {
 }
 
 MyList.propTypes = {
+  fetchMyList: PropTypes.func.isRequired,
   loadStatus: PropTypes.bool.isRequired,
   myFilms: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,

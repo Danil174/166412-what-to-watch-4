@@ -69,9 +69,10 @@ const withPlayer = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
 
-      if  (!video) {
+      if (!video) {
         return;
       }
+
       video.src = ``;
       video.poster = ``;
 

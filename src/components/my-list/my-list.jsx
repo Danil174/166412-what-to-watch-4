@@ -20,7 +20,9 @@ class MyList extends PureComponent {
 
     return (
       <div className="user-page">
-        <Header userPage={true} />
+        <Header userPage={true}>
+          <h1 className="page-title user-page__title">My list</h1>
+        </Header>
 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

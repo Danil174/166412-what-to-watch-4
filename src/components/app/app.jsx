@@ -36,7 +36,7 @@ class App extends PureComponent {
           <Route exact path={`${AppRoute.PLAYER_PAGE}/:id?`} render={(props) => {
             return <PlayerPageWrapped films={this.props.films} {...props} />;
           }}/>
-          <PrivateRoute exact path={`${AppRoute.REVIEW}/:id?`} render={(props) => {
+          <PrivateRoute exact path={`${AppRoute.PLAYER_PAGE}/:id?${AppRoute.REVIEW}`} render={(props) => {
             return <AddReviewWrapped {...props} />;
           }}/>
           <PrivateRoute

@@ -98,7 +98,6 @@ const AddReview = (props) => {
           onSubmit={(evt)=> {
             evt.preventDefault();
             if (!blocked) {
-              console.log(`test2`);
               onFormSubmit(id, {
                 rating,
                 comment,

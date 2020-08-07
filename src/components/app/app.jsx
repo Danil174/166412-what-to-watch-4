@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, Router} from "react-router-dom";
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
 
@@ -21,7 +21,6 @@ class App extends PureComponent {
   render() {
     const PlayerPageWrapped = withPlayer(PlayerPage);
     const AddReviewWrapped = withReview(AddReview);
-    console.log(this.props.films);
     if (this.props.loading) {
       return <Preload />;
     }

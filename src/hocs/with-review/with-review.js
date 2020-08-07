@@ -14,8 +14,8 @@ const withReview = (Component) => {
 
       this.handleRatingChange = this.handleRatingChange.bind(this);
       this.handleCommentChange = this.handleCommentChange.bind(this);
-      this.checkStateBeforeReq = this.checkStateBeforeReq.bind(this);
-      this.unBlockForm = this.unBlockForm.bind(this);
+      this.handleFormRedyToReq = this.handleFormRedyToReq.bind(this);
+      this.handleFormUnblock = this.handleFormUnblock.bind(this);
     }
 
     handleRatingChange(value) {
@@ -30,7 +30,7 @@ const withReview = (Component) => {
       });
     }
 
-    checkStateBeforeReq() {
+    handleFormRedyToReq() {
       if (this.state.comment.length < REVIEW_OPTIONS.MIN_LENGTH || this.state.comment.length > REVIEW_OPTIONS.MAX_LENGTH) {
         this.setState({
           blocked: true,
@@ -38,7 +38,7 @@ const withReview = (Component) => {
       }
     }
 
-    unBlockForm() {
+    handleFormUnblock() {
       this.setState({
         blocked: false,
       });
@@ -55,8 +55,8 @@ const withReview = (Component) => {
           rating={rating}
           comment={comment}
           blocked={blocked}
-          onBtnClick={this.checkStateBeforeReq}
-          onOkBtnClick={this.unBlockForm}
+          onBtnClick={this.handleFormRedyToReq}
+          onOkBtnClick={this.handleFormUnblock}
         />
       );
     }

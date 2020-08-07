@@ -21,7 +21,7 @@ const getProgressPercent = (duration, progress) => {
 };
 
 const PlayerPage = (props) => {
-  const {film, children, onFullScreenBtnClick, playPauseSetter, progress, isPlaying, duration} = props;
+  const {film, children, onFullScreenBtnClick, handlePlayPauseBtnClick, progress, isPlaying, duration} = props;
 
   if (!film) {
     return <Preload />;
@@ -65,7 +65,7 @@ const PlayerPage = (props) => {
           <button
             type="button"
             className="player__play"
-            onClick={playPauseSetter}
+            onClick={handlePlayPauseBtnClick}
           >
             {
               isPlaying ?
@@ -103,7 +103,7 @@ const PlayerPage = (props) => {
 };
 
 PlayerPage.propTypes = {
-  playPauseSetter: PropTypes.func.isRequired,
+  handlePlayPauseBtnClick: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   progress: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,

@@ -98,7 +98,7 @@ const MoviePage = (props) => {
               {
                 isAuth &&
                 <Link
-                  to={`${AppRoute.REVIEW}/${id}`}
+                  to={`${AppRoute.PLAYER_PAGE}/${id}${AppRoute.REVIEW}`}
                   className="btn movie-card__button"
                 >
                   Add review

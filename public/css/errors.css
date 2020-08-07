@@ -80,3 +80,10 @@ section.loading .dot:first-child {
   border: 1px solid;
   padding: 0px 8px;
 }
+
+.add-review__btn.disabled {
+  color: rgb(0 0 0 / 56%);
+}
+.add-review__btn.disabled:hover {
+  opacity: 1;
+}

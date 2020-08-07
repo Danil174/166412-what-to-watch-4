@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import history from "../../history.js";
 import {AppRoute, LoadErrorsTexts, REVIEW_OPTIONS} from "../../const.js";
 
 import Header from "../header/header.jsx";
@@ -97,10 +98,12 @@ const AddReview = (props) => {
           onSubmit={(evt)=> {
             evt.preventDefault();
             if (!blocked) {
+              console.log(`test2`);
               onFormSubmit(id, {
                 rating,
                 comment,
               });
+              history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
             }
           }}
         >
@@ -116,7 +119,7 @@ const AddReview = (props) => {
               <button
                 className="add-review__btn"
                 type="button"
-                onClick= {(evt) => {
+                onClick={(evt) => {
                   evt.preventDefault();
                   onOkBtnClick();
                 }}

@@ -44,8 +44,10 @@ const AddReview = (props) => {
     changeRating,
     changeComment,
     blocked,
-    onBtnClick,
+    isErrorShown,
+    onFormChange,
     onOkBtnClick,
+    onBlockedBtnClick,
   } = props;
 
   if (!film) {
@@ -105,14 +107,17 @@ const AddReview = (props) => {
               history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
             }
           }}
+          onChange={()=> {
+            onFormChange();
+          }}
         >
           <div className="rating">
             <div className="rating__stars">
-              {renderRatingControls(pending || blocked, props.rating, changeRating)}
+              {renderRatingControls(pending || isErrorShown, props.rating, changeRating)}
             </div>
           </div>
           {
-            blocked &&
+            isErrorShown &&
             <p className="error__review">
               Длина комментария не менее {REVIEW_OPTIONS.MIN_LENGTH} знаков и не более {REVIEW_OPTIONS.MAX_LENGTH}. <br />У вас: {comment.length} знаков.
               <button
@@ -145,20 +150,33 @@ const AddReview = (props) => {
                 evt.preventDefault();
                 changeComment(evt.target.value);
               }}
-              disabled={pending || blocked}
+              disabled={pending || isErrorShown}
             >
             </textarea>
             <div className="add-review__submit">
-              <button
-                className="add-review__btn"
-                type="submit"
-                disabled={pending || blocked}
-                onClick= {() => {
-                  onBtnClick();
-                }}
-              >
-                {pending ? `Sending...` : `Post`}
-              </button>
+              {
+                !blocked &&
+                <button
+                  className="add-review__btn"
+                  type="submit"
+                  disabled={pending}
+                >
+                  {pending ? `Sending...` : `Post`}
+                </button>
+              }
+              {
+                blocked &&
+                <button
+                  className="add-review__btn disabled"
+                  type="button"
+                  onClick= {(evt) => {
+                    evt.preventDefault();
+                    onBlockedBtnClick();
+                  }}
+                >
+                 Post
+                </button>
+              }
             </div>
 
           </div>
@@ -170,9 +188,11 @@ const AddReview = (props) => {
 };
 
 AddReview.propTypes = {
-  blocked: PropTypes.bool.isRequired,
-  onBtnClick: PropTypes.func.isRequired,
+  isErrorShown: PropTypes.bool.isRequired,
+  onFormChange: PropTypes.func.isRequired,
   onOkBtnClick: PropTypes.func.isRequired,
+  onBlockedBtnClick: PropTypes.func.isRequired,
+  blocked: PropTypes.bool.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

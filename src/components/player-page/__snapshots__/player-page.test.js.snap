@@ -67,7 +67,7 @@ exports[`Render Player 1`] = `
       <div
         className="player__name"
       >
-        test
+        Gangs of new york
       </div>
       <button
         className="player__full-screen"

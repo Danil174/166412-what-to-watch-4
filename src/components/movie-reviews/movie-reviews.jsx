@@ -5,6 +5,7 @@ import {Months} from "../../const.js";
 const renderComment = (comment) => {
   const {userID, userName, text, rating, date} = comment;
   const prittydate = `${Months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  const prittyDateTime = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
   return (
     <div
       key={`${userID}${date}`}
@@ -14,7 +15,7 @@ const renderComment = (comment) => {
 
         <footer className="review__details">
           <cite className="review__author">{userName}</cite>
-          <time className="review__date" dateTime="2016-12-24">{prittydate}</time>
+          <time className="review__date" dateTime={prittyDateTime}>{prittydate}</time>
         </footer>
       </blockquote>
 

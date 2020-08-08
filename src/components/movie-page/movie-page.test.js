@@ -29,6 +29,15 @@ const fakeComments = [
   },
 ];
 
+const testMatch = {
+  isExact: false,
+  params: {
+    id: `2`,
+  },
+  path: `/films/:id?`,
+  url: `/films/4`,
+};
+
 const fakeFilm = {
   actors: [`Leonardo DiCaprio`, `Cameron Diaz`, `Daniel Day-Lewis`],
   bgColor: `#A6B7AC`,
@@ -136,6 +145,7 @@ describe(`MoviePageTest`, () => {
                 films={testFilms}
                 film={fakeFilm}
                 authorizationStatus={AuthorizationStatus.NO_AUTH}
+                match={testMatch}
               />
             </Provider>
           </Router>, {

@@ -31,13 +31,25 @@ const getSelectedTab = (tab, film, comments) => {
 };
 
 const MoviePage = (props) => {
-  const {currentFilm, activeTab, films, authorizationStatus, comments} = props;
+  const {
+    currentFilm,
+    activeTab,
+    films,
+    authorizationStatus,
+    comments,
+    match
+  } = props;
 
   const AddReviewWrapped = withReview(AddReview);
 
   if (!currentFilm) {
     return <Preload />;
   }
+
+  const {
+    url,
+    path
+  } = match;
 
   const {
     poster,
@@ -57,8 +69,6 @@ const MoviePage = (props) => {
   const posterAlt = `${title} poster`;
 
   const sectionColor = {backgroundColor: bgColor};
-
-  const {url, path} = props.match;
 
   return (
     <Switch>

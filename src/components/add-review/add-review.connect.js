@@ -3,12 +3,8 @@ import {Operation as ReviewOperations} from '../../reducer/review/review.js';
 import {getPending, getError} from "../../reducer/review/selectors.js";
 import {connect} from "react-redux";
 
-
-import {getFilmByID} from "../../reducer/films/selectors.js";
-
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return ({
-    film: getFilmByID(props.computedMatch.params.id, state),
     pending: getPending(state),
     error: getError(state),
   });

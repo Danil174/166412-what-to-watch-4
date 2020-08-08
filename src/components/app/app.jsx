@@ -11,16 +11,16 @@ import PrivateRoute from "../private-route/private-route.connect.js";
 import NotFound from "../not-found/not-found.jsx";
 import SignIn from "../sign-in/sign-in.connect.js";
 import MyList from "../my-list/my-list.connect.js";
-import AddReview from "../add-review/add-review.connect.js";
+// import AddReview from "../add-review/add-review.connect.js";
 import PlayerPage from "../player-page/player-page.connect.js";
 
-import withReview from "../../hocs/with-review/with-review.js";
+// import withReview from "../../hocs/with-review/with-review.js";
 import withPlayer from "../../hocs/with-player/with-player.js";
 
 class App extends PureComponent {
   render() {
     const PlayerPageWrapped = withPlayer(PlayerPage);
-    const AddReviewWrapped = withReview(AddReview);
+    // const AddReviewWrapped = withReview(AddReview);
     if (this.props.loading) {
       return <Preload />;
     }
@@ -32,12 +32,9 @@ class App extends PureComponent {
           <Route exact path={AppRoute.ROOT}>
             <Main />
           </Route>
-          <Route exact path={`${AppRoute.MOVIE_PAGE}/:id?`} component={MoviePage} />
+          <Route path={`${AppRoute.MOVIE_PAGE}/:id?`} component={MoviePage} />
           <Route exact path={`${AppRoute.PLAYER_PAGE}/:id?`} render={(props) => {
             return <PlayerPageWrapped films={this.props.films} {...props} />;
-          }}/>
-          <PrivateRoute exact path={`${AppRoute.REVIEW}/:id?`} render={(props) => {
-            return <AddReviewWrapped {...props} />;
           }}/>
           <PrivateRoute
             exact
@@ -65,7 +62,27 @@ class App extends PureComponent {
 
 App.propTypes = {
   loading: PropTypes.bool.isRequired,
-  films: PropTypes.array,
+  films: PropTypes.arrayOf(
+      PropTypes.shape({
+        actors: PropTypes.arrayOf(PropTypes.string).isRequired,
+        bgColor: PropTypes.string.isRequired,
+        cover: PropTypes.string.isRequired,
+        director: PropTypes.string.isRequired,
+        duration: PropTypes.number.isRequired,
+        genre: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        movieScore: PropTypes.number.isRequired,
+        poster: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
+        previewVideoLink: PropTypes.string.isRequired,
+        ratingCount: PropTypes.number.isRequired,
+        releaseDate: PropTypes.number.isRequired,
+        source: PropTypes.string.isRequired,
+        synopsis: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+      })
+  ).isRequired,
 };
 
 export default App;

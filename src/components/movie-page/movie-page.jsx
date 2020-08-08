@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Switch, Route, Link} from "react-router-dom";
 import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationStatus} from "../../const.js";
 
 import Preload from "../preload/preload.jsx";
@@ -12,6 +12,10 @@ import MovieDetails from "../movie-details/movie-details.jsx";
 import MovieReviews from "../movie-reviews/movie-reviews.connect.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import Footer from "../footer/footer.jsx";
+
+import PrivateRoute from "../private-route/private-route.connect.js";
+import AddReview from "../add-review/add-review.connect.js";
+import withReview from "../../hocs/with-review/with-review.js";
 
 const getSelectedTab = (tab, film, comments) => {
   switch (tab) {
@@ -27,11 +31,25 @@ const getSelectedTab = (tab, film, comments) => {
 };
 
 const MoviePage = (props) => {
-  const {currentFilm, activeTab, films, authorizationStatus, comments} = props;
+  const {
+    currentFilm,
+    activeTab,
+    films,
+    authorizationStatus,
+    comments,
+    match
+  } = props;
+
+  const AddReviewWrapped = withReview(AddReview);
 
   if (!currentFilm) {
     return <Preload />;
   }
+
+  const {
+    url,
+    path
+  } = match;
 
   const {
     poster,
@@ -53,99 +71,112 @@ const MoviePage = (props) => {
   const sectionColor = {backgroundColor: bgColor};
 
   return (
-  <>
-    <section
-      style={sectionColor}
-      className="movie-card movie-card--full"
-    >
-      <div className="movie-card__hero">
-        <div className="movie-card__bg">
-          <img
-            src={cover}
-            alt={title}
-          />
-        </div>
-
-        <h1 className="visually-hidden">WTW</h1>
-
-        <Header />
-
-        <div className="movie-card__wrap">
-          <div className="movie-card__desc">
-            <h2 className="movie-card__title">{title}</h2>
-            <p className="movie-card__meta">
-              <span className="movie-card__genre">{genre}</span>
-              <span className="movie-card__year">{releaseDate}</span>
-            </p>
-
-            <div className="movie-card__buttons">
-
-              <Link
-                to={`${AppRoute.PLAYER_PAGE}/${id}`}
-                className="btn btn--play movie-card__button"
-                type="button"
-              >
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </Link>
-
-              <AddToList
-                id={id}
-                isFavorite={isFavorite}
+    <Switch>
+      <Route exact path={path}>
+        <section
+          style={sectionColor}
+          className="movie-card movie-card--full"
+        >
+          <div className="movie-card__hero">
+            <div className="movie-card__bg">
+              <img
+                src={cover}
+                alt={title}
               />
-              {
-                isAuth &&
-                <Link
-                  to={`${AppRoute.REVIEW}/${id}`}
-                  className="btn movie-card__button"
-                >
-                  Add review
-                </Link>
-              }
+            </div>
+
+            <h1 className="visually-hidden">WTW</h1>
+
+            <Header />
+
+            <div className="movie-card__wrap">
+              <div className="movie-card__desc">
+                <h2 className="movie-card__title">{title}</h2>
+                <p className="movie-card__meta">
+                  <span className="movie-card__genre">{genre}</span>
+                  <span className="movie-card__year">{releaseDate}</span>
+                </p>
+
+                <div className="movie-card__buttons">
+
+                  <Link
+                    to={`${AppRoute.PLAYER_PAGE}/${id}`}
+                    className="btn btn--play movie-card__button"
+                    type="button"
+                  >
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s"></use>
+                    </svg>
+                    <span>Play</span>
+                  </Link>
+
+                  <AddToList
+                    id={id}
+                    isFavorite={isFavorite}
+                  />
+                  {
+                    isAuth &&
+                    <Link
+                      to={`${url}${AppRoute.REVIEW}`}
+                      className="btn movie-card__button"
+                    >
+                      Add review
+                    </Link>
+                  }
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="movie-card__wrap movie-card__translate-top">
-        <div className="movie-card__info">
-          <div className="movie-card__poster movie-card__poster--big">
-            <img
-              src={poster}
-              alt={posterAlt}
-              width="218"
-              height="327"
+          <div className="movie-card__wrap movie-card__translate-top">
+            <div className="movie-card__info">
+              <div className="movie-card__poster movie-card__poster--big">
+                <img
+                  src={poster}
+                  alt={posterAlt}
+                  width="218"
+                  height="327"
+                />
+              </div>
+
+              <div className="movie-card__desc">
+
+                <MovieNav tabs={MovieTabs} />
+
+                {getSelectedTab(activeTab, currentFilm, comments)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="page-content">
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+
+            <MoviesList
+              filmsList={similarFilms}
             />
-          </div>
+          </section>
 
-          <div className="movie-card__desc">
-
-            <MovieNav tabs={MovieTabs} />
-
-            {getSelectedTab(activeTab, currentFilm, comments)}
-          </div>
+          <Footer />
         </div>
-      </div>
-    </section>
-
-    <div className="page-content">
-      <section className="catalog catalog--like-this">
-        <h2 className="catalog__title">More like this</h2>
-
-        <MoviesList
-          filmsList={similarFilms}
-        />
-      </section>
-
-      <Footer />
-    </div>
-  </>
+      </Route>
+      <PrivateRoute exact path={`${path}${AppRoute.REVIEW}`} render={() => {
+        return <AddReviewWrapped film={currentFilm} />;
+      }}/>
+    </Switch>
   );
 };
 
 MoviePage.propTypes = {
+  match: PropTypes.shape({
+    isExact: PropTypes.bool,
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+    path: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired,
   comments: PropTypes.array.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   activeTab: PropTypes.string.isRequired,

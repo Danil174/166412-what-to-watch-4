@@ -28,9 +28,9 @@ exports[`MovieReviewsTest render MovieReviews 1`] = `
           </cite>
           <time
             className="review__date"
-            dateTime="2016-12-24"
+            dateTime="2020-7-4"
           >
-            August 6, 2020
+            August 4, 2020
           </time>
         </footer>
       </blockquote>
@@ -65,9 +65,9 @@ exports[`MovieReviewsTest render MovieReviews 1`] = `
           </cite>
           <time
             className="review__date"
-            dateTime="2016-12-24"
+            dateTime="2020-7-4"
           >
-            August 6, 2020
+            August 4, 2020
           </time>
         </footer>
       </blockquote>

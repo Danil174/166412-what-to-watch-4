@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Switch, Route, Link, useRouteMatch} from "react-router-dom";
 import {MovieTabs, MovieTabsMap, AppRoute, SIMILAR_LIST_LENGTH, AuthorizationStatus} from "../../const.js";
 
 import Preload from "../preload/preload.jsx";
@@ -12,6 +12,11 @@ import MovieDetails from "../movie-details/movie-details.jsx";
 import MovieReviews from "../movie-reviews/movie-reviews.connect.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import Footer from "../footer/footer.jsx";
+
+
+import PrivateRoute from "../private-route/private-route.connect.js";
+import AddReview from "../add-review/add-review.connect.js";
+import withReview from "../../hocs/with-review/with-review.js";
 
 const getSelectedTab = (tab, film, comments) => {
   switch (tab) {
@@ -28,6 +33,8 @@ const getSelectedTab = (tab, film, comments) => {
 
 const MoviePage = (props) => {
   const {currentFilm, activeTab, films, authorizationStatus, comments} = props;
+
+  const AddReviewWrapped = withReview(AddReview);
 
   if (!currentFilm) {
     return <Preload />;
@@ -51,6 +58,8 @@ const MoviePage = (props) => {
   const posterAlt = `${title} poster`;
 
   const sectionColor = {backgroundColor: bgColor};
+
+  const {url, path} = props.match;
 
   return (
   <>
@@ -98,7 +107,7 @@ const MoviePage = (props) => {
               {
                 isAuth &&
                 <Link
-                  to={`${AppRoute.PLAYER_PAGE}/${id}${AppRoute.REVIEW}`}
+                  to={`${url}${AppRoute.REVIEW}`}
                   className="btn movie-card__button"
                 >
                   Add review
@@ -141,6 +150,12 @@ const MoviePage = (props) => {
 
       <Footer />
     </div>
+
+    <Switch>
+      <PrivateRoute exact path={`${path}${AppRoute.REVIEW}`} render={() => {
+        return <AddReviewWrapped film={currentFilm} />;
+      }}/>
+    </Switch>
   </>
   );
 };

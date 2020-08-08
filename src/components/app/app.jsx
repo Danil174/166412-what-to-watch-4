@@ -11,16 +11,13 @@ import PrivateRoute from "../private-route/private-route.connect.js";
 import NotFound from "../not-found/not-found.jsx";
 import SignIn from "../sign-in/sign-in.connect.js";
 import MyList from "../my-list/my-list.connect.js";
-// import AddReview from "../add-review/add-review.connect.js";
 import PlayerPage from "../player-page/player-page.connect.js";
 
-// import withReview from "../../hocs/with-review/with-review.js";
 import withPlayer from "../../hocs/with-player/with-player.js";
 
 class App extends PureComponent {
   render() {
     const PlayerPageWrapped = withPlayer(PlayerPage);
-    // const AddReviewWrapped = withReview(AddReview);
     if (this.props.loading) {
       return <Preload />;
     }

@@ -81,6 +81,7 @@ exports[`SignInTest render SignIn 1`] = `
             id="user-password"
             name="user-password"
             placeholder="Password"
+            required={true}
             type="password"
           />
           <label

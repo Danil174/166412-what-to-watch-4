@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import history from "../../history.js";
 import {AppRoute, LoadErrorsTexts, REVIEW_OPTIONS} from "../../const.js";
 
 import Header from "../header/header.jsx";
@@ -104,7 +103,6 @@ const AddReview = (props) => {
                 rating,
                 comment,
               });
-              history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
             }
           }}
           onChange={()=> {

@@ -1,4 +1,6 @@
 import {extend} from "../../utils/common.js";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 const initialState = {
   pending: false,
@@ -41,6 +43,7 @@ const Operation = {
     })
     .then(() => {
       dispatch(ActionCreator.endPending());
+      history.push(`${AppRoute.MOVIE_PAGE}/${id}`);
     })
     .catch((error) => {
       dispatch(ActionCreator.endPending());

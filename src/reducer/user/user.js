@@ -60,12 +60,12 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUserData(configureUserData(response.data)));
       })
-      .catch((err) => {
-        if (err.status === 401) {
+      .catch((error) => {
+        if (error.response.status === 401) {
           dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
           dispatch(ActionCreator.setUserData({}));
         }
-        throw err;
+        throw error;
       });
   },
 

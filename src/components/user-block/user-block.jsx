@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import {Link} from "react-router-dom";
 import {AuthorizationStatus, AppRoute} from "../../const.js";
 
 import Avatar from "../avatar/avatar.jsx";
 
 const SignIn = () => {
   return (
-    <a href={AppRoute.LOGIN} className="user-block__link">Sign in</a>
+    <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
+    // <Redirect to={AppRoute.LOGIN} className="user-block__link">Sign in</Redirect>
+    // <a href={AppRoute.LOGIN} className="user-block__link">Sign in</a>
   );
 };
 

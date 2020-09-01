@@ -53,7 +53,7 @@ export const REVIEW_OPTIONS = {
 };
 
 export const AppRoute = {
-  ROOT: `/166412-what-to-watch-4/`,
+  ROOT: `/166412-what-to-watch-4`,
   LOGIN: `/wtw-login`,
   MY_LIST: `/mylist`,
   MOVIE_PAGE: `/films`,

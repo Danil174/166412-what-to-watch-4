@@ -16,7 +16,6 @@ import PlayerPage from "../player-page/player-page.connect.js";
 import withPlayer from "../../hocs/with-player/with-player.js";
 
 class App extends PureComponent {
-  console.log(AppRoute.ROOT);
   render() {
     const PlayerPageWrapped = withPlayer(PlayerPage);
     if (this.props.loading) {
